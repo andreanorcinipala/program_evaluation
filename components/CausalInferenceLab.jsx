@@ -766,12 +766,13 @@ export default function CausalInferenceLab() {
 
         {/* Navigation */}
         <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "1.5rem" }}>
-          <a href="/class7" style={{ fontSize: "0.85rem", color: "#94a3b8", fontFamily: "'Helvetica Neue', sans-serif", textDecoration: "none", display: "flex", alignItems: "center", gap: 6, padding: "6px 14px", background: "#0f172a", border: "1px solid #1e293b", borderRadius: 8, transition: "all 0.2s" }}>Class 7: Bias in Impact Evaluation →</a>
+          <a href="/class7" style={{ fontSize: "1.1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", textDecoration: "none", display: "flex", alignItems: "center", gap: 8, padding: "10px 20px", background: "#1e293b", border: "1px solid #334155", borderRadius: 10, transition: "all 0.2s", fontWeight: 600 }}>Class 7: Bias in Impact Evaluation →</a>
         </div>
 
         {/* Header */}
         <header style={{ textAlign: "center", marginBottom: "3rem" }}>
           <div style={{ fontSize: "0.82rem", color: "#dce1e8", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 10 }}>Interactive Learning Platform (Work in Progress)</div>
+          <div style={{ display: "inline-block", padding: "4px 14px", background: "#1e293b", borderRadius: 6, fontSize: "0.85rem", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", color: "#94a3b8", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12, fontWeight: 600 }}>Class 6</div>
           <h1 style={{ fontSize: "clamp(1.9rem, 4.5vw, 2.8rem)", fontWeight: 700, color: "#ffffff", lineHeight: 1.2, marginBottom: 10, letterSpacing: "-0.01em" }}>Causal Inference Methods</h1>
           <p style={{ fontSize: "1.1rem", color: "#f0f0f0", fontFamily: "'Helvetica Neue', sans-serif", maxWidth: 560, margin: "0 auto", lineHeight: 1.6 }}>Choose a method, set your difficulty level, and describe a program you want to evaluate. The AI builds a personalized, step-by-step explanation using your example.</p>
         </header>
