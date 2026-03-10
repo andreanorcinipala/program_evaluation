@@ -66,6 +66,131 @@ const METHODS = [
   },
 ];
 
+// ============================================================
+// NOTATION TOOLTIPS
+// ============================================================
+const NOTATION_GLOSSARY = [
+  // RCT
+  { pattern: "(Y(1), Y(0)) ⊥ D", tip: "The potential outcomes (what would happen with and without treatment) are statistically independent of who actually gets treated. In plain terms: treatment assignment is unrelated to how someone would respond." },
+  { pattern: "ATE = E[Y|D=1] - E[Y|D=0]", tip: "The Average Treatment Effect equals the expected outcome for the treated group minus the expected outcome for the control group. Simply: the average difference in results between the two groups." },
+  { pattern: "Y(1), Y(0)", tip: "Potential outcomes: Y(1) is the outcome if a person receives treatment, Y(0) is the outcome if they do not. We can only ever observe one of these for each person." },
+  { pattern: "ITT vs. CACE", tip: "Intent-to-Treat (ITT) compares groups as originally assigned, regardless of whether participants actually followed through. Complier Average Causal Effect (CACE) estimates the effect only among those who complied with their assignment." },
+  { pattern: "ICC", tip: "Intraclass Correlation Coefficient: measures how similar individuals within the same cluster (e.g., school, clinic) are to each other. Higher ICC means you need larger sample sizes in clustered designs." },
+  // DiD
+  { pattern: "δ = [E(Y|G=1,T=1) - E(Y|G=1,T=0)] - [E(Y|G=0,T=1) - E(Y|G=0,T=0)]", tip: "The DiD estimator: take the before-to-after change in the treatment group, subtract the before-to-after change in the control group. What remains is the estimated effect of the intervention." },
+  { pattern: "E[Y(0)|G=1,T=1] - E[Y(0)|G=1,T=0] = E[Y(0)|G=0,T=1] - E[Y(0)|G=0,T=0]", tip: "The parallel trends assumption in math: without treatment, the treatment group would have changed by the same amount as the control group. Both groups were on the same trajectory before the intervention." },
+  { pattern: "ATT", tip: "Average Treatment Effect on the Treated: the average impact of the program specifically on those who received it (not the entire population)." },
+  // RD
+  { pattern: "τ_RD = lim(x→c+) E[Y|X=x] - lim(x→c-) E[Y|X=x]", tip: "The RD treatment effect: compare the expected outcome just above the cutoff to the expected outcome just below it. The size of the 'jump' at the cutoff is the estimated effect." },
+  { pattern: "E[Y(0)|X=x]", tip: "The expected outcome without treatment for individuals at score x. If this function is smooth (no jumps) at the cutoff, then any jump in actual outcomes must be caused by the treatment." },
+  { pattern: "E[Y(1)|X=x]", tip: "The expected outcome with treatment for individuals at score x." },
+  { pattern: "LATE", tip: "Local Average Treatment Effect: the treatment effect estimated specifically for individuals right around the cutoff, not necessarily generalizable to everyone." },
+  // PSM
+  { pattern: "e(X) = P(D=1|X)", tip: "The propensity score: the probability of receiving treatment given a person's observed characteristics X. It boils down many variables (age, education, etc.) into a single number." },
+  { pattern: "(Y(0),Y(1)) ⊥ D | X", tip: "Strong ignorability (or unconfoundedness): once you account for observed characteristics X, treatment assignment is as good as random. There are no hidden factors driving both who gets treated and the outcome." },
+  { pattern: "(Y(0),Y(1)) ⊥ D | e(X)", tip: "A key result: if strong ignorability holds given X, it also holds given just the propensity score. This means you can match on one number instead of many variables." },
+  { pattern: "ATT = E[Y(1)-Y(0)|D=1]", tip: "The Average Treatment Effect on the Treated: the average difference between what treated individuals actually experienced and what they would have experienced without treatment." },
+  { pattern: "0 < e(X) < 1", tip: "The overlap (common support) condition: every individual must have some chance of being treated and some chance of not being treated. If certain people always or never get treated, we cannot find good matches for them." },
+  { pattern: "ATE", tip: "Average Treatment Effect: the average causal impact of treatment across the entire population." },
+  { pattern: "IPW", tip: "Inverse Probability Weighting: instead of matching, you reweight observations by the inverse of their propensity score to create a balanced pseudo-population." },
+  { pattern: "AIPW", tip: "Augmented Inverse Probability Weighting (doubly robust): combines a regression model with propensity score weighting. If either model is correctly specified, you still get a consistent estimate." },
+  { pattern: "Rosenbaum bounds", tip: "A sensitivity analysis that asks: how strong would an unmeasured confounder need to be to change your conclusion? If the result holds even with large hypothetical confounding, it is more credible." },
+  { pattern: "Hawthorne effects", tip: "When people change their behavior simply because they know they are being observed or studied, not because of the treatment itself." },
+  { pattern: "Callaway-Sant'Anna", tip: "A modern DiD estimator designed for settings where different groups receive treatment at different times (staggered adoption). It avoids the biases of traditional two-way fixed effects." },
+  { pattern: "Sun-Abraham", tip: "Another modern DiD estimator for staggered adoption that uses an interaction-weighted approach to avoid contamination across cohorts." },
+  { pattern: "McCrary density tests", tip: "A diagnostic test for RD that checks whether people are bunching just above or below the cutoff. If they are, it suggests manipulation of the running variable, which would violate the RD design." },
+  { pattern: "Calonico, Cattaneo, Titiunik", tip: "Researchers who developed the standard modern toolkit for RD analysis, including optimal bandwidth selection, bias correction, and robust confidence intervals." },
+];
+
+function NotationText({ text, color }) {
+  // Sort patterns by length (longest first) to match greedily
+  const sorted = [...NOTATION_GLOSSARY].sort((a, b) => b.pattern.length - a.pattern.length);
+
+  // Find all matches with their positions
+  const matches = [];
+  const used = new Set();
+  for (const entry of sorted) {
+    let searchFrom = 0;
+    while (true) {
+      const idx = text.indexOf(entry.pattern, searchFrom);
+      if (idx === -1) break;
+      const end = idx + entry.pattern.length;
+      // Check no overlap with existing matches
+      let overlaps = false;
+      for (const m of matches) {
+        if (idx < m.end && end > m.start) { overlaps = true; break; }
+      }
+      if (!overlaps) {
+        matches.push({ start: idx, end, pattern: entry.pattern, tip: entry.tip });
+      }
+      searchFrom = idx + 1;
+    }
+  }
+  matches.sort((a, b) => a.start - b.start);
+
+  if (matches.length === 0) return <>{text}</>;
+
+  const parts = [];
+  let cursor = 0;
+  for (const m of matches) {
+    if (m.start > cursor) parts.push(<span key={`t${cursor}`}>{text.slice(cursor, m.start)}</span>);
+    parts.push(<NotationSpan key={`n${m.start}`} notation={m.pattern} tip={m.tip} color={color} />);
+    cursor = m.end;
+  }
+  if (cursor < text.length) parts.push(<span key={`t${cursor}`}>{text.slice(cursor)}</span>);
+  return <>{parts}</>;
+}
+
+function NotationSpan({ notation, tip, color }) {
+  const [show, setShow] = useState(false);
+  const [pos, setPos] = useState("below");
+  const ref = useRef(null);
+
+  const handleEnter = () => {
+    if (ref.current) {
+      const rect = ref.current.getBoundingClientRect();
+      setPos(rect.top < 200 ? "below" : "above");
+    }
+    setShow(true);
+  };
+
+  return (
+    <span
+      ref={ref}
+      onMouseEnter={handleEnter}
+      onMouseLeave={() => setShow(false)}
+      onClick={() => setShow(s => !s)}
+      style={{
+        position: "relative",
+        borderBottom: `2px dotted ${color || "#94a3b8"}`,
+        cursor: "help",
+        paddingBottom: 1,
+      }}
+    >
+      {notation}
+      {show && (
+        <span style={{
+          position: "absolute",
+          left: "50%", transform: "translateX(-50%)",
+          ...(pos === "above" ? { bottom: "calc(100% + 10px)" } : { top: "calc(100% + 10px)" }),
+          width: 320, maxWidth: "90vw",
+          padding: "12px 14px",
+          background: "#1e293b", border: `1px solid ${color || "#94a3b8"}50`,
+          borderRadius: 10, boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+          fontSize: "0.9rem", color: "#f0f0f0",
+          fontFamily: "'Helvetica Neue', sans-serif", fontStyle: "normal",
+          lineHeight: 1.55, fontWeight: 400,
+          zIndex: 100, pointerEvents: "none",
+          textAlign: "left",
+        }}>
+          <span style={{ display: "block", fontSize: "0.72rem", color: color || "#94a3b8", fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, marginBottom: 4, letterSpacing: "0.05em", textTransform: "uppercase" }}>In plain terms</span>
+          {tip}
+        </span>
+      )}
+    </span>
+  );
+}
+
 const LEVELS = [
   { id: "colloquial", label: "Plain Language", desc: "Analogies and everyday language, zero jargon", emoji: "💬" },
   { id: "basic", label: "Basic", desc: "Key terms introduced, accessible to undergrads", emoji: "📖" },
@@ -672,7 +797,10 @@ export default function CausalInferenceLab() {
                   <span style={{ fontSize: "0.85rem", color: accentColor, fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>What is {method.full}?</span>
                   <span style={{ fontSize: "0.78rem", color: "#f0f0f0", fontFamily: "'Helvetica Neue', sans-serif", background: "#1e293b", padding: "3px 10px", borderRadius: 4 }}>{level.label} level</span>
                 </div>
-                <p style={{ fontSize: "1.05rem", color: "#ffffff", fontFamily: "'Georgia', serif", lineHeight: 1.75, margin: 0 }}>{method.definitions[level.id]}</p>
+                <p style={{ fontSize: "1.05rem", color: "#ffffff", fontFamily: "'Georgia', serif", lineHeight: 1.75, margin: 0 }}>
+                  {level.id === "advanced" ? <NotationText text={method.definitions[level.id]} color={accentColor} /> : method.definitions[level.id]}
+                </p>
+                {level.id === "advanced" && <div style={{ marginTop: 10, fontSize: "0.78rem", color: "#94a3b8", fontFamily: "'Helvetica Neue', sans-serif", fontStyle: "italic" }}>Hover or tap dotted terms for plain-language explanations.</div>}
               </div>
             )}
           </section>
