@@ -12,7 +12,7 @@ const METHODS = [
     id: "rct",
     label: "RCT",
     full: "Randomized Controlled Trial",
-    color: "#22d3ee",
+    color: "#1e3a8a",
     icon: "🎲",
     tagline: "The gold standard: randomize, then compare.",
     keyConcepts: ["Random assignment", "Control group", "Treatment group", "Average treatment effect (ATE)", "Internal validity"],
@@ -40,7 +40,7 @@ const METHODS = [
     id: "rd",
     label: "RD",
     full: "Regression Discontinuity",
-    color: "#e879f9",
+    color: "#7c3aed",
     icon: "📏",
     tagline: "A threshold rule creates a natural experiment.",
     keyConcepts: ["Running variable", "Cutoff/threshold", "Bandwidth", "Local average treatment effect (LATE)", "Continuity assumption"],
@@ -54,7 +54,7 @@ const METHODS = [
     id: "psm",
     label: "PSM",
     full: "Propensity Score Matching",
-    color: "#a78bfa",
+    color: "#047857",
     icon: "🔗",
     tagline: "Find comparable pairs in observational data.",
     keyConcepts: ["Propensity score", "Matching", "Covariate balance", "Ignorability/unconfoundedness", "Common support"],
@@ -359,9 +359,9 @@ function RCTChart({ step }) {
         <div style={{ display: "flex", justifyContent: "center", gap: isRand ? 24 : 0, flexWrap: "wrap", padding: "1.5rem 1rem" }}>
           {isRand ? (
             <>
-              <DotGroup dots={ctrl} color="#60a5fa" label="Control (n=30)" />
+              <DotGroup dots={ctrl} color="#2563eb" label="Control (n=30)" />
               <div style={{ width: 1, background: "#cbd5e1", alignSelf: "stretch" }} />
-              <DotGroup dots={trt} color="#22d3ee" label="Treatment (n=30)" />
+              <DotGroup dots={trt} color="#1e3a8a" label="Treatment (n=30)" />
             </>
           ) : (
             <div style={{ display: "grid", gridTemplateColumns: "repeat(10, 1fr)", gap: 7 }}>
@@ -369,7 +369,7 @@ function RCTChart({ step }) {
             </div>
           )}
         </div>
-        <ChartLegend items={isRand ? [{ color: "#60a5fa", label: "Control" }, { color: "#22d3ee", label: "Treatment" }] : [{ color: "#64748b", label: "Participants" }]} />
+        <ChartLegend items={isRand ? [{ color: "#2563eb", label: "Control" }, { color: "#1e3a8a", label: "Treatment" }] : [{ color: "#64748b", label: "Participants" }]} />
       </div>
     );
   }
@@ -382,10 +382,10 @@ function RCTChart({ step }) {
             <CartesianGrid strokeDasharray="3 3" stroke={gs} />
             <XAxis dataKey="group" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
             <YAxis domain={[0, 80]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Baseline Score", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-            <Bar dataKey="mean" radius={[6, 6, 0, 0]}><Cell fill="#60a5fa" /><Cell fill="#22d3ee" /></Bar>
+            <Bar dataKey="mean" radius={[6, 6, 0, 0]}><Cell fill="#2563eb" /><Cell fill="#1e3a8a" /></Bar>
           </BarChart>
         </ResponsiveContainer>
-        <ChartLegend items={[{ color: "#60a5fa", label: "Control" }, { color: "#22d3ee", label: "Treatment" }]} />
+        <ChartLegend items={[{ color: "#2563eb", label: "Control" }, { color: "#1e3a8a", label: "Treatment" }]} />
       </div>
     );
   }
@@ -398,12 +398,12 @@ function RCTChart({ step }) {
             <CartesianGrid strokeDasharray="3 3" stroke={gs} />
             <XAxis dataKey="time" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
             <YAxis domain={[35, 80]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Score", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-            <Line type="linear" dataKey="Control" stroke="#60a5fa" strokeWidth={2.5} dot={{ r: 5, fill: "#60a5fa" }} />
-            <Line type="linear" dataKey="Treatment" stroke="#22d3ee" strokeWidth={2.5} dot={{ r: 5, fill: "#22d3ee" }} />
+            <Line type="linear" dataKey="Control" stroke="#2563eb" strokeWidth={2.5} dot={{ r: 5, fill: "#2563eb" }} />
+            <Line type="linear" dataKey="Treatment" stroke="#1e3a8a" strokeWidth={2.5} dot={{ r: 5, fill: "#1e3a8a" }} />
           </LineChart>
         </ResponsiveContainer>
-        {step === 4 && <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#60a5fa" text={`Control: ${rctD.chgC}`} /><Pill color="#22d3ee" text={`Treatment: ${rctD.chgT}`} /></div>}
-        <ChartLegend items={[{ color: "#60a5fa", label: "Control" }, { color: "#22d3ee", label: "Treatment" }]} />
+        {step === 4 && <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#2563eb" text={`Control: ${rctD.chgC}`} /><Pill color="#1e3a8a" text={`Treatment: ${rctD.chgT}`} /></div>}
+        <ChartLegend items={[{ color: "#2563eb", label: "Control" }, { color: "#1e3a8a", label: "Treatment" }]} />
       </div>
     );
   }
@@ -415,11 +415,11 @@ function RCTChart({ step }) {
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
           <XAxis dataKey="group" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
           <YAxis domain={[-20, 5]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Change", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-          <ReferenceLine y={0} stroke="#cbd5e1" /><Bar dataKey="mean" radius={[6, 6, 0, 0]}><Cell fill="#60a5fa" /><Cell fill="#22d3ee" /></Bar>
+          <ReferenceLine y={0} stroke="#cbd5e1" /><Bar dataKey="mean" radius={[6, 6, 0, 0]}><Cell fill="#2563eb" /><Cell fill="#1e3a8a" /></Bar>
         </BarChart>
       </ResponsiveContainer>
-      <div style={{ display: "flex", justifyContent: "center", marginTop: 4 }}><Pill color="#34d399" text={`ATE = ${rctD.ate}`} /></div>
-      <ChartLegend items={[{ color: "#60a5fa", label: "Control" }, { color: "#22d3ee", label: "Treatment" }, { color: "#34d399", label: "Treatment Effect" }]} />
+      <div style={{ display: "flex", justifyContent: "center", marginTop: 4 }}><Pill color="#059669" text={`ATE = ${rctD.ate}`} /></div>
+      <ChartLegend items={[{ color: "#2563eb", label: "Control" }, { color: "#1e3a8a", label: "Treatment" }, { color: "#059669", label: "Treatment Effect" }]} />
     </div>
   );
 }
@@ -433,14 +433,14 @@ function DiDChart({ step }) {
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
           <XAxis dataKey="time" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
           <YAxis domain={[25, 90]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Outcome", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-          <Line type="linear" dataKey="Control" stroke="#60a5fa" strokeWidth={2.5} dot={{ r: 5, fill: "#60a5fa" }} />
+          <Line type="linear" dataKey="Control" stroke="#2563eb" strokeWidth={2.5} dot={{ r: 5, fill: "#2563eb" }} />
           <Line type="linear" dataKey="Treatment" stroke="#f97316" strokeWidth={2.5} dot={{ r: 5, fill: "#f97316" }} />
           {showCf && <ReferenceLine segment={[{ x: "Before", y: 50 }, { x: "After", y: 60 }]} stroke="#f97316" strokeDasharray="8 4" strokeWidth={2} />}
-          {showFx && <ReferenceLine segment={[{ x: "After", y: 60 }, { x: "After", y: 80 }]} stroke="#34d399" strokeWidth={3} />}
+          {showFx && <ReferenceLine segment={[{ x: "After", y: 60 }, { x: "After", y: 80 }]} stroke="#059669" strokeWidth={3} />}
         </ComposedChart>
       </ResponsiveContainer>
-      {showChg && <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#f97316" text="Treatment: +30" /><Pill color="#60a5fa" text="Control: +10" />{showFx && <Pill color="#34d399" text="DiD = 20" />}</div>}
-      <ChartLegend items={[{ color: "#f97316", label: "Treatment" }, { color: "#60a5fa", label: "Control" }, ...(showCf ? [{ color: "#f97316", label: "Counterfactual", dashed: true }] : []), ...(showFx ? [{ color: "#34d399", label: "Effect" }] : [])]} />
+      {showChg && <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#f97316" text="Treatment: +30" /><Pill color="#2563eb" text="Control: +10" />{showFx && <Pill color="#059669" text="DiD = 20" />}</div>}
+      <ChartLegend items={[{ color: "#f97316", label: "Treatment" }, { color: "#2563eb", label: "Control" }, ...(showCf ? [{ color: "#f97316", label: "Counterfactual", dashed: true }] : []), ...(showFx ? [{ color: "#059669", label: "Effect" }] : [])]} />
     </div>
   );
 }
@@ -449,7 +449,7 @@ function RDChart({ step }) {
   const showCut = step >= 1, showLines = step >= 3, showJump = step >= 4, showCf = step >= 5, hl = step === 2;
   const DotRD = ({ cx, cy, payload }) => {
     if (!cx || !cy) return null;
-    const color = step >= 1 ? (payload.side === "below" ? "#60a5fa" : "#e879f9") : "#64748b";
+    const color = step >= 1 ? (payload.side === "below" ? "#2563eb" : "#7c3aed") : "#64748b";
     const inB = payload.x >= 43 && payload.x <= 57;
     return <circle cx={cx} cy={cy} r={hl && inB ? 4.5 : 3.5} fill={color} fillOpacity={hl ? (inB ? 0.9 : 0.15) : 0.6} />;
   };
@@ -460,16 +460,16 @@ function RDChart({ step }) {
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
           <XAxis type="number" dataKey="x" domain={[15, 85]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Running Variable", position: "insideBottom", offset: -10, ...ax }} />
           <YAxis type="number" dataKey="y" domain={[20, 70]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Outcome", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-          {showCut && <ReferenceLine x={50} stroke="#fbbf24" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Cutoff", position: "top", fill: "#fbbf24", fontSize: 13, fontWeight: 700 }} />}
+          {showCut && <ReferenceLine x={50} stroke="#d97706" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Cutoff", position: "top", fill: "#d97706", fontSize: 13, fontWeight: 700 }} />}
           <Scatter data={rdD.pts} shape={<DotRD />} />
-          {showLines && <Scatter data={rdD.lineB} line={{ stroke: "#60a5fa", strokeWidth: 2.5 }} shape={() => null} />}
-          {showLines && <Scatter data={rdD.lineA} line={{ stroke: "#e879f9", strokeWidth: 2.5 }} shape={() => null} />}
-          {showCf && <Scatter data={rdD.lineC} line={{ stroke: "#60a5fa", strokeWidth: 2, strokeDasharray: "8 4" }} shape={() => null} />}
-          {showJump && <ReferenceLine segment={[{ x: 50, y: rdD.yB50 }, { x: 50, y: rdD.yA50 }]} stroke="#34d399" strokeWidth={3.5} />}
+          {showLines && <Scatter data={rdD.lineB} line={{ stroke: "#2563eb", strokeWidth: 2.5 }} shape={() => null} />}
+          {showLines && <Scatter data={rdD.lineA} line={{ stroke: "#7c3aed", strokeWidth: 2.5 }} shape={() => null} />}
+          {showCf && <Scatter data={rdD.lineC} line={{ stroke: "#2563eb", strokeWidth: 2, strokeDasharray: "8 4" }} shape={() => null} />}
+          {showJump && <ReferenceLine segment={[{ x: 50, y: rdD.yB50 }, { x: 50, y: rdD.yA50 }]} stroke="#059669" strokeWidth={3.5} />}
         </ComposedChart>
       </ResponsiveContainer>
-      {showJump && <div style={{ display: "flex", justifyContent: "center", marginTop: 2 }}><Pill color="#34d399" text={`LATE ≈ ${rdD.jump}`} /></div>}
-      <ChartLegend items={[...(step >= 1 ? [{ color: "#60a5fa", label: "Below cutoff" }, { color: "#e879f9", label: "Above cutoff" }] : [{ color: "#64748b", label: "Individuals" }]), ...(showCut ? [{ color: "#fbbf24", label: "Cutoff", dashed: true }] : []), ...(showJump ? [{ color: "#34d399", label: "Effect" }] : []), ...(showCf ? [{ color: "#60a5fa", label: "Counterfactual", dashed: true }] : [])]} />
+      {showJump && <div style={{ display: "flex", justifyContent: "center", marginTop: 2 }}><Pill color="#059669" text={`LATE ≈ ${rdD.jump}`} /></div>}
+      <ChartLegend items={[...(step >= 1 ? [{ color: "#2563eb", label: "Below cutoff" }, { color: "#7c3aed", label: "Above cutoff" }] : [{ color: "#64748b", label: "Individuals" }]), ...(showCut ? [{ color: "#d97706", label: "Cutoff", dashed: true }] : []), ...(showJump ? [{ color: "#059669", label: "Effect" }] : []), ...(showCf ? [{ color: "#2563eb", label: "Counterfactual", dashed: true }] : [])]} />
     </div>
   );
 }
@@ -477,7 +477,7 @@ function RDChart({ step }) {
 function PSMChart({ step }) {
   const DotPSM = ({ cx, cy, payload }) => {
     if (!cx || !cy) return null;
-    return <circle cx={cx} cy={cy} r={3.5} fill={payload.group === "T" ? "#a78bfa" : "#60a5fa"} fillOpacity={0.6} />;
+    return <circle cx={cx} cy={cy} r={3.5} fill={payload.group === "T" ? "#047857" : "#2563eb"} fillOpacity={0.6} />;
   };
   if (step <= 0 || step === 3) {
     return (
@@ -490,7 +490,7 @@ function PSMChart({ step }) {
             <Scatter data={psmD.scatterC} shape={<DotPSM />} /><Scatter data={psmD.scatterT} shape={<DotPSM />} />
           </ComposedChart>
         </ResponsiveContainer>
-        <ChartLegend items={[{ color: "#a78bfa", label: "Treated" }, { color: "#60a5fa", label: "Untreated" }]} />
+        <ChartLegend items={[{ color: "#047857", label: "Treated" }, { color: "#2563eb", label: "Untreated" }]} />
       </div>
     );
   }
@@ -503,10 +503,10 @@ function PSMChart({ step }) {
             <CartesianGrid strokeDasharray="3 3" stroke={gs} />
             <XAxis dataKey="group" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
             <YAxis domain={[0, 65]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Earnings ($k)", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-            <Bar dataKey="val" radius={[6, 6, 0, 0]}><Cell fill="#60a5fa" /><Cell fill="#a78bfa" /></Bar>
+            <Bar dataKey="val" radius={[6, 6, 0, 0]}><Cell fill="#2563eb" /><Cell fill="#047857" /></Bar>
           </BarChart>
         </ResponsiveContainer>
-        <div style={{ display: "flex", justifyContent: "center", marginTop: 4 }}><Pill color="#fbbf24" text={`Naive diff: $${((psmD.naiveT - psmD.naiveC) / 1000).toFixed(1)}k (confounded)`} /></div>
+        <div style={{ display: "flex", justifyContent: "center", marginTop: 4 }}><Pill color="#d97706" text={`Naive diff: $${((psmD.naiveT - psmD.naiveC) / 1000).toFixed(1)}k (confounded)`} /></div>
       </div>
     );
   }
@@ -517,14 +517,14 @@ function PSMChart({ step }) {
         <div style={{ padding: "1rem" }}>
           <table style={{ width: "100%", maxWidth: 440, margin: "0 auto", borderCollapse: "collapse", fontFamily: "'Inter', sans-serif" }}>
             <thead><tr>
-              <th style={thS}>Covariate</th><th style={{ ...thS, color: "#a78bfa" }}>Treated</th><th style={{ ...thS, color: "#60a5fa" }}>Untreated</th><th style={{ ...thS, color: aft ? "#34d399" : "#f87171" }}>Gap</th>
+              <th style={thS}>Covariate</th><th style={{ ...thS, color: "#047857" }}>Treated</th><th style={{ ...thS, color: "#2563eb" }}>Untreated</th><th style={{ ...thS, color: aft ? "#059669" : "#dc2626" }}>Gap</th>
             </tr></thead>
             <tbody>
-              <tr><td style={tdS}>Education (yrs)</td><td style={{ ...tdS, color: "#a78bfa", textAlign: "center", fontWeight: 700 }}>{aft ? psmD.mEdTa : psmD.mEdT}</td><td style={{ ...tdS, color: "#60a5fa", textAlign: "center", fontWeight: 700 }}>{aft ? psmD.mEdCa : psmD.mEdC}</td><td style={{ ...tdS, color: aft ? "#34d399" : "#f87171", textAlign: "center", fontWeight: 700 }}>{aft ? (psmD.mEdTa - psmD.mEdCa).toFixed(1) : (psmD.mEdT - psmD.mEdC).toFixed(1)}</td></tr>
-              <tr><td style={tdS}>Age (yrs)</td><td style={{ ...tdS, color: "#a78bfa", textAlign: "center", fontWeight: 700 }}>{psmD.mAgeT}</td><td style={{ ...tdS, color: "#60a5fa", textAlign: "center", fontWeight: 700 }}>{psmD.mAgeC}</td><td style={{ ...tdS, color: aft ? "#34d399" : "#f87171", textAlign: "center", fontWeight: 700 }}>{(psmD.mAgeT - psmD.mAgeC).toFixed(1)}</td></tr>
+              <tr><td style={tdS}>Education (yrs)</td><td style={{ ...tdS, color: "#047857", textAlign: "center", fontWeight: 700 }}>{aft ? psmD.mEdTa : psmD.mEdT}</td><td style={{ ...tdS, color: "#2563eb", textAlign: "center", fontWeight: 700 }}>{aft ? psmD.mEdCa : psmD.mEdC}</td><td style={{ ...tdS, color: aft ? "#059669" : "#dc2626", textAlign: "center", fontWeight: 700 }}>{aft ? (psmD.mEdTa - psmD.mEdCa).toFixed(1) : (psmD.mEdT - psmD.mEdC).toFixed(1)}</td></tr>
+              <tr><td style={tdS}>Age (yrs)</td><td style={{ ...tdS, color: "#047857", textAlign: "center", fontWeight: 700 }}>{psmD.mAgeT}</td><td style={{ ...tdS, color: "#2563eb", textAlign: "center", fontWeight: 700 }}>{psmD.mAgeC}</td><td style={{ ...tdS, color: aft ? "#059669" : "#dc2626", textAlign: "center", fontWeight: 700 }}>{(psmD.mAgeT - psmD.mAgeC).toFixed(1)}</td></tr>
             </tbody>
           </table>
-          <div style={{ display: "flex", justifyContent: "center", marginTop: 12 }}><Pill color={aft ? "#34d399" : "#f87171"} text={aft ? "Matching reduced the imbalance" : "Groups are NOT comparable"} /></div>
+          <div style={{ display: "flex", justifyContent: "center", marginTop: 12 }}><Pill color={aft ? "#059669" : "#dc2626"} text={aft ? "Matching reduced the imbalance" : "Groups are NOT comparable"} /></div>
         </div>
       </div>
     );
@@ -541,11 +541,11 @@ function PSMChart({ step }) {
             <Scatter data={psmD.scatterC} shape={<DotPSM />} /><Scatter data={psmD.scatterT} shape={<DotPSM />} />
           </ComposedChart>
         </ResponsiveContainer>
-        <ChartLegend items={[{ color: "#a78bfa", label: "Treated" }, { color: "#60a5fa", label: "Matched control" }, { color: "#64748b", label: "Match link", dashed: true }]} />
+        <ChartLegend items={[{ color: "#047857", label: "Treated" }, { color: "#2563eb", label: "Matched control" }, { color: "#64748b", label: "Match link", dashed: true }]} />
       </div>
     );
   }
-  const data = [{ label: "Naive", value: (psmD.naiveT - psmD.naiveC) / 1000, color: "#f87171" }, { label: "PSM", value: (psmD.adjT - psmD.adjC) / 1000, color: "#34d399" }];
+  const data = [{ label: "Naive", value: (psmD.naiveT - psmD.naiveC) / 1000, color: "#dc2626" }, { label: "PSM", value: (psmD.adjT - psmD.adjC) / 1000, color: "#059669" }];
   return (
     <div style={chartBox}>
       <ResponsiveContainer width="100%" height={230}>
@@ -556,7 +556,7 @@ function PSMChart({ step }) {
           <Bar dataKey="value" radius={[6, 6, 0, 0]}>{data.map((d, i) => <Cell key={i} fill={d.color} />)}</Bar>
         </BarChart>
       </ResponsiveContainer>
-      <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#f87171" text={`Naive: $${((psmD.naiveT - psmD.naiveC) / 1000).toFixed(1)}k`} /><Pill color="#34d399" text={`PSM: $${((psmD.adjT - psmD.adjC) / 1000).toFixed(1)}k`} /></div>
+      <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#dc2626" text={`Naive: $${((psmD.naiveT - psmD.naiveC) / 1000).toFixed(1)}k`} /><Pill color="#059669" text={`PSM: $${((psmD.adjT - psmD.adjC) / 1000).toFixed(1)}k`} /></div>
     </div>
   );
 }
@@ -629,7 +629,7 @@ function MethodCard({ method, selected, onClick }) {
     <button onClick={() => onClick(method)} style={{
       flex: "1 1 140px", maxWidth: 200, padding: "1.25rem 1rem",
       background: isA ? `linear-gradient(135deg, ${method.color}18, ${method.color}08)` : "rgba(255,255,255,0.02)",
-      border: isA ? `2px solid ${method.color}` : "1px solid #e2e8f0",
+      border: isA ? `2px solid ${method.color}` : "1.5px solid #000000",
       borderRadius: 14, cursor: "pointer", transition: "all 0.25s ease", textAlign: "center",
       transform: isA ? "translateY(-2px)" : "none", boxShadow: isA ? `0 8px 24px ${method.color}15` : "none",
     }}>
@@ -701,7 +701,7 @@ function AssumptionCard({ assumption, color }) {
       {open && (
         <div style={{ marginTop: 10 }}>
           <p style={{ fontSize: "1rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.65, margin: "0 0 8px" }}>{assumption.plain_english}</p>
-          <div style={{ padding: "10px 14px", background: "#f8717115", border: "1px solid #f8717130", borderRadius: 8, fontSize: "0.92rem", color: "#fecaca", fontFamily: "'Inter', sans-serif", lineHeight: 1.55 }}>⚠️ Violation: {assumption.what_breaks_it}</div>
+          <div style={{ padding: "10px 14px", background: "#dc262615", border: "1px solid #dc262630", borderRadius: 8, fontSize: "0.92rem", color: "#fecaca", fontFamily: "'Inter', sans-serif", lineHeight: 1.55 }}>⚠️ Violation: {assumption.what_breaks_it}</div>
         </div>
       )}
     </div>
@@ -828,7 +828,7 @@ export default function CausalInferenceLab() {
         )}
 
         {loading && <LoadingAnimation color={accentColor} />}
-        {error && <div style={{ padding: "1rem 1.25rem", background: "#f8717115", border: "1px solid #f8717130", borderRadius: 12, color: "#000000", fontSize: "1rem", fontFamily: "'Inter', sans-serif", textAlign: "center", marginBottom: "2rem" }}>{error}</div>}
+        {error && <div style={{ padding: "1rem 1.25rem", background: "#dc262615", border: "1px solid #dc262630", borderRadius: 12, color: "#000000", fontSize: "1rem", fontFamily: "'Inter', sans-serif", textAlign: "center", marginBottom: "2rem" }}>{error}</div>}
 
         {/* RESULTS */}
         {result && !loading && (
@@ -860,14 +860,14 @@ export default function CausalInferenceLab() {
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 12, marginBottom: "2.5rem" }}>
               {result.limitations && (
-                <div style={{ padding: "1rem 1.25rem", background: "#f8717108", border: "1px solid #f8717120", borderRadius: 12 }}>
-                  <div style={{ fontSize: "0.85rem", color: "#f87171", fontFamily: "'Inter', sans-serif", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>Limitations</div>
+                <div style={{ padding: "1rem 1.25rem", background: "#dc262608", border: "1px solid #dc262620", borderRadius: 12 }}>
+                  <div style={{ fontSize: "0.85rem", color: "#dc2626", fontFamily: "'Inter', sans-serif", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>Limitations</div>
                   <p style={{ fontSize: "1rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, margin: 0 }}>{result.limitations}</p>
                 </div>
               )}
               {result.connection_to_other_methods && (
-                <div style={{ padding: "1rem 1.25rem", background: "#34d39908", border: "1px solid #34d39920", borderRadius: 12 }}>
-                  <div style={{ fontSize: "0.85rem", color: "#34d399", fontFamily: "'Inter', sans-serif", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>Connection to other methods</div>
+                <div style={{ padding: "1rem 1.25rem", background: "#05966908", border: "1px solid #05966920", borderRadius: 12 }}>
+                  <div style={{ fontSize: "0.85rem", color: "#059669", fontFamily: "'Inter', sans-serif", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>Connection to other methods</div>
                   <p style={{ fontSize: "1rem", color: "#d1fae5", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, margin: 0 }}>{result.connection_to_other_methods}</p>
                 </div>
               )}

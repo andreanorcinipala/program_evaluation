@@ -30,7 +30,7 @@ const DESIGNS = [
     id: "regression",
     label: "Regression",
     full: "Regression Adjustment",
-    color: "#60a5fa",
+    color: "#2563eb",
     icon: "📈",
     strength: 2,
     tagline: "Statistically control for observed differences.",
@@ -46,7 +46,7 @@ const DESIGNS = [
     id: "matching",
     label: "Matching",
     full: "Matching Designs",
-    color: "#a78bfa",
+    color: "#7c3aed",
     icon: "🔗",
     strength: 3,
     tagline: "Find comparable pairs based on observed characteristics.",
@@ -62,7 +62,7 @@ const DESIGNS = [
     id: "its",
     label: "ITS",
     full: "Interrupted Time Series",
-    color: "#34d399",
+    color: "#059669",
     icon: "⏱️",
     strength: 4,
     tagline: "Use the pre-trend to separate program effects from time.",
@@ -78,7 +78,7 @@ const DESIGNS = [
     id: "did",
     label: "DiD",
     full: "DiD & Panel Methods",
-    color: "#22d3ee",
+    color: "#1e3a8a",
     icon: "📐",
     strength: 5,
     tagline: "Subtract the common trend, isolate the program effect.",
@@ -318,8 +318,8 @@ function NaiveChart({ step, seed }) {
 
   const data = [
     { name: "Naïve Effect", value: d.naiveEffect, fill: "#f97316" },
-    { name: "True Effect", value: d.trueEffect, fill: "#34d399" },
-    { name: "Bias", value: d.bias, fill: "#ef4444" },
+    { name: "True Effect", value: d.trueEffect, fill: "#059669" },
+    { name: "Bias", value: d.bias, fill: "#dc2626" },
   ];
   return (
     <div>
@@ -333,7 +333,7 @@ function NaiveChart({ step, seed }) {
           </Bar>
         </BarChart>
       </ResponsiveContainer>
-      <ChartLegend items={[{ color: "#f97316", label: "Naïve (overstated)" }, { color: "#34d399", label: "True effect" }, { color: "#ef4444", label: "Bias" }]} />
+      <ChartLegend items={[{ color: "#f97316", label: "Naïve (overstated)" }, { color: "#059669", label: "True effect" }, { color: "#dc2626", label: "Bias" }]} />
     </div>
   );
 }
@@ -343,7 +343,7 @@ function RegressionChart({ step, seed }) {
 
   if (step === 1) {
     const data = [
-      { name: "Treatment", value: d.tMeanOutcome, fill: "#60a5fa" },
+      { name: "Treatment", value: d.tMeanOutcome, fill: "#2563eb" },
       { name: "Control", value: d.cMeanOutcome, fill: "#64748b" },
     ];
     return (
@@ -358,7 +358,7 @@ function RegressionChart({ step, seed }) {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
-        <ChartLegend items={[{ color: "#60a5fa", label: "Treatment" }, { color: "#64748b", label: "Control" }]} />
+        <ChartLegend items={[{ color: "#2563eb", label: "Treatment" }, { color: "#64748b", label: "Control" }]} />
         <div style={{ textAlign: "center", marginTop: 6, fontSize: "0.85rem", color: "#f97316", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>Raw difference: {d.rawEffect} points</div>
       </div>
     );
@@ -376,19 +376,19 @@ function RegressionChart({ step, seed }) {
             <CartesianGrid {...gridStyle} />
             <XAxis dataKey="name" {...axisStyle} />
             <YAxis {...axisStyle} domain={[0, "auto"]} />
-            <Bar dataKey="treatment" fill="#60a5fa" name="Treatment" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="treatment" fill="#2563eb" name="Treatment" radius={[4, 4, 0, 0]} />
             <Bar dataKey="control" fill="#64748b" name="Control" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
-        <ChartLegend items={[{ color: "#60a5fa", label: "Treatment" }, { color: "#64748b", label: "Control" }]} />
-        <div style={{ textAlign: "center", marginTop: 6, fontSize: "0.85rem", color: "#fbbf24", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>Treatment group started {d.tMeanBaseline - d.cMeanBaseline} points higher at baseline</div>
+        <ChartLegend items={[{ color: "#2563eb", label: "Treatment" }, { color: "#64748b", label: "Control" }]} />
+        <div style={{ textAlign: "center", marginTop: 6, fontSize: "0.85rem", color: "#d97706", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>Treatment group started {d.tMeanBaseline - d.cMeanBaseline} points higher at baseline</div>
       </div>
     );
   }
 
   const data = [
     { name: "Raw Effect", value: d.rawEffect, fill: "#f97316" },
-    { name: "Adjusted Effect", value: d.adjustedEffect, fill: "#60a5fa" },
+    { name: "Adjusted Effect", value: d.adjustedEffect, fill: "#2563eb" },
   ];
   return (
     <div>
@@ -402,8 +402,8 @@ function RegressionChart({ step, seed }) {
           </Bar>
         </BarChart>
       </ResponsiveContainer>
-      <ChartLegend items={[{ color: "#f97316", label: "Raw (confounded)" }, { color: "#60a5fa", label: "Adjusted (controlled)" }]} />
-      <div style={{ textAlign: "center", marginTop: 6, fontSize: "0.85rem", color: "#34d399", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>Adjustment reduced the estimate by {Math.round((d.rawEffect - d.adjustedEffect) * 10) / 10} points</div>
+      <ChartLegend items={[{ color: "#f97316", label: "Raw (confounded)" }, { color: "#2563eb", label: "Adjusted (controlled)" }]} />
+      <div style={{ textAlign: "center", marginTop: 6, fontSize: "0.85rem", color: "#059669", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>Adjustment reduced the estimate by {Math.round((d.rawEffect - d.adjustedEffect) * 10) / 10} points</div>
     </div>
   );
 }
@@ -417,12 +417,12 @@ function MatchingChart({ step, seed }) {
           <CartesianGrid {...gridStyle} />
           <XAxis dataKey="name" {...axisStyle} tick={{ fontSize: 10 }} />
           <YAxis {...axisStyle} domain={[0, 0.7]} tickFormatter={(v) => v.toFixed(1)} />
-          <ReferenceLine y={0.1} stroke="#fbbf24" strokeDasharray="5 5" />
-          {(step === 1 || step === 3) && <Bar dataKey="before" fill="#ef4444" name="Before" radius={[4, 4, 0, 0]} opacity={step === 3 ? 0.4 : 1} />}
-          {step >= 2 && <Bar dataKey="after" fill="#a78bfa" name="After" radius={[4, 4, 0, 0]} />}
+          <ReferenceLine y={0.1} stroke="#d97706" strokeDasharray="5 5" />
+          {(step === 1 || step === 3) && <Bar dataKey="before" fill="#dc2626" name="Before" radius={[4, 4, 0, 0]} opacity={step === 3 ? 0.4 : 1} />}
+          {step >= 2 && <Bar dataKey="after" fill="#7c3aed" name="After" radius={[4, 4, 0, 0]} />}
         </BarChart>
       </ResponsiveContainer>
-      <ChartLegend items={[...(step === 1 || step === 3 ? [{ color: "#ef4444", label: "Before matching" }] : []), ...(step >= 2 ? [{ color: "#a78bfa", label: "After matching" }] : []), { color: "#fbbf24", label: "Balance threshold (0.1)", dashed: true }]} />
+      <ChartLegend items={[...(step === 1 || step === 3 ? [{ color: "#dc2626", label: "Before matching" }] : []), ...(step >= 2 ? [{ color: "#7c3aed", label: "After matching" }] : []), { color: "#d97706", label: "Balance threshold (0.1)", dashed: true }]} />
     </div>
   );
 }
@@ -436,13 +436,13 @@ function ITSChart({ step, seed }) {
           <CartesianGrid {...gridStyle} />
           <XAxis dataKey="t" {...axisStyle} />
           <YAxis {...axisStyle} domain={["auto", "auto"]} />
-          <ReferenceLine x={d.T} stroke="#fbbf24" strokeDasharray="5 5" />
-          <Scatter dataKey="y" fill="#34d399" r={3} />
+          <ReferenceLine x={d.T} stroke="#d97706" strokeDasharray="5 5" />
+          <Scatter dataKey="y" fill="#059669" r={3} />
           {step >= 2 && <Line dataKey="preTrend" stroke="#64748b" strokeDasharray="6 4" dot={false} strokeWidth={2} />}
-          {step >= 3 && <Line dataKey="postTrend" stroke="#34d399" dot={false} strokeWidth={2} connectNulls={false} />}
+          {step >= 3 && <Line dataKey="postTrend" stroke="#059669" dot={false} strokeWidth={2} connectNulls={false} />}
         </ComposedChart>
       </ResponsiveContainer>
-      <ChartLegend items={[{ color: "#34d399", label: "Observed data" }, ...(step >= 2 ? [{ color: "#64748b", label: "Counterfactual (pre-trend)", dashed: true }] : []), ...(step >= 3 ? [{ color: "#34d399", label: "Post-trend fit" }] : []), { color: "#fbbf24", label: "Intervention", dashed: true }]} />
+      <ChartLegend items={[{ color: "#059669", label: "Observed data" }, ...(step >= 2 ? [{ color: "#64748b", label: "Counterfactual (pre-trend)", dashed: true }] : []), ...(step >= 3 ? [{ color: "#059669", label: "Post-trend fit" }] : []), { color: "#d97706", label: "Intervention", dashed: true }]} />
     </div>
   );
 }
@@ -459,14 +459,14 @@ function DiDChart({ step, seed }) {
           <CartesianGrid {...gridStyle} />
           <XAxis dataKey="time" {...axisStyle} />
           <YAxis {...axisStyle} domain={[20, "auto"]} />
-          <Line dataKey="treatment" stroke="#22d3ee" strokeWidth={2} dot={{ r: 5, fill: "#22d3ee" }} />
+          <Line dataKey="treatment" stroke="#1e3a8a" strokeWidth={2} dot={{ r: 5, fill: "#1e3a8a" }} />
           <Line dataKey="control" stroke="#64748b" strokeWidth={2} dot={{ r: 5, fill: "#64748b" }} />
-          {showCf && <Line dataKey="counterfactual" stroke="#22d3ee" strokeWidth={2} strokeDasharray="6 4" dot={false} connectNulls={false} />}
-          {step >= 2 && <ReferenceLine x="Post" stroke="#fbbf24" strokeDasharray="5 5" />}
+          {showCf && <Line dataKey="counterfactual" stroke="#1e3a8a" strokeWidth={2} strokeDasharray="6 4" dot={false} connectNulls={false} />}
+          {step >= 2 && <ReferenceLine x="Post" stroke="#d97706" strokeDasharray="5 5" />}
         </LineChart>
       </ResponsiveContainer>
-      <ChartLegend items={[{ color: "#22d3ee", label: "Treatment" }, { color: "#64748b", label: "Control" }, ...(showCf ? [{ color: "#22d3ee", label: "Counterfactual", dashed: true }] : []), ...(step >= 2 ? [{ color: "#fbbf24", label: "Program start", dashed: true }] : [])]} />
-      {showCf && <div style={{ textAlign: "center", marginTop: 6, fontSize: "0.85rem", color: "#34d399", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>DiD effect = {data[3].treatment - data[3].counterfactual} points</div>}
+      <ChartLegend items={[{ color: "#1e3a8a", label: "Treatment" }, { color: "#64748b", label: "Control" }, ...(showCf ? [{ color: "#1e3a8a", label: "Counterfactual", dashed: true }] : []), ...(step >= 2 ? [{ color: "#d97706", label: "Program start", dashed: true }] : [])]} />
+      {showCf && <div style={{ textAlign: "center", marginTop: 6, fontSize: "0.85rem", color: "#059669", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>DiD effect = {data[3].treatment - data[3].counterfactual} points</div>}
     </div>
   );
 }
@@ -498,7 +498,7 @@ function StrengthMeter({ level, color }) {
 function DesignCard({ design, selected, onClick }) {
   const active = selected?.id === design.id;
   return (
-    <button onClick={() => onClick(design)} style={{ flex: "1 1 140px", maxWidth: 170, padding: "14px 10px 10px", background: active ? `${design.color}15` : "#f1f5f9", border: `1.5px solid ${active ? design.color : "#e2e8f0"}`, borderRadius: 12, cursor: "pointer", textAlign: "center", transition: "all 0.2s", outline: "none" }}>
+    <button onClick={() => onClick(design)} style={{ flex: "1 1 140px", maxWidth: 170, padding: "14px 10px 10px", background: active ? `${design.color}15` : "#f1f5f9", border: `1.5px solid ${active ? design.color : "#000000"}`, borderRadius: 12, cursor: "pointer", textAlign: "center", transition: "all 0.2s", outline: "none" }}>
       <div style={{ fontSize: "1.4rem", marginBottom: 4 }}>{design.icon}</div>
       <div style={{ fontSize: "0.95rem", fontWeight: 700, color: active ? design.color : "#000000", fontFamily: "'Inter', sans-serif" }}>{design.label}</div>
       <div style={{ fontSize: "0.72rem", color: "#000000", fontFamily: "'Inter', sans-serif", marginTop: 2 }}>{design.full}</div>
@@ -579,7 +579,7 @@ function NotationTerm({ pattern, tip }) {
   const [show, setShow] = useState(false);
   return (
     <span style={{ position: "relative", display: "inline" }}>
-      <span onClick={() => setShow(!show)} onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)} style={{ borderBottom: "1.5px dotted #a78bfa", cursor: "help", color: "#6d28d9", padding: "0 1px" }}>{pattern}</span>
+      <span onClick={() => setShow(!show)} onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)} style={{ borderBottom: "1.5px dotted #7c3aed", cursor: "help", color: "#6d28d9", padding: "0 1px" }}>{pattern}</span>
       {show && (
         <span style={{ position: "absolute", bottom: "calc(100% + 6px)", left: "50%", transform: "translateX(-50%)", background: "#f1f5f9", border: "1px solid #cbd5e1", borderRadius: 8, padding: "8px 12px", fontSize: "0.82rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.45, maxWidth: 320, minWidth: 180, zIndex: 100, whiteSpace: "normal", boxShadow: "0 4px 20px #00000015", pointerEvents: "none" }}>{tip}</span>
       )}
@@ -630,7 +630,7 @@ export default function ComparisonGroupLab() {
   useEffect(() => { setResult(null); setError(null); }, [design, level]);
   useEffect(() => { if (design) setProgram(DEFAULT_PROGRAMS[design.id] || ""); }, [design]);
 
-  const accentColor = design?.color || "#60a5fa";
+  const accentColor = design?.color || "#2563eb";
   const levelKey = level?.id || "colloquial";
 
   const handleGenerate = async () => {
@@ -699,7 +699,7 @@ export default function ComparisonGroupLab() {
                 </div>
               )}
               {design.addressesBias.length === 0 && (
-                <div style={{ marginTop: 8, fontSize: "0.85rem", color: "#ef4444", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>⚠ Vulnerable to all biases. Use only as a starting benchmark.</div>
+                <div style={{ marginTop: 8, fontSize: "0.85rem", color: "#dc2626", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>⚠ Vulnerable to all biases. Use only as a starting benchmark.</div>
               )}
               <div style={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: "center", marginTop: 12 }}>
                 <span style={{ fontSize: "0.85rem", color: "#000000", fontFamily: "'Inter', sans-serif", fontWeight: 700, marginRight: 4, lineHeight: "28px" }}>Key concepts:</span>

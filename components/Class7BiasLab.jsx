@@ -11,7 +11,7 @@ const BIAS_TYPES = [
     id: "selection",
     label: "Selection",
     full: "Selection Bias",
-    color: "#f87171",
+    color: "#dc2626",
     icon: "🎯",
     tagline: "When groups differ before the program even starts.",
     keyConcepts: ["Pre-existing differences", "Confounding", "Self-selection", "Systematic differences", "Comparability"],
@@ -25,7 +25,7 @@ const BIAS_TYPES = [
     id: "attrition",
     label: "Attrition",
     full: "Attrition Bias",
-    color: "#fbbf24",
+    color: "#d97706",
     icon: "🚪",
     tagline: "When people drop out, and it's not random who leaves.",
     keyConcepts: ["Differential dropout", "Loss to follow-up", "Missing data", "Intention-to-treat", "Survivor bias"],
@@ -39,7 +39,7 @@ const BIAS_TYPES = [
     id: "secular",
     label: "Secular Trends",
     full: "Secular Trends",
-    color: "#34d399",
+    color: "#059669",
     icon: "📈",
     tagline: "The world changes too, not just your program.",
     keyConcepts: ["Time trends", "Historical changes", "Confounding with time", "Pre-post fallacy", "Comparison groups"],
@@ -53,7 +53,7 @@ const BIAS_TYPES = [
     id: "maturation",
     label: "Maturation",
     full: "Maturation",
-    color: "#60a5fa",
+    color: "#2563eb",
     icon: "🌱",
     tagline: "People change naturally over time, program or not.",
     keyConcepts: ["Developmental change", "Natural progression", "Aging effects", "Learning effects", "Time-dependent change"],
@@ -67,7 +67,7 @@ const BIAS_TYPES = [
     id: "rtm",
     label: "RTM",
     full: "Regression to the Mean",
-    color: "#e879f9",
+    color: "#9333ea",
     icon: "📉",
     tagline: "Extreme scores naturally bounce back toward average.",
     keyConcepts: ["Statistical artifact", "Extreme scores", "Natural fluctuation", "Measurement error", "Repeated measurement"],
@@ -387,25 +387,25 @@ function SelectionChart({ step }) {
             <XAxis dataKey="range" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Baseline Score Range", position: "insideBottom", offset: -2, ...ax }} />
             <YAxis tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Count", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
             {step === 0 ? (
-              <Bar dataKey="Treatment" fill="#f87171" fillOpacity={0.6} radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Treatment" fill="#dc2626" fillOpacity={0.6} radius={[4, 4, 0, 0]} />
             ) : (
               <>
-                <Bar dataKey="Treatment" fill="#f87171" fillOpacity={0.6} radius={[4, 4, 0, 0]} />
-                <Bar dataKey="Control" fill="#60a5fa" fillOpacity={0.6} radius={[4, 4, 0, 0]} />
+                <Bar dataKey="Treatment" fill="#dc2626" fillOpacity={0.6} radius={[4, 4, 0, 0]} />
+                <Bar dataKey="Control" fill="#2563eb" fillOpacity={0.6} radius={[4, 4, 0, 0]} />
               </>
             )}
           </BarChart>
         </ResponsiveContainer>
-        {step === 1 && <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#f87171" text={`Treatment avg: ${selD.avgT}`} /><Pill color="#60a5fa" text={`Control avg: ${selD.avgC}`} /><Pill color="#fbbf24" text={`Gap: ${selD.gap}`} /></div>}
-        <ChartLegend items={step === 0 ? [{ color: "#f87171", label: "Treatment group" }] : [{ color: "#f87171", label: "Treatment" }, { color: "#60a5fa", label: "Control" }]} />
+        {step === 1 && <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#dc2626" text={`Treatment avg: ${selD.avgT}`} /><Pill color="#2563eb" text={`Control avg: ${selD.avgC}`} /><Pill color="#d97706" text={`Gap: ${selD.gap}`} /></div>}
+        <ChartLegend items={step === 0 ? [{ color: "#dc2626", label: "Treatment group" }] : [{ color: "#dc2626", label: "Treatment" }, { color: "#2563eb", label: "Control" }]} />
       </div>
     );
   }
   // Steps 2-3: show the bias in the comparison
   const data = [
-    { label: "Naive Estimate", value: 15.2, color: "#f87171" },
-    { label: "True Effect", value: 5.0, color: "#34d399" },
-    { label: "Selection Bias", value: 10.2, color: "#fbbf24" },
+    { label: "Naive Estimate", value: 15.2, color: "#dc2626" },
+    { label: "True Effect", value: 5.0, color: "#059669" },
+    { label: "Selection Bias", value: 10.2, color: "#d97706" },
   ];
   return (
     <div style={chartBox}>
@@ -417,7 +417,7 @@ function SelectionChart({ step }) {
           <Bar dataKey="value" radius={[6, 6, 0, 0]}>{data.map((d, i) => <Cell key={i} fill={d.color} />)}</Bar>
         </BarChart>
       </ResponsiveContainer>
-      <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#fbbf24" text="Naive = True Effect + Selection Bias" /></div>
+      <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#d97706" text="Naive = True Effect + Selection Bias" /></div>
     </div>
   );
 }
@@ -432,12 +432,12 @@ function AttritionChart({ step }) {
             <CartesianGrid strokeDasharray="3 3" stroke={gs} />
             <XAxis dataKey="wave" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
             <YAxis domain={[0, 55]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Participants", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-            <Line type="linear" dataKey="Treatment" stroke="#fbbf24" strokeWidth={2.5} dot={{ r: 5, fill: "#fbbf24" }} />
-            <Line type="linear" dataKey="Control" stroke="#60a5fa" strokeWidth={2.5} dot={{ r: 5, fill: "#60a5fa" }} />
+            <Line type="linear" dataKey="Treatment" stroke="#d97706" strokeWidth={2.5} dot={{ r: 5, fill: "#d97706" }} />
+            <Line type="linear" dataKey="Control" stroke="#2563eb" strokeWidth={2.5} dot={{ r: 5, fill: "#2563eb" }} />
           </LineChart>
         </ResponsiveContainer>
-        {step === 1 && <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#fbbf24" text="Treatment: 50 → 28 (44% lost)" /><Pill color="#60a5fa" text="Control: 50 → 42 (16% lost)" /></div>}
-        <ChartLegend items={[{ color: "#fbbf24", label: "Treatment" }, { color: "#60a5fa", label: "Control" }]} />
+        {step === 1 && <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#d97706" text="Treatment: 50 → 28 (44% lost)" /><Pill color="#2563eb" text="Control: 50 → 42 (16% lost)" /></div>}
+        <ChartLegend items={[{ color: "#d97706", label: "Treatment" }, { color: "#2563eb", label: "Control" }]} />
       </div>
     );
   }
@@ -449,16 +449,16 @@ function AttritionChart({ step }) {
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
           <XAxis dataKey="wave" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
           <YAxis domain={[60, 82]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Outcome", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-          <Line type="linear" dataKey="Treatment" stroke="#fbbf24" strokeWidth={2.5} dot={{ r: 5, fill: "#fbbf24" }} />
-          <Line type="linear" dataKey="Control" stroke="#60a5fa" strokeWidth={2.5} dot={{ r: 5, fill: "#60a5fa" }} />
-          {step >= 3 && <Line type="linear" dataKey="Treatment (ITT)" stroke="#fbbf24" strokeWidth={2} strokeDasharray="8 4" dot={{ r: 4, fill: "#fbbf24", strokeDasharray: "0" }} />}
+          <Line type="linear" dataKey="Treatment" stroke="#d97706" strokeWidth={2.5} dot={{ r: 5, fill: "#d97706" }} />
+          <Line type="linear" dataKey="Control" stroke="#2563eb" strokeWidth={2.5} dot={{ r: 5, fill: "#2563eb" }} />
+          {step >= 3 && <Line type="linear" dataKey="Treatment (ITT)" stroke="#d97706" strokeWidth={2} strokeDasharray="8 4" dot={{ r: 4, fill: "#d97706", strokeDasharray: "0" }} />}
         </LineChart>
       </ResponsiveContainer>
       <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}>
-        <Pill color="#fbbf24" text="Survivors look great" />
-        {step >= 3 && <Pill color="#34d399" text="ITT tells the real story" />}
+        <Pill color="#d97706" text="Survivors look great" />
+        {step >= 3 && <Pill color="#059669" text="ITT tells the real story" />}
       </div>
-      <ChartLegend items={[{ color: "#fbbf24", label: "Treatment (survivors)" }, { color: "#60a5fa", label: "Control" }, ...(step >= 3 ? [{ color: "#fbbf24", label: "Treatment (ITT)", dashed: true }] : [])]} />
+      <ChartLegend items={[{ color: "#d97706", label: "Treatment (survivors)" }, { color: "#2563eb", label: "Control" }, ...(step >= 3 ? [{ color: "#d97706", label: "Treatment (ITT)", dashed: true }] : [])]} />
     </div>
   );
 }
@@ -471,18 +471,18 @@ function SecularChart({ step }) {
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
           <XAxis dataKey="month" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Month", position: "insideBottom", offset: -10, ...ax }} />
           <YAxis domain={[15, 55]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Outcome", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-          <ReferenceLine x={12} stroke="#fbbf24" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Intervention", position: "top", fill: "#fbbf24", fontSize: 12, fontWeight: 700 }} />
-          <Line type="monotone" dataKey="Observed" stroke="#34d399" strokeWidth={2.5} dot={false} />
+          <ReferenceLine x={12} stroke="#d97706" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Intervention", position: "top", fill: "#d97706", fontSize: 12, fontWeight: 700 }} />
+          <Line type="monotone" dataKey="Observed" stroke="#059669" strokeWidth={2.5} dot={false} />
           {step >= 2 && <Line type="monotone" dataKey="Secular Trend" stroke="#64748b" strokeWidth={2} strokeDasharray="6 4" dot={false} />}
         </ComposedChart>
       </ResponsiveContainer>
       <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}>
-        {step === 0 && <Pill color="#34d399" text="Outcome drops after intervention" />}
-        {step === 1 && <Pill color="#fbbf24" text="But was it already dropping?" />}
+        {step === 0 && <Pill color="#059669" text="Outcome drops after intervention" />}
+        {step === 1 && <Pill color="#d97706" text="But was it already dropping?" />}
         {step >= 2 && <Pill color="#64748b" text="Secular trend was declining anyway" />}
-        {step >= 3 && <Pill color="#34d399" text="True effect = observed - trend" />}
+        {step >= 3 && <Pill color="#059669" text="True effect = observed - trend" />}
       </div>
-      <ChartLegend items={[{ color: "#34d399", label: "Observed" }, ...(step >= 2 ? [{ color: "#64748b", label: "Secular trend", dashed: true }] : []), { color: "#fbbf24", label: "Intervention start", dashed: true }]} />
+      <ChartLegend items={[{ color: "#059669", label: "Observed" }, ...(step >= 2 ? [{ color: "#64748b", label: "Secular trend", dashed: true }] : []), { color: "#d97706", label: "Intervention start", dashed: true }]} />
     </div>
   );
 }
@@ -495,17 +495,17 @@ function MaturationChart({ step }) {
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
           <XAxis dataKey="age" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Age (years)", position: "insideBottom", offset: -10, ...ax }} />
           <YAxis domain={[15, 55]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Reading Score", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-          <ReferenceLine x={7} stroke="#fbbf24" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Program starts", position: "top", fill: "#fbbf24", fontSize: 12, fontWeight: 700 }} />
-          <Line type="monotone" dataKey="With Program" stroke="#60a5fa" strokeWidth={2.5} dot={false} />
+          <ReferenceLine x={7} stroke="#d97706" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Program starts", position: "top", fill: "#d97706", fontSize: 12, fontWeight: 700 }} />
+          <Line type="monotone" dataKey="With Program" stroke="#2563eb" strokeWidth={2.5} dot={false} />
           {step >= 2 && <Line type="monotone" dataKey="Natural Growth" stroke="#64748b" strokeWidth={2} strokeDasharray="6 4" dot={false} />}
         </ComposedChart>
       </ResponsiveContainer>
       <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}>
-        {step <= 1 && <Pill color="#60a5fa" text="Scores improve after program starts" />}
+        {step <= 1 && <Pill color="#2563eb" text="Scores improve after program starts" />}
         {step >= 2 && <Pill color="#64748b" text="But kids naturally improve too" />}
-        {step >= 3 && <Pill color="#34d399" text="True effect = gap between curves" />}
+        {step >= 3 && <Pill color="#059669" text="True effect = gap between curves" />}
       </div>
-      <ChartLegend items={[{ color: "#60a5fa", label: "With program" }, ...(step >= 2 ? [{ color: "#64748b", label: "Natural growth", dashed: true }] : []), { color: "#fbbf24", label: "Program start", dashed: true }]} />
+      <ChartLegend items={[{ color: "#2563eb", label: "With program" }, ...(step >= 2 ? [{ color: "#64748b", label: "Natural growth", dashed: true }] : []), { color: "#d97706", label: "Program start", dashed: true }]} />
     </div>
   );
 }
@@ -515,7 +515,7 @@ function RTMChart({ step }) {
     // Show the scatter of test1 vs test2
     const DotRTM = ({ cx, cy, payload }) => {
       if (!cx || !cy) return null;
-      return <circle cx={cx} cy={cy} r={payload.selected ? 5 : 3} fill={payload.selected ? "#e879f9" : "#94a3b8"} fillOpacity={payload.selected ? 0.8 : 0.3} />;
+      return <circle cx={cx} cy={cy} r={payload.selected ? 5 : 3} fill={payload.selected ? "#9333ea" : "#94a3b8"} fillOpacity={payload.selected ? 0.8 : 0.3} />;
     };
     const scatter = rtmD.students.map(s => ({ x: s.test1, y: s.test2, selected: s.selected }));
     return (
@@ -526,20 +526,20 @@ function RTMChart({ step }) {
             <XAxis type="number" dataKey="x" domain={[10, 95]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Test 1 Score", position: "insideBottom", offset: -10, ...ax }} />
             <YAxis type="number" dataKey="y" domain={[10, 95]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Test 2 Score", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
             <ReferenceLine segment={[{ x: 10, y: 10 }, { x: 95, y: 95 }]} stroke="#cbd5e1" strokeWidth={1} strokeDasharray="4 4" />
-            {step >= 1 && <ReferenceLine x={35} stroke="#e879f9" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Cutoff", position: "top", fill: "#e879f9", fontSize: 12, fontWeight: 700 }} />}
+            {step >= 1 && <ReferenceLine x={35} stroke="#9333ea" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Cutoff", position: "top", fill: "#9333ea", fontSize: 12, fontWeight: 700 }} />}
             <Scatter data={scatter} shape={<DotRTM />} />
           </ComposedChart>
         </ResponsiveContainer>
-        {step >= 1 && <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#e879f9" text={`Selected: scored < 35 (n=${rtmD.selected.length})`} /></div>}
-        <ChartLegend items={[{ color: "#e879f9", label: "Selected (low scorers)" }, { color: "#94a3b8", label: "Not selected" }, { color: "#cbd5e1", label: "No change line", dashed: true }]} />
+        {step >= 1 && <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#9333ea" text={`Selected: scored < 35 (n=${rtmD.selected.length})`} /></div>}
+        <ChartLegend items={[{ color: "#9333ea", label: "Selected (low scorers)" }, { color: "#94a3b8", label: "Not selected" }, { color: "#cbd5e1", label: "No change line", dashed: true }]} />
       </div>
     );
   }
   // Steps 2-3: show the bounce-back
   const data = [
-    { label: "Test 1 (selected)", value: rtmD.avgSel1, color: "#e879f9" },
-    { label: "Test 2 (retest)", value: rtmD.avgSel2, color: "#60a5fa" },
-    { label: "True Score", value: rtmD.avgTrue, color: "#34d399" },
+    { label: "Test 1 (selected)", value: rtmD.avgSel1, color: "#9333ea" },
+    { label: "Test 2 (retest)", value: rtmD.avgSel2, color: "#2563eb" },
+    { label: "True Score", value: rtmD.avgTrue, color: "#059669" },
   ];
   return (
     <div style={chartBox}>
@@ -552,8 +552,8 @@ function RTMChart({ step }) {
         </BarChart>
       </ResponsiveContainer>
       <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}>
-        <Pill color="#e879f9" text={`RTM effect: +${rtmD.rtmEffect} points`} />
-        {step >= 3 && <Pill color="#fbbf24" text="This is NOT a program effect!" />}
+        <Pill color="#9333ea" text={`RTM effect: +${rtmD.rtmEffect} points`} />
+        {step >= 3 && <Pill color="#d97706" text="This is NOT a program effect!" />}
       </div>
     </div>
   );
@@ -613,7 +613,7 @@ function BiasCard({ bias, selected, onClick }) {
     <button onClick={() => onClick(bias)} style={{
       flex: "1 1 130px", maxWidth: 170, padding: "1.1rem 0.8rem",
       background: isA ? `linear-gradient(135deg, ${bias.color}18, ${bias.color}08)` : "rgba(255,255,255,0.02)",
-      border: isA ? `2px solid ${bias.color}` : "1px solid #e2e8f0",
+      border: isA ? `2px solid ${bias.color}` : "1.5px solid #000000",
       borderRadius: 14, cursor: "pointer", transition: "all 0.25s ease", textAlign: "center",
       transform: isA ? "translateY(-2px)" : "none", boxShadow: isA ? `0 8px 24px ${bias.color}15` : "none",
     }}>
@@ -678,7 +678,7 @@ function DetectFixCard({ item, color, type }) {
   return (
     <div style={{ padding: "0.85rem 1.1rem", background: "rgba(255,255,255,0.02)", border: "1px solid #e2e8f0", borderRadius: 10, marginBottom: 8 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-        <span style={{ fontSize: "0.9rem", color: type === "detect" ? "#fbbf24" : "#34d399" }}>{type === "detect" ? "🔍" : "🛠️"}</span>
+        <span style={{ fontSize: "0.9rem", color: type === "detect" ? "#d97706" : "#059669" }}>{type === "detect" ? "🔍" : "🛠️"}</span>
         <span style={{ fontSize: "1rem", fontWeight: 600, color, fontFamily: "'Inter', sans-serif" }}>{item.method}</span>
       </div>
       <p style={{ fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, margin: 0 }}>{item.description}</p>
@@ -805,7 +805,7 @@ export default function Class7BiasLab() {
         )}
 
         {loading && <LoadingAnimation color={accentColor} />}
-        {error && <div style={{ padding: "1rem 1.25rem", background: "#f8717115", border: "1px solid #f8717130", borderRadius: 12, color: "#000000", fontSize: "1rem", fontFamily: "'Inter', sans-serif", textAlign: "center", marginBottom: "2rem" }}>{error}</div>}
+        {error && <div style={{ padding: "1rem 1.25rem", background: "#dc262615", border: "1px solid #dc262630", borderRadius: 12, color: "#000000", fontSize: "1rem", fontFamily: "'Inter', sans-serif", textAlign: "center", marginBottom: "2rem" }}>{error}</div>}
 
         {/* RESULTS */}
         {result && !loading && (
@@ -846,8 +846,8 @@ export default function Class7BiasLab() {
 
             {/* Consequence */}
             {result.real_world_consequence && (
-              <div style={{ padding: "1rem 1.25rem", background: "#f8717108", border: "1px solid #f8717120", borderRadius: 12, marginBottom: "2.5rem" }}>
-                <div style={{ fontSize: "0.85rem", color: "#f87171", fontFamily: "'Inter', sans-serif", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>What could go wrong</div>
+              <div style={{ padding: "1rem 1.25rem", background: "#dc262608", border: "1px solid #dc262620", borderRadius: 12, marginBottom: "2.5rem" }}>
+                <div style={{ fontSize: "0.85rem", color: "#dc2626", fontFamily: "'Inter', sans-serif", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>What could go wrong</div>
                 <p style={{ fontSize: "1rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, margin: 0 }}>{result.real_world_consequence}</p>
               </div>
             )}
