@@ -172,7 +172,7 @@ function NotationSpan({ notation, tip, color }) {
           width: 320, maxWidth: "90vw", padding: "12px 14px",
           background: "#1e293b", border: `1px solid ${color || "#94a3b8"}50`,
           borderRadius: 10, boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
-          fontSize: "0.9rem", color: "#f0f0f0",
+          fontSize: "0.9rem", color: "#ffffff",
           fontFamily: "'Helvetica Neue', sans-serif", fontStyle: "normal",
           lineHeight: 1.55, fontWeight: 400, zIndex: 100, pointerEvents: "none", textAlign: "left",
         }}>
@@ -600,7 +600,7 @@ function ChartLegend({ items }) {
       {items.map((it, i) => (
         <div key={i} style={{ display: "flex", alignItems: "center", gap: 5 }}>
           <div style={{ width: 16, height: 0, borderTop: `2.5px ${it.dashed ? "dashed" : "solid"} ${it.color}` }} />
-          <span style={{ fontSize: "0.82rem", color: "#f0f0f0", fontFamily: "'Helvetica Neue', sans-serif" }}>{it.label}</span>
+          <span style={{ fontSize: "0.82rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif" }}>{it.label}</span>
         </div>
       ))}
     </div>
@@ -619,7 +619,7 @@ function BiasCard({ bias, selected, onClick }) {
     }}>
       <div style={{ fontSize: "1.8rem", marginBottom: 4 }}>{bias.icon}</div>
       <div style={{ fontSize: "1.1rem", fontWeight: 700, color: isA ? bias.color : "#f0f0f0", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", letterSpacing: "0.03em", marginBottom: 3 }}>{bias.label}</div>
-      <div style={{ fontSize: "0.78rem", color: "#dce1e8", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.35 }}>{bias.full}</div>
+      <div style={{ fontSize: "0.78rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.35 }}>{bias.full}</div>
     </button>
   );
 }
@@ -636,7 +636,7 @@ function LevelSelector({ level, setLevel, accentColor }) {
         }}>
           <div style={{ fontSize: "1.25rem", marginBottom: 2 }}>{l.emoji}</div>
           <div style={{ fontSize: "0.95rem", fontWeight: 600, color: level.id === l.id ? accentColor : "#f0f0f0", fontFamily: "'Helvetica Neue', sans-serif" }}>{l.label}</div>
-          <div style={{ fontSize: "0.8rem", color: "#dce1e8", fontFamily: "'Helvetica Neue', sans-serif", marginTop: 2, lineHeight: 1.3 }}>{l.desc}</div>
+          <div style={{ fontSize: "0.8rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", marginTop: 2, lineHeight: 1.3 }}>{l.desc}</div>
         </button>
       ))}
     </div>
@@ -665,7 +665,7 @@ function StepCard({ step, color, isActive, onClick }) {
             <div>
               <p style={{ fontSize: "1.05rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.75, margin: "0 0 10px" }}>{step.explanation}</p>
               {step.key_concept && <div style={{ display: "inline-block", padding: "5px 12px", background: `${color}15`, border: `1px solid ${color}30`, borderRadius: 6, fontSize: "0.88rem", color, fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, marginBottom: step.analogy ? 8 : 0 }}>Key concept: {step.key_concept}</div>}
-              {step.analogy && <div style={{ marginTop: 8, padding: "10px 14px", background: "#1c191740", borderLeft: `3px solid ${color}50`, borderRadius: "0 8px 8px 0", fontSize: "0.95rem", color: "#f0f0f0", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.6, fontStyle: "italic" }}>💡 {step.analogy}</div>}
+              {step.analogy && <div style={{ marginTop: 8, padding: "10px 14px", background: "#1c191740", borderLeft: `3px solid ${color}50`, borderRadius: "0 8px 8px 0", fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.6, fontStyle: "italic" }}>💡 {step.analogy}</div>}
             </div>
           )}
         </div>
@@ -690,7 +690,7 @@ function LoadingAnimation({ color }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "4rem 2rem", gap: 20 }}>
       <div style={{ display: "flex", gap: 8 }}>{[0, 1, 2, 3].map(i => <div key={i} style={{ width: 12, height: 12, borderRadius: "50%", background: color, animation: `pulse 1.2s ease-in-out ${i * 0.15}s infinite` }} />)}</div>
-      <p style={{ color: "#f0f0f0", fontSize: "1rem", fontFamily: "'Helvetica Neue', sans-serif" }}>Building your personalized explanation...</p>
+      <p style={{ color: "#ffffff", fontSize: "1rem", fontFamily: "'Helvetica Neue', sans-serif" }}>Building your personalized explanation...</p>
       <style>{`@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.5); opacity: 1; } }`}</style>
     </div>
   );
@@ -699,7 +699,7 @@ function LoadingAnimation({ color }) {
 function SectionLabel({ number, text }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-      <span style={{ fontSize: "0.88rem", color: "#f0f0f0", fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, background: "#0f172a", border: "1px solid #1e293b", borderRadius: 6, padding: "3px 8px" }}>{number}</span>
+      <span style={{ fontSize: "0.88rem", color: "#ffffff", fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, background: "#0f172a", border: "1px solid #1e293b", borderRadius: 6, padding: "3px 8px" }}>{number}</span>
       <span style={{ fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em" }}>{text}</span>
       <div style={{ flex: 1, height: 1, background: "#1e293b" }} />
     </div>
@@ -737,7 +737,7 @@ export default function Class7BiasLab() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#060a13", color: "#e2e8f0", fontFamily: "'Georgia', 'Times New Roman', serif" }}>
+    <div style={{ minHeight: "100vh", background: "#060a13", color: "#ffffff", fontFamily: "'Georgia', 'Times New Roman', serif" }}>
       <div style={{ position: "fixed", inset: 0, backgroundImage: `radial-gradient(circle at 1px 1px, #ffffff06 1px, transparent 0)`, backgroundSize: "40px 40px", pointerEvents: "none", zIndex: 0 }} />
       <div style={{ position: "relative", zIndex: 1, maxWidth: 820, margin: "0 auto", padding: "2.5rem 1.5rem 4rem" }}>
 
@@ -749,9 +749,9 @@ export default function Class7BiasLab() {
 
         {/* Header */}
         <header style={{ textAlign: "center", marginBottom: "3rem" }}>
-          <div style={{ fontSize: "0.82rem", color: "#dce1e8", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 10 }}>Interactive Learning Platform (Work in Progress)</div>
+          <div style={{ fontSize: "0.82rem", color: "#ffffff", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 10 }}>Interactive Learning Platform (Work in Progress)</div>
           <h1 style={{ fontSize: "clamp(1.9rem, 4.5vw, 2.8rem)", fontWeight: 700, color: "#ffffff", lineHeight: 1.2, marginBottom: 10, letterSpacing: "-0.01em" }}>Bias in Impact Evaluation</h1>
-          <p style={{ fontSize: "1.1rem", color: "#f0f0f0", fontFamily: "'Helvetica Neue', sans-serif", maxWidth: 560, margin: "0 auto", lineHeight: 1.6 }}>Select a type of bias, choose your difficulty level, and describe a program. The AI explains how that bias could threaten your evaluation, with detection strategies and remedies.</p>
+          <p style={{ fontSize: "1.1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", maxWidth: 560, margin: "0 auto", lineHeight: 1.6 }}>Select a type of bias, choose your difficulty level, and describe a program. The AI explains how that bias could threaten your evaluation, with detection strategies and remedies.</p>
         </header>
 
         {/* Step 1: Choose bias */}
@@ -778,12 +778,12 @@ export default function Class7BiasLab() {
               <div style={{ marginTop: 16, padding: "1.1rem 1.4rem", background: "#0f172a", borderRadius: 12, border: `1px solid ${accentColor}25`, borderLeft: `3px solid ${accentColor}` }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
                   <span style={{ fontSize: "0.85rem", color: accentColor, fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>What is {bias.full}?</span>
-                  <span style={{ fontSize: "0.78rem", color: "#f0f0f0", fontFamily: "'Helvetica Neue', sans-serif", background: "#1e293b", padding: "3px 10px", borderRadius: 4 }}>{level.label} level</span>
+                  <span style={{ fontSize: "0.78rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", background: "#1e293b", padding: "3px 10px", borderRadius: 4 }}>{level.label} level</span>
                 </div>
                 <p style={{ fontSize: "1.05rem", color: "#ffffff", fontFamily: "'Georgia', serif", lineHeight: 1.75, margin: 0 }}>
                   {level.id === "advanced" ? <NotationText text={bias.definitions[level.id]} color={accentColor} /> : bias.definitions[level.id]}
                 </p>
-                {level.id === "advanced" && <div style={{ marginTop: 10, fontSize: "0.78rem", color: "#94a3b8", fontFamily: "'Helvetica Neue', sans-serif", fontStyle: "italic" }}>Hover or tap dotted terms for plain-language explanations.</div>}
+                {level.id === "advanced" && <div style={{ marginTop: 10, fontSize: "0.78rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", fontStyle: "italic" }}>Hover or tap dotted terms for plain-language explanations.</div>}
               </div>
             )}
           </section>
@@ -793,11 +793,11 @@ export default function Class7BiasLab() {
         {bias && (
           <section style={{ marginBottom: "2.5rem", animation: "fadeIn 0.4s ease" }}>
             <SectionLabel number="3" text="Describe your program" />
-            <p style={{ fontSize: "0.95rem", color: "#f0f0f0", fontFamily: "'Helvetica Neue', sans-serif", marginBottom: 12, lineHeight: 1.5 }}>Enter a program, policy, or intervention. The AI will explain how {bias.full.toLowerCase()} could affect your evaluation.</p>
+            <p style={{ fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", marginBottom: 12, lineHeight: 1.5 }}>Enter a program, policy, or intervention. The AI will explain how {bias.full.toLowerCase()} could affect your evaluation.</p>
             <div style={{ position: "relative", background: "#0f172a", borderRadius: 12, border: "1px solid #1e293b", overflow: "hidden" }}>
               <textarea value={program} onChange={e => setProgram(e.target.value)} placeholder="e.g., a community health worker home visiting program on childhood vaccination rates" rows={3} style={{ width: "100%", padding: "1rem 1.25rem", background: "transparent", border: "none", color: "#ffffff", fontSize: "1.05rem", fontFamily: "'Georgia', serif", lineHeight: 1.6, resize: "vertical", outline: "none", boxSizing: "border-box" }} />
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.5rem 1.25rem 0.75rem", borderTop: "1px solid #1e293b10" }}>
-                <span style={{ fontSize: "0.82rem", color: "#dce1e8", fontFamily: "'JetBrains Mono', monospace" }}>{bias.full} · {level.label}</span>
+                <span style={{ fontSize: "0.82rem", color: "#ffffff", fontFamily: "'JetBrains Mono', monospace" }}>{bias.full} · {level.label}</span>
                 <button onClick={handleGenerate} disabled={loading || !program.trim()} style={{ padding: "0.6rem 1.6rem", background: loading || !program.trim() ? "#1e293b" : accentColor, color: loading || !program.trim() ? "#475569" : "#0a0f1a", border: "none", borderRadius: 8, cursor: loading || !program.trim() ? "default" : "pointer", fontSize: "0.95rem", fontWeight: 700, fontFamily: "'Helvetica Neue', sans-serif", transition: "all 0.2s", letterSpacing: "0.02em" }}>{loading ? "Generating..." : "Generate Explanation →"}</button>
               </div>
             </div>
@@ -814,7 +814,7 @@ export default function Class7BiasLab() {
             <section style={{ padding: "1.25rem 1.5rem", background: `${accentColor}08`, border: `1px solid ${accentColor}25`, borderRadius: 14, marginBottom: "2rem" }}>
               <div style={{ fontSize: "0.82rem", color: accentColor, fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 6 }}>How this bias affects your evaluation</div>
               <p style={{ fontSize: "1.1rem", color: "#ffffff", fontFamily: "'Georgia', serif", lineHeight: 1.65, margin: 0 }}>{result.example_framing}</p>
-              {result.scenario && <p style={{ fontSize: "1rem", color: "#f0f0f0", fontFamily: "'Helvetica Neue', sans-serif", marginTop: 10, marginBottom: 0, lineHeight: 1.6, fontStyle: "italic", borderLeft: `3px solid ${accentColor}40`, paddingLeft: 14 }}>{result.scenario}</p>}
+              {result.scenario && <p style={{ fontSize: "1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", marginTop: 10, marginBottom: 0, lineHeight: 1.6, fontStyle: "italic", borderLeft: `3px solid ${accentColor}40`, paddingLeft: 14 }}>{result.scenario}</p>}
             </section>
 
             {/* Steps */}
