@@ -744,7 +744,7 @@ export default function Class7BiasLab() {
         {/* Navigation */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
           <a href="/" style={{ fontSize: "1.1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", textDecoration: "none", display: "flex", alignItems: "center", gap: 8, padding: "10px 20px", background: "#1e293b", border: "1px solid #334155", borderRadius: 10, fontWeight: 600 }}>← Class 6: Causal Inference Methods</a>
-          <span style={{ fontSize: "0.82rem", color: "#94a3b8", fontFamily: "'JetBrains Mono', monospace", background: "#0f172a", border: "1px solid #1e293b", borderRadius: 6, padding: "4px 10px" }}>Class 7</span>
+          <a href="/class7/designs" style={{ fontSize: "1.1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", textDecoration: "none", display: "flex", alignItems: "center", gap: 8, padding: "10px 20px", background: "#1e293b", border: "1px solid #334155", borderRadius: 10, fontWeight: 600 }}>Comparison Group Designs →</a>
         </div>
 
         {/* Header */}
