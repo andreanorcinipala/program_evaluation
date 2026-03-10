@@ -163,20 +163,20 @@ function NotationSpan({ notation, tip, color }) {
   };
   return (
     <span ref={ref} onMouseEnter={handleEnter} onMouseLeave={() => setShow(false)} onClick={() => setShow(s => !s)}
-      style={{ position: "relative", borderBottom: `2px dotted ${color || "#94a3b8"}`, cursor: "help", paddingBottom: 1 }}>
+      style={{ position: "relative", borderBottom: `2px dotted ${color || "#64748b"}`, cursor: "help", paddingBottom: 1 }}>
       {notation}
       {show && (
         <span style={{
           position: "absolute", left: "50%", transform: "translateX(-50%)",
           ...(pos === "above" ? { bottom: "calc(100% + 10px)" } : { top: "calc(100% + 10px)" }),
           width: 320, maxWidth: "90vw", padding: "12px 14px",
-          background: "#1e293b", border: `1px solid ${color || "#94a3b8"}50`,
+          background: "#f1f5f9", border: `1px solid ${color || "#64748b"}50`,
           borderRadius: 10, boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
-          fontSize: "0.9rem", color: "#ffffff",
-          fontFamily: "'Helvetica Neue', sans-serif", fontStyle: "normal",
+          fontSize: "0.9rem", color: "#000000",
+          fontFamily: "'Inter', sans-serif", fontStyle: "normal",
           lineHeight: 1.55, fontWeight: 400, zIndex: 100, pointerEvents: "none", textAlign: "left",
         }}>
-          <span style={{ display: "block", fontSize: "0.72rem", color: color || "#94a3b8", fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, marginBottom: 4, letterSpacing: "0.05em", textTransform: "uppercase" }}>In plain terms</span>
+          <span style={{ display: "block", fontSize: "0.72rem", color: color || "#64748b", fontFamily: "'Inter', sans-serif", fontWeight: 700, marginBottom: 4, letterSpacing: "0.05em", textTransform: "uppercase" }}>In plain terms</span>
           {tip}
         </span>
       )}
@@ -371,11 +371,11 @@ const rtmD = genRTMData();
 // ============================================================
 const chartBox = {
   width: "100%", background: "linear-gradient(135deg, #111827 0%, #0f172a 100%)",
-  borderRadius: 14, border: "1px solid #1e293b", padding: "1rem 0.5rem 0.5rem",
+  borderRadius: 14, border: "1px solid #e2e8f0", padding: "1rem 0.5rem 0.5rem",
   marginBottom: "1.25rem", position: "relative",
 };
-const ax = { fill: "#e8ecf2", fontSize: 13, fontFamily: "Georgia" };
-const gs = "#1e293b";
+const ax = { fill: "#64748b", fontSize: 13, fontFamily: "Inter" };
+const gs = "#e2e8f0";
 
 function SelectionChart({ step }) {
   if (step <= 1) {
@@ -384,8 +384,8 @@ function SelectionChart({ step }) {
         <ResponsiveContainer width="100%" height={240}>
           <BarChart data={selD.bins} margin={{ top: 15, right: 30, left: 15, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-            <XAxis dataKey="range" tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Baseline Score Range", position: "insideBottom", offset: -2, ...ax }} />
-            <YAxis tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Count", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+            <XAxis dataKey="range" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Baseline Score Range", position: "insideBottom", offset: -2, ...ax }} />
+            <YAxis tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Count", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
             {step === 0 ? (
               <Bar dataKey="Treatment" fill="#f87171" fillOpacity={0.6} radius={[4, 4, 0, 0]} />
             ) : (
@@ -412,8 +412,8 @@ function SelectionChart({ step }) {
       <ResponsiveContainer width="100%" height={230}>
         <BarChart data={data} margin={{ top: 15, right: 30, left: 15, bottom: 5 }} barSize={60}>
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-          <XAxis dataKey="label" tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} />
-          <YAxis domain={[0, 20]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Effect Size", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+          <XAxis dataKey="label" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
+          <YAxis domain={[0, 20]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Effect Size", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
           <Bar dataKey="value" radius={[6, 6, 0, 0]}>{data.map((d, i) => <Cell key={i} fill={d.color} />)}</Bar>
         </BarChart>
       </ResponsiveContainer>
@@ -430,8 +430,8 @@ function AttritionChart({ step }) {
         <ResponsiveContainer width="100%" height={240}>
           <LineChart data={data} margin={{ top: 15, right: 30, left: 15, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-            <XAxis dataKey="wave" tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} />
-            <YAxis domain={[0, 55]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Participants", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+            <XAxis dataKey="wave" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
+            <YAxis domain={[0, 55]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Participants", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
             <Line type="linear" dataKey="Treatment" stroke="#fbbf24" strokeWidth={2.5} dot={{ r: 5, fill: "#fbbf24" }} />
             <Line type="linear" dataKey="Control" stroke="#60a5fa" strokeWidth={2.5} dot={{ r: 5, fill: "#60a5fa" }} />
           </LineChart>
@@ -447,8 +447,8 @@ function AttritionChart({ step }) {
       <ResponsiveContainer width="100%" height={250}>
         <LineChart data={attD.timeline} margin={{ top: 15, right: 30, left: 15, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-          <XAxis dataKey="wave" tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} />
-          <YAxis domain={[60, 82]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Outcome", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+          <XAxis dataKey="wave" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
+          <YAxis domain={[60, 82]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Outcome", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
           <Line type="linear" dataKey="Treatment" stroke="#fbbf24" strokeWidth={2.5} dot={{ r: 5, fill: "#fbbf24" }} />
           <Line type="linear" dataKey="Control" stroke="#60a5fa" strokeWidth={2.5} dot={{ r: 5, fill: "#60a5fa" }} />
           {step >= 3 && <Line type="linear" dataKey="Treatment (ITT)" stroke="#fbbf24" strokeWidth={2} strokeDasharray="8 4" dot={{ r: 4, fill: "#fbbf24", strokeDasharray: "0" }} />}
@@ -469,20 +469,20 @@ function SecularChart({ step }) {
       <ResponsiveContainer width="100%" height={260}>
         <ComposedChart data={secD.months} margin={{ top: 15, right: 30, left: 15, bottom: 20 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-          <XAxis dataKey="month" tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Month", position: "insideBottom", offset: -10, ...ax }} />
-          <YAxis domain={[15, 55]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Outcome", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+          <XAxis dataKey="month" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Month", position: "insideBottom", offset: -10, ...ax }} />
+          <YAxis domain={[15, 55]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Outcome", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
           <ReferenceLine x={12} stroke="#fbbf24" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Intervention", position: "top", fill: "#fbbf24", fontSize: 12, fontWeight: 700 }} />
           <Line type="monotone" dataKey="Observed" stroke="#34d399" strokeWidth={2.5} dot={false} />
-          {step >= 2 && <Line type="monotone" dataKey="Secular Trend" stroke="#94a3b8" strokeWidth={2} strokeDasharray="6 4" dot={false} />}
+          {step >= 2 && <Line type="monotone" dataKey="Secular Trend" stroke="#64748b" strokeWidth={2} strokeDasharray="6 4" dot={false} />}
         </ComposedChart>
       </ResponsiveContainer>
       <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}>
         {step === 0 && <Pill color="#34d399" text="Outcome drops after intervention" />}
         {step === 1 && <Pill color="#fbbf24" text="But was it already dropping?" />}
-        {step >= 2 && <Pill color="#94a3b8" text="Secular trend was declining anyway" />}
+        {step >= 2 && <Pill color="#64748b" text="Secular trend was declining anyway" />}
         {step >= 3 && <Pill color="#34d399" text="True effect = observed - trend" />}
       </div>
-      <ChartLegend items={[{ color: "#34d399", label: "Observed" }, ...(step >= 2 ? [{ color: "#94a3b8", label: "Secular trend", dashed: true }] : []), { color: "#fbbf24", label: "Intervention start", dashed: true }]} />
+      <ChartLegend items={[{ color: "#34d399", label: "Observed" }, ...(step >= 2 ? [{ color: "#64748b", label: "Secular trend", dashed: true }] : []), { color: "#fbbf24", label: "Intervention start", dashed: true }]} />
     </div>
   );
 }
@@ -493,19 +493,19 @@ function MaturationChart({ step }) {
       <ResponsiveContainer width="100%" height={260}>
         <ComposedChart data={matD.ages} margin={{ top: 15, right: 30, left: 15, bottom: 20 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-          <XAxis dataKey="age" tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Age (years)", position: "insideBottom", offset: -10, ...ax }} />
-          <YAxis domain={[15, 55]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Reading Score", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+          <XAxis dataKey="age" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Age (years)", position: "insideBottom", offset: -10, ...ax }} />
+          <YAxis domain={[15, 55]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Reading Score", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
           <ReferenceLine x={7} stroke="#fbbf24" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Program starts", position: "top", fill: "#fbbf24", fontSize: 12, fontWeight: 700 }} />
           <Line type="monotone" dataKey="With Program" stroke="#60a5fa" strokeWidth={2.5} dot={false} />
-          {step >= 2 && <Line type="monotone" dataKey="Natural Growth" stroke="#94a3b8" strokeWidth={2} strokeDasharray="6 4" dot={false} />}
+          {step >= 2 && <Line type="monotone" dataKey="Natural Growth" stroke="#64748b" strokeWidth={2} strokeDasharray="6 4" dot={false} />}
         </ComposedChart>
       </ResponsiveContainer>
       <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}>
         {step <= 1 && <Pill color="#60a5fa" text="Scores improve after program starts" />}
-        {step >= 2 && <Pill color="#94a3b8" text="But kids naturally improve too" />}
+        {step >= 2 && <Pill color="#64748b" text="But kids naturally improve too" />}
         {step >= 3 && <Pill color="#34d399" text="True effect = gap between curves" />}
       </div>
-      <ChartLegend items={[{ color: "#60a5fa", label: "With program" }, ...(step >= 2 ? [{ color: "#94a3b8", label: "Natural growth", dashed: true }] : []), { color: "#fbbf24", label: "Program start", dashed: true }]} />
+      <ChartLegend items={[{ color: "#60a5fa", label: "With program" }, ...(step >= 2 ? [{ color: "#64748b", label: "Natural growth", dashed: true }] : []), { color: "#fbbf24", label: "Program start", dashed: true }]} />
     </div>
   );
 }
@@ -515,7 +515,7 @@ function RTMChart({ step }) {
     // Show the scatter of test1 vs test2
     const DotRTM = ({ cx, cy, payload }) => {
       if (!cx || !cy) return null;
-      return <circle cx={cx} cy={cy} r={payload.selected ? 5 : 3} fill={payload.selected ? "#e879f9" : "#475569"} fillOpacity={payload.selected ? 0.8 : 0.3} />;
+      return <circle cx={cx} cy={cy} r={payload.selected ? 5 : 3} fill={payload.selected ? "#e879f9" : "#94a3b8"} fillOpacity={payload.selected ? 0.8 : 0.3} />;
     };
     const scatter = rtmD.students.map(s => ({ x: s.test1, y: s.test2, selected: s.selected }));
     return (
@@ -523,15 +523,15 @@ function RTMChart({ step }) {
         <ResponsiveContainer width="100%" height={260}>
           <ComposedChart margin={{ top: 15, right: 30, left: 15, bottom: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-            <XAxis type="number" dataKey="x" domain={[10, 95]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Test 1 Score", position: "insideBottom", offset: -10, ...ax }} />
-            <YAxis type="number" dataKey="y" domain={[10, 95]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Test 2 Score", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-            <ReferenceLine segment={[{ x: 10, y: 10 }, { x: 95, y: 95 }]} stroke="#334155" strokeWidth={1} strokeDasharray="4 4" />
+            <XAxis type="number" dataKey="x" domain={[10, 95]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Test 1 Score", position: "insideBottom", offset: -10, ...ax }} />
+            <YAxis type="number" dataKey="y" domain={[10, 95]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Test 2 Score", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+            <ReferenceLine segment={[{ x: 10, y: 10 }, { x: 95, y: 95 }]} stroke="#cbd5e1" strokeWidth={1} strokeDasharray="4 4" />
             {step >= 1 && <ReferenceLine x={35} stroke="#e879f9" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Cutoff", position: "top", fill: "#e879f9", fontSize: 12, fontWeight: 700 }} />}
             <Scatter data={scatter} shape={<DotRTM />} />
           </ComposedChart>
         </ResponsiveContainer>
         {step >= 1 && <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#e879f9" text={`Selected: scored < 35 (n=${rtmD.selected.length})`} /></div>}
-        <ChartLegend items={[{ color: "#e879f9", label: "Selected (low scorers)" }, { color: "#475569", label: "Not selected" }, { color: "#334155", label: "No change line", dashed: true }]} />
+        <ChartLegend items={[{ color: "#e879f9", label: "Selected (low scorers)" }, { color: "#94a3b8", label: "Not selected" }, { color: "#cbd5e1", label: "No change line", dashed: true }]} />
       </div>
     );
   }
@@ -546,8 +546,8 @@ function RTMChart({ step }) {
       <ResponsiveContainer width="100%" height={230}>
         <BarChart data={data} margin={{ top: 15, right: 30, left: 15, bottom: 5 }} barSize={60}>
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-          <XAxis dataKey="label" tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} />
-          <YAxis domain={[0, 55]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Score", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+          <XAxis dataKey="label" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
+          <YAxis domain={[0, 55]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Score", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
           <Bar dataKey="value" radius={[6, 6, 0, 0]}>{data.map((d, i) => <Cell key={i} fill={d.color} />)}</Bar>
         </BarChart>
       </ResponsiveContainer>
@@ -591,7 +591,7 @@ async function generateExplanation(bias, level, program) {
 // SHARED UI
 // ============================================================
 function Pill({ color, text }) {
-  return <div style={{ background: color + "18", border: `1px solid ${color}55`, color, padding: "5px 13px", borderRadius: 8, fontSize: "0.88rem", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>{text}</div>;
+  return <div style={{ background: color + "18", border: `1px solid ${color}55`, color, padding: "5px 13px", borderRadius: 8, fontSize: "0.88rem", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>{text}</div>;
 }
 
 function ChartLegend({ items }) {
@@ -600,7 +600,7 @@ function ChartLegend({ items }) {
       {items.map((it, i) => (
         <div key={i} style={{ display: "flex", alignItems: "center", gap: 5 }}>
           <div style={{ width: 16, height: 0, borderTop: `2.5px ${it.dashed ? "dashed" : "solid"} ${it.color}` }} />
-          <span style={{ fontSize: "0.82rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif" }}>{it.label}</span>
+          <span style={{ fontSize: "0.82rem", color: "#000000", fontFamily: "'Inter', sans-serif" }}>{it.label}</span>
         </div>
       ))}
     </div>
@@ -613,13 +613,13 @@ function BiasCard({ bias, selected, onClick }) {
     <button onClick={() => onClick(bias)} style={{
       flex: "1 1 130px", maxWidth: 170, padding: "1.1rem 0.8rem",
       background: isA ? `linear-gradient(135deg, ${bias.color}18, ${bias.color}08)` : "rgba(255,255,255,0.02)",
-      border: isA ? `2px solid ${bias.color}` : "1px solid #1e293b",
+      border: isA ? `2px solid ${bias.color}` : "1px solid #e2e8f0",
       borderRadius: 14, cursor: "pointer", transition: "all 0.25s ease", textAlign: "center",
       transform: isA ? "translateY(-2px)" : "none", boxShadow: isA ? `0 8px 24px ${bias.color}15` : "none",
     }}>
       <div style={{ fontSize: "1.8rem", marginBottom: 4 }}>{bias.icon}</div>
-      <div style={{ fontSize: "1.1rem", fontWeight: 700, color: isA ? bias.color : "#f0f0f0", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", letterSpacing: "0.03em", marginBottom: 3 }}>{bias.label}</div>
-      <div style={{ fontSize: "0.78rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.35 }}>{bias.full}</div>
+      <div style={{ fontSize: "1.1rem", fontWeight: 700, color: isA ? bias.color : "#000000", fontFamily: "'Inter', sans-serif", letterSpacing: "0.03em", marginBottom: 3 }}>{bias.label}</div>
+      <div style={{ fontSize: "0.78rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.35 }}>{bias.full}</div>
     </button>
   );
 }
@@ -631,12 +631,12 @@ function LevelSelector({ level, setLevel, accentColor }) {
         <button key={l.id} onClick={() => setLevel(l)} style={{
           flex: "1 1 120px", padding: "0.7rem 0.8rem",
           background: level.id === l.id ? `${accentColor}15` : "rgba(255,255,255,0.02)",
-          border: level.id === l.id ? `1.5px solid ${accentColor}` : "1px solid #1e293b",
+          border: level.id === l.id ? `1.5px solid ${accentColor}` : "1px solid #e2e8f0",
           borderRadius: 10, cursor: "pointer", transition: "all 0.2s", textAlign: "center",
         }}>
           <div style={{ fontSize: "1.25rem", marginBottom: 2 }}>{l.emoji}</div>
-          <div style={{ fontSize: "0.95rem", fontWeight: 600, color: level.id === l.id ? accentColor : "#f0f0f0", fontFamily: "'Helvetica Neue', sans-serif" }}>{l.label}</div>
-          <div style={{ fontSize: "0.8rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", marginTop: 2, lineHeight: 1.3 }}>{l.desc}</div>
+          <div style={{ fontSize: "0.95rem", fontWeight: 600, color: level.id === l.id ? accentColor : "#000000", fontFamily: "'Inter', sans-serif" }}>{l.label}</div>
+          <div style={{ fontSize: "0.8rem", color: "#000000", fontFamily: "'Inter', sans-serif", marginTop: 2, lineHeight: 1.3 }}>{l.desc}</div>
         </button>
       ))}
     </div>
@@ -648,24 +648,24 @@ function StepCard({ step, color, isActive, onClick }) {
     <button onClick={onClick} style={{
       width: "100%", textAlign: "left", padding: "1rem 1.25rem",
       background: isActive ? `${color}10` : "transparent",
-      border: isActive ? `1px solid ${color}40` : "1px solid #1e293b",
+      border: isActive ? `1px solid ${color}40` : "1px solid #e2e8f0",
       borderRadius: 12, cursor: "pointer", transition: "all 0.25s", marginBottom: 8,
     }}>
       <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
         <div style={{
           width: 32, height: 32, borderRadius: "50%",
-          background: isActive ? color : "#1e293b",
+          background: isActive ? color : "#e2e8f0",
           color: isActive ? "#0a0f1a" : "#c0c8d4",
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: "0.95rem", fontWeight: 700, fontFamily: "'JetBrains Mono', monospace", flexShrink: 0,
+          fontSize: "0.95rem", fontWeight: 700, fontFamily: "'Inter', sans-serif", flexShrink: 0,
         }}>{step.step_number}</div>
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: "1.1rem", fontWeight: 600, color: isActive ? "#ffffff" : "#f0f0f0", fontFamily: "'Georgia', serif", marginBottom: isActive ? 8 : 0 }}>{step.title}</div>
+          <div style={{ fontSize: "1.1rem", fontWeight: 600, color: isActive ? "#000000" : "#000000", fontFamily: "'Inter', sans-serif", marginBottom: isActive ? 8 : 0 }}>{step.title}</div>
           {isActive && (
             <div>
-              <p style={{ fontSize: "1.05rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.75, margin: "0 0 10px" }}>{step.explanation}</p>
-              {step.key_concept && <div style={{ display: "inline-block", padding: "5px 12px", background: `${color}15`, border: `1px solid ${color}30`, borderRadius: 6, fontSize: "0.88rem", color, fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, marginBottom: step.analogy ? 8 : 0 }}>Key concept: {step.key_concept}</div>}
-              {step.analogy && <div style={{ marginTop: 8, padding: "10px 14px", background: "#1c191740", borderLeft: `3px solid ${color}50`, borderRadius: "0 8px 8px 0", fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.6, fontStyle: "italic" }}>💡 {step.analogy}</div>}
+              <p style={{ fontSize: "1.05rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.75, margin: "0 0 10px" }}>{step.explanation}</p>
+              {step.key_concept && <div style={{ display: "inline-block", padding: "5px 12px", background: `${color}15`, border: `1px solid ${color}30`, borderRadius: 6, fontSize: "0.88rem", color, fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: step.analogy ? 8 : 0 }}>Key concept: {step.key_concept}</div>}
+              {step.analogy && <div style={{ marginTop: 8, padding: "10px 14px", background: "#f1f5f920", borderLeft: `3px solid ${color}50`, borderRadius: "0 8px 8px 0", fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, fontStyle: "italic" }}>💡 {step.analogy}</div>}
             </div>
           )}
         </div>
@@ -676,12 +676,12 @@ function StepCard({ step, color, isActive, onClick }) {
 
 function DetectFixCard({ item, color, type }) {
   return (
-    <div style={{ padding: "0.85rem 1.1rem", background: "rgba(255,255,255,0.02)", border: "1px solid #1e293b", borderRadius: 10, marginBottom: 8 }}>
+    <div style={{ padding: "0.85rem 1.1rem", background: "rgba(255,255,255,0.02)", border: "1px solid #e2e8f0", borderRadius: 10, marginBottom: 8 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
         <span style={{ fontSize: "0.9rem", color: type === "detect" ? "#fbbf24" : "#34d399" }}>{type === "detect" ? "🔍" : "🛠️"}</span>
-        <span style={{ fontSize: "1rem", fontWeight: 600, color, fontFamily: "'Georgia', serif" }}>{item.method}</span>
+        <span style={{ fontSize: "1rem", fontWeight: 600, color, fontFamily: "'Inter', sans-serif" }}>{item.method}</span>
       </div>
-      <p style={{ fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.6, margin: 0 }}>{item.description}</p>
+      <p style={{ fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, margin: 0 }}>{item.description}</p>
     </div>
   );
 }
@@ -690,7 +690,7 @@ function LoadingAnimation({ color }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "4rem 2rem", gap: 20 }}>
       <div style={{ display: "flex", gap: 8 }}>{[0, 1, 2, 3].map(i => <div key={i} style={{ width: 12, height: 12, borderRadius: "50%", background: color, animation: `pulse 1.2s ease-in-out ${i * 0.15}s infinite` }} />)}</div>
-      <p style={{ color: "#ffffff", fontSize: "1rem", fontFamily: "'Helvetica Neue', sans-serif" }}>Building your personalized explanation...</p>
+      <p style={{ color: "#000000", fontSize: "1rem", fontFamily: "'Inter', sans-serif" }}>Building your personalized explanation...</p>
       <style>{`@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.5); opacity: 1; } }`}</style>
     </div>
   );
@@ -699,15 +699,15 @@ function LoadingAnimation({ color }) {
 function SectionLabel({ number, text }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-      <span style={{ fontSize: "0.88rem", color: "#ffffff", fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, background: "#0f172a", border: "1px solid #1e293b", borderRadius: 6, padding: "3px 8px" }}>{number}</span>
-      <span style={{ fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em" }}>{text}</span>
-      <div style={{ flex: 1, height: 1, background: "#1e293b" }} />
+      <span style={{ fontSize: "0.88rem", color: "#000000", fontFamily: "'Inter', sans-serif", fontWeight: 700, background: "#f1f5f9", border: "1px solid #e2e8f0", borderRadius: 6, padding: "3px 8px" }}>{number}</span>
+      <span style={{ fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em" }}>{text}</span>
+      <div style={{ flex: 1, height: 1, background: "#f1f5f9" }} />
     </div>
   );
 }
 
 function navBtnStyle(disabled, color, primary = false) {
-  return { padding: "0.55rem 1.4rem", borderRadius: 8, border: `1px solid ${disabled ? "#1e293b" : primary ? color : "#334155"}`, background: disabled ? "#0f172a" : primary ? color : "#1e293b", color: disabled ? "#475569" : primary ? "#0a0f1a" : "#ffffff", cursor: disabled ? "default" : "pointer", fontFamily: "'Helvetica Neue', sans-serif", fontSize: "0.95rem", fontWeight: primary ? 700 : 500, transition: "all 0.2s" };
+  return { padding: "0.55rem 1.4rem", borderRadius: 8, border: `1px solid ${disabled ? "#e2e8f0" : primary ? color : "#cbd5e1"}`, background: disabled ? "#f1f5f9" : primary ? color : "#e2e8f0", color: disabled ? "#94a3b8" : primary ? "#0a0f1a" : "#000000", cursor: disabled ? "default" : "pointer", fontFamily: "'Inter', sans-serif", fontSize: "0.95rem", fontWeight: primary ? 700 : 500, transition: "all 0.2s" };
 }
 
 // ============================================================
@@ -722,7 +722,7 @@ export default function Class7BiasLab() {
   const [activeStep, setActiveStep] = useState(0);
   const [error, setError] = useState(null);
   const resultRef = useRef(null);
-  const accentColor = bias?.color || "#94a3b8";
+  const accentColor = bias?.color || "#64748b";
 
   useEffect(() => { if (bias && !program) setProgram(EXAMPLE_PROGRAMS[bias.id]); }, [bias]);
   useEffect(() => { setResult(null); setActiveStep(0); setError(null); }, [bias, level]);
@@ -737,21 +737,21 @@ export default function Class7BiasLab() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#060a13", color: "#ffffff", fontFamily: "'Georgia', 'Times New Roman', serif" }}>
-      <div style={{ position: "fixed", inset: 0, backgroundImage: `radial-gradient(circle at 1px 1px, #ffffff06 1px, transparent 0)`, backgroundSize: "40px 40px", pointerEvents: "none", zIndex: 0 }} />
+    <div style={{ minHeight: "100vh", background: "#f8f7f4", color: "#000000", fontFamily: "'Inter', sans-serif" }}>
+      <div style={{ position: "fixed", inset: 0, backgroundImage: `radial-gradient(circle at 1px 1px, #00000006 1px, transparent 0)`, backgroundSize: "40px 40px", pointerEvents: "none", zIndex: 0 }} />
       <div style={{ position: "relative", zIndex: 1, maxWidth: 820, margin: "0 auto", padding: "2.5rem 1.5rem 4rem" }}>
 
         {/* Navigation */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
-          <a href="/" style={{ fontSize: "1.1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", textDecoration: "none", display: "flex", alignItems: "center", gap: 8, padding: "10px 20px", background: "#1e293b", border: "1px solid #334155", borderRadius: 10, fontWeight: 600 }}>← Class 6: Causal Inference Methods</a>
-          <a href="/class7/designs" style={{ fontSize: "1.1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", textDecoration: "none", display: "flex", alignItems: "center", gap: 8, padding: "10px 20px", background: "#1e293b", border: "1px solid #334155", borderRadius: 10, fontWeight: 600 }}>Comparison Group Designs →</a>
+          <a href="/" style={{ fontSize: "1.1rem", color: "#000000", fontFamily: "'Inter', sans-serif", textDecoration: "none", display: "flex", alignItems: "center", gap: 8, padding: "10px 20px", background: "#f1f5f9", border: "1px solid #cbd5e1", borderRadius: 10, fontWeight: 600 }}>← Class 6: Causal Inference Methods</a>
+          <a href="/class7/designs" style={{ fontSize: "1.1rem", color: "#000000", fontFamily: "'Inter', sans-serif", textDecoration: "none", display: "flex", alignItems: "center", gap: 8, padding: "10px 20px", background: "#f1f5f9", border: "1px solid #cbd5e1", borderRadius: 10, fontWeight: 600 }}>Comparison Group Designs →</a>
         </div>
 
         {/* Header */}
         <header style={{ textAlign: "center", marginBottom: "3rem" }}>
-          <div style={{ fontSize: "0.82rem", color: "#ffffff", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 10 }}>Interactive Learning Platform (Work in Progress)</div>
-          <h1 style={{ fontSize: "clamp(1.9rem, 4.5vw, 2.8rem)", fontWeight: 700, color: "#ffffff", lineHeight: 1.2, marginBottom: 10, letterSpacing: "-0.01em" }}>Bias in Impact Evaluation</h1>
-          <p style={{ fontSize: "1.1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", maxWidth: 560, margin: "0 auto", lineHeight: 1.6 }}>Select a type of bias, choose your difficulty level, and describe a program. The AI explains how that bias could threaten your evaluation, with detection strategies and remedies.</p>
+          <div style={{ fontSize: "0.82rem", color: "#000000", fontFamily: "'Inter', sans-serif", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 10 }}>Interactive Learning Platform (Work in Progress)</div>
+          <h1 style={{ fontSize: "clamp(1.9rem, 4.5vw, 2.8rem)", fontWeight: 700, color: "#000000", lineHeight: 1.2, marginBottom: 10, letterSpacing: "-0.01em" }}>Bias in Impact Evaluation</h1>
+          <p style={{ fontSize: "1.1rem", color: "#000000", fontFamily: "'Inter', sans-serif", maxWidth: 560, margin: "0 auto", lineHeight: 1.6 }}>Select a type of bias, choose your difficulty level, and describe a program. The AI explains how that bias could threaten your evaluation, with detection strategies and remedies.</p>
         </header>
 
         {/* Step 1: Choose bias */}
@@ -760,10 +760,10 @@ export default function Class7BiasLab() {
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>{BIAS_TYPES.map(b => <BiasCard key={b.id} bias={b} selected={bias} onClick={setBias} />)}</div>
           {bias && (
             <div style={{ textAlign: "center", marginTop: 16, padding: "14px 20px", background: `${bias.color}08`, borderRadius: 10, border: `1px solid ${bias.color}20` }}>
-              <span style={{ fontSize: "1rem", color: bias.color, fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 500, fontStyle: "italic" }}>{bias.tagline}</span>
+              <span style={{ fontSize: "1rem", color: bias.color, fontFamily: "'Inter', sans-serif", fontWeight: 500, fontStyle: "italic" }}>{bias.tagline}</span>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: "center", marginTop: 12 }}>
-                <span style={{ fontSize: "0.85rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 700, marginRight: 4, lineHeight: "28px" }}>Key concepts:</span>
-                {bias.keyConcepts.map((c, i) => <span key={i} style={{ display: "inline-block", padding: "4px 12px", background: `${bias.color}12`, border: `1px solid ${bias.color}30`, borderRadius: 20, fontSize: "0.85rem", color: bias.color, fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, whiteSpace: "nowrap" }}>{c}</span>)}
+                <span style={{ fontSize: "0.85rem", color: "#000000", fontFamily: "'Inter', sans-serif", fontWeight: 700, marginRight: 4, lineHeight: "28px" }}>Key concepts:</span>
+                {bias.keyConcepts.map((c, i) => <span key={i} style={{ display: "inline-block", padding: "4px 12px", background: `${bias.color}12`, border: `1px solid ${bias.color}30`, borderRadius: 20, fontSize: "0.85rem", color: bias.color, fontFamily: "'Inter', sans-serif", fontWeight: 600, whiteSpace: "nowrap" }}>{c}</span>)}
               </div>
             </div>
           )}
@@ -775,15 +775,15 @@ export default function Class7BiasLab() {
             <SectionLabel number="2" text="Set the difficulty level" />
             <LevelSelector level={level} setLevel={setLevel} accentColor={accentColor} />
             {bias.definitions && level && (
-              <div style={{ marginTop: 16, padding: "1.1rem 1.4rem", background: "#0f172a", borderRadius: 12, border: `1px solid ${accentColor}25`, borderLeft: `3px solid ${accentColor}` }}>
+              <div style={{ marginTop: 16, padding: "1.1rem 1.4rem", background: "#f1f5f9", borderRadius: 12, border: `1px solid ${accentColor}25`, borderLeft: `3px solid ${accentColor}` }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                  <span style={{ fontSize: "0.85rem", color: accentColor, fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>What is {bias.full}?</span>
-                  <span style={{ fontSize: "0.78rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", background: "#1e293b", padding: "3px 10px", borderRadius: 4 }}>{level.label} level</span>
+                  <span style={{ fontSize: "0.85rem", color: accentColor, fontFamily: "'Inter', sans-serif", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>What is {bias.full}?</span>
+                  <span style={{ fontSize: "0.78rem", color: "#000000", fontFamily: "'Inter', sans-serif", background: "#f1f5f9", padding: "3px 10px", borderRadius: 4 }}>{level.label} level</span>
                 </div>
-                <p style={{ fontSize: "1.05rem", color: "#ffffff", fontFamily: "'Georgia', serif", lineHeight: 1.75, margin: 0 }}>
+                <p style={{ fontSize: "1.05rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.75, margin: 0 }}>
                   {level.id === "advanced" ? <NotationText text={bias.definitions[level.id]} color={accentColor} /> : bias.definitions[level.id]}
                 </p>
-                {level.id === "advanced" && <div style={{ marginTop: 10, fontSize: "0.78rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", fontStyle: "italic" }}>Hover or tap dotted terms for plain-language explanations.</div>}
+                {level.id === "advanced" && <div style={{ marginTop: 10, fontSize: "0.78rem", color: "#000000", fontFamily: "'Inter', sans-serif", fontStyle: "italic" }}>Hover or tap dotted terms for plain-language explanations.</div>}
               </div>
             )}
           </section>
@@ -793,28 +793,28 @@ export default function Class7BiasLab() {
         {bias && (
           <section style={{ marginBottom: "2.5rem", animation: "fadeIn 0.4s ease" }}>
             <SectionLabel number="3" text="Describe your program" />
-            <p style={{ fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", marginBottom: 12, lineHeight: 1.5 }}>Enter a program, policy, or intervention. The AI will explain how {bias.full.toLowerCase()} could affect your evaluation.</p>
-            <div style={{ position: "relative", background: "#0f172a", borderRadius: 12, border: "1px solid #1e293b", overflow: "hidden" }}>
-              <textarea value={program} onChange={e => setProgram(e.target.value)} placeholder="e.g., a community health worker home visiting program on childhood vaccination rates" rows={3} style={{ width: "100%", padding: "1rem 1.25rem", background: "transparent", border: "none", color: "#ffffff", fontSize: "1.05rem", fontFamily: "'Georgia', serif", lineHeight: 1.6, resize: "vertical", outline: "none", boxSizing: "border-box" }} />
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.5rem 1.25rem 0.75rem", borderTop: "1px solid #1e293b10" }}>
-                <span style={{ fontSize: "0.82rem", color: "#ffffff", fontFamily: "'JetBrains Mono', monospace" }}>{bias.full} · {level.label}</span>
-                <button onClick={handleGenerate} disabled={loading || !program.trim()} style={{ padding: "0.6rem 1.6rem", background: loading || !program.trim() ? "#1e293b" : accentColor, color: loading || !program.trim() ? "#475569" : "#0a0f1a", border: "none", borderRadius: 8, cursor: loading || !program.trim() ? "default" : "pointer", fontSize: "0.95rem", fontWeight: 700, fontFamily: "'Helvetica Neue', sans-serif", transition: "all 0.2s", letterSpacing: "0.02em" }}>{loading ? "Generating..." : "Generate Explanation →"}</button>
+            <p style={{ fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", marginBottom: 12, lineHeight: 1.5 }}>Enter a program, policy, or intervention. The AI will explain how {bias.full.toLowerCase()} could affect your evaluation.</p>
+            <div style={{ position: "relative", background: "#f1f5f9", borderRadius: 12, border: "1px solid #e2e8f0", overflow: "hidden" }}>
+              <textarea value={program} onChange={e => setProgram(e.target.value)} placeholder="e.g., a community health worker home visiting program on childhood vaccination rates" rows={3} style={{ width: "100%", padding: "1rem 1.25rem", background: "transparent", border: "none", color: "#000000", fontSize: "1.05rem", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, resize: "vertical", outline: "none", boxSizing: "border-box" }} />
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.5rem 1.25rem 0.75rem", borderTop: "1px solid #e2e8f010" }}>
+                <span style={{ fontSize: "0.82rem", color: "#000000", fontFamily: "'Inter', sans-serif" }}>{bias.full} · {level.label}</span>
+                <button onClick={handleGenerate} disabled={loading || !program.trim()} style={{ padding: "0.6rem 1.6rem", background: loading || !program.trim() ? "#e2e8f0" : accentColor, color: loading || !program.trim() ? "#94a3b8" : "#0a0f1a", border: "none", borderRadius: 8, cursor: loading || !program.trim() ? "default" : "pointer", fontSize: "0.95rem", fontWeight: 700, fontFamily: "'Inter', sans-serif", transition: "all 0.2s", letterSpacing: "0.02em" }}>{loading ? "Generating..." : "Generate Explanation →"}</button>
               </div>
             </div>
           </section>
         )}
 
         {loading && <LoadingAnimation color={accentColor} />}
-        {error && <div style={{ padding: "1rem 1.25rem", background: "#f8717115", border: "1px solid #f8717130", borderRadius: 12, color: "#ffffff", fontSize: "1rem", fontFamily: "'Helvetica Neue', sans-serif", textAlign: "center", marginBottom: "2rem" }}>{error}</div>}
+        {error && <div style={{ padding: "1rem 1.25rem", background: "#f8717115", border: "1px solid #f8717130", borderRadius: 12, color: "#000000", fontSize: "1rem", fontFamily: "'Inter', sans-serif", textAlign: "center", marginBottom: "2rem" }}>{error}</div>}
 
         {/* RESULTS */}
         {result && !loading && (
           <div ref={resultRef} style={{ animation: "fadeIn 0.5s ease" }}>
             {/* Scenario framing */}
             <section style={{ padding: "1.25rem 1.5rem", background: `${accentColor}08`, border: `1px solid ${accentColor}25`, borderRadius: 14, marginBottom: "2rem" }}>
-              <div style={{ fontSize: "0.82rem", color: accentColor, fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 6 }}>How this bias affects your evaluation</div>
-              <p style={{ fontSize: "1.1rem", color: "#ffffff", fontFamily: "'Georgia', serif", lineHeight: 1.65, margin: 0 }}>{result.example_framing}</p>
-              {result.scenario && <p style={{ fontSize: "1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", marginTop: 10, marginBottom: 0, lineHeight: 1.6, fontStyle: "italic", borderLeft: `3px solid ${accentColor}40`, paddingLeft: 14 }}>{result.scenario}</p>}
+              <div style={{ fontSize: "0.82rem", color: accentColor, fontFamily: "'Inter', sans-serif", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 6 }}>How this bias affects your evaluation</div>
+              <p style={{ fontSize: "1.1rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.65, margin: 0 }}>{result.example_framing}</p>
+              {result.scenario && <p style={{ fontSize: "1rem", color: "#000000", fontFamily: "'Inter', sans-serif", marginTop: 10, marginBottom: 0, lineHeight: 1.6, fontStyle: "italic", borderLeft: `3px solid ${accentColor}40`, paddingLeft: 14 }}>{result.scenario}</p>}
             </section>
 
             {/* Steps */}
@@ -847,13 +847,13 @@ export default function Class7BiasLab() {
             {/* Consequence */}
             {result.real_world_consequence && (
               <div style={{ padding: "1rem 1.25rem", background: "#f8717108", border: "1px solid #f8717120", borderRadius: 12, marginBottom: "2.5rem" }}>
-                <div style={{ fontSize: "0.85rem", color: "#f87171", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>What could go wrong</div>
-                <p style={{ fontSize: "1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.6, margin: 0 }}>{result.real_world_consequence}</p>
+                <div style={{ fontSize: "0.85rem", color: "#f87171", fontFamily: "'Inter', sans-serif", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>What could go wrong</div>
+                <p style={{ fontSize: "1rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, margin: 0 }}>{result.real_world_consequence}</p>
               </div>
             )}
 
             <div style={{ textAlign: "center" }}>
-              <button onClick={() => { setResult(null); setProgram(""); setActiveStep(0); window.scrollTo({ top: 0, behavior: "smooth" }); }} style={{ padding: "0.65rem 2.2rem", background: "transparent", border: "1px solid #334155", borderRadius: 8, color: "#ffffff", fontSize: "1rem", fontFamily: "'Helvetica Neue', sans-serif", cursor: "pointer" }}>↻ Try a different example</button>
+              <button onClick={() => { setResult(null); setProgram(""); setActiveStep(0); window.scrollTo({ top: 0, behavior: "smooth" }); }} style={{ padding: "0.65rem 2.2rem", background: "transparent", border: "1px solid #cbd5e1", borderRadius: 8, color: "#000000", fontSize: "1rem", fontFamily: "'Inter', sans-serif", cursor: "pointer" }}>↻ Try a different example</button>
             </div>
           </div>
         )}
@@ -862,7 +862,7 @@ export default function Class7BiasLab() {
       <style>{`
         @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
         textarea::placeholder { color: #94a3b8; }
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
+
       `}</style>
     </div>
   );

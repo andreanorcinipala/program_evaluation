@@ -276,8 +276,8 @@ function generateDiDData(seed) {
 // ============================================================
 // CHART COMPONENTS
 // ============================================================
-const axisStyle = { stroke: "#94a3b8", fontSize: 11, fontFamily: "'Helvetica Neue', sans-serif" };
-const gridStyle = { strokeDasharray: "3 3", stroke: "#1e293b" };
+const axisStyle = { stroke: "#64748b", fontSize: 11, fontFamily: "'Inter', sans-serif" };
+const gridStyle = { strokeDasharray: "3 3", stroke: "#e2e8f0" };
 
 function ChartLegend({ items }) {
   return (
@@ -285,7 +285,7 @@ function ChartLegend({ items }) {
       {items.map((it, i) => (
         <div key={i} style={{ display: "flex", alignItems: "center", gap: 5 }}>
           <div style={{ width: 14, height: 3, background: it.color, borderRadius: 2, ...(it.dashed ? { backgroundImage: `repeating-linear-gradient(90deg, ${it.color} 0 4px, transparent 4px 8px)`, background: "none" } : {}) }} />
-          <span style={{ fontSize: "0.82rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif" }}>{it.label}</span>
+          <span style={{ fontSize: "0.82rem", color: "#000000", fontFamily: "'Inter', sans-serif" }}>{it.label}</span>
         </div>
       ))}
     </div>
@@ -359,7 +359,7 @@ function RegressionChart({ step, seed }) {
           </BarChart>
         </ResponsiveContainer>
         <ChartLegend items={[{ color: "#60a5fa", label: "Treatment" }, { color: "#64748b", label: "Control" }]} />
-        <div style={{ textAlign: "center", marginTop: 6, fontSize: "0.85rem", color: "#f97316", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 600 }}>Raw difference: {d.rawEffect} points</div>
+        <div style={{ textAlign: "center", marginTop: 6, fontSize: "0.85rem", color: "#f97316", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>Raw difference: {d.rawEffect} points</div>
       </div>
     );
   }
@@ -381,7 +381,7 @@ function RegressionChart({ step, seed }) {
           </BarChart>
         </ResponsiveContainer>
         <ChartLegend items={[{ color: "#60a5fa", label: "Treatment" }, { color: "#64748b", label: "Control" }]} />
-        <div style={{ textAlign: "center", marginTop: 6, fontSize: "0.85rem", color: "#fbbf24", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 600 }}>Treatment group started {d.tMeanBaseline - d.cMeanBaseline} points higher at baseline</div>
+        <div style={{ textAlign: "center", marginTop: 6, fontSize: "0.85rem", color: "#fbbf24", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>Treatment group started {d.tMeanBaseline - d.cMeanBaseline} points higher at baseline</div>
       </div>
     );
   }
@@ -403,7 +403,7 @@ function RegressionChart({ step, seed }) {
         </BarChart>
       </ResponsiveContainer>
       <ChartLegend items={[{ color: "#f97316", label: "Raw (confounded)" }, { color: "#60a5fa", label: "Adjusted (controlled)" }]} />
-      <div style={{ textAlign: "center", marginTop: 6, fontSize: "0.85rem", color: "#34d399", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 600 }}>Adjustment reduced the estimate by {Math.round((d.rawEffect - d.adjustedEffect) * 10) / 10} points</div>
+      <div style={{ textAlign: "center", marginTop: 6, fontSize: "0.85rem", color: "#34d399", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>Adjustment reduced the estimate by {Math.round((d.rawEffect - d.adjustedEffect) * 10) / 10} points</div>
     </div>
   );
 }
@@ -438,11 +438,11 @@ function ITSChart({ step, seed }) {
           <YAxis {...axisStyle} domain={["auto", "auto"]} />
           <ReferenceLine x={d.T} stroke="#fbbf24" strokeDasharray="5 5" />
           <Scatter dataKey="y" fill="#34d399" r={3} />
-          {step >= 2 && <Line dataKey="preTrend" stroke="#94a3b8" strokeDasharray="6 4" dot={false} strokeWidth={2} />}
+          {step >= 2 && <Line dataKey="preTrend" stroke="#64748b" strokeDasharray="6 4" dot={false} strokeWidth={2} />}
           {step >= 3 && <Line dataKey="postTrend" stroke="#34d399" dot={false} strokeWidth={2} connectNulls={false} />}
         </ComposedChart>
       </ResponsiveContainer>
-      <ChartLegend items={[{ color: "#34d399", label: "Observed data" }, ...(step >= 2 ? [{ color: "#94a3b8", label: "Counterfactual (pre-trend)", dashed: true }] : []), ...(step >= 3 ? [{ color: "#34d399", label: "Post-trend fit" }] : []), { color: "#fbbf24", label: "Intervention", dashed: true }]} />
+      <ChartLegend items={[{ color: "#34d399", label: "Observed data" }, ...(step >= 2 ? [{ color: "#64748b", label: "Counterfactual (pre-trend)", dashed: true }] : []), ...(step >= 3 ? [{ color: "#34d399", label: "Post-trend fit" }] : []), { color: "#fbbf24", label: "Intervention", dashed: true }]} />
     </div>
   );
 }
@@ -466,7 +466,7 @@ function DiDChart({ step, seed }) {
         </LineChart>
       </ResponsiveContainer>
       <ChartLegend items={[{ color: "#22d3ee", label: "Treatment" }, { color: "#64748b", label: "Control" }, ...(showCf ? [{ color: "#22d3ee", label: "Counterfactual", dashed: true }] : []), ...(step >= 2 ? [{ color: "#fbbf24", label: "Program start", dashed: true }] : [])]} />
-      {showCf && <div style={{ textAlign: "center", marginTop: 6, fontSize: "0.85rem", color: "#34d399", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 600 }}>DiD effect = {data[3].treatment - data[3].counterfactual} points</div>}
+      {showCf && <div style={{ textAlign: "center", marginTop: 6, fontSize: "0.85rem", color: "#34d399", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>DiD effect = {data[3].treatment - data[3].counterfactual} points</div>}
     </div>
   );
 }
@@ -489,7 +489,7 @@ function StrengthMeter({ level, color }) {
   return (
     <div style={{ display: "flex", gap: 3, marginTop: 4 }}>
       {[1, 2, 3, 4, 5].map((i) => (
-        <div key={i} style={{ width: 8, height: 8, borderRadius: "50%", background: i <= level ? color : "#1e293b", border: `1px solid ${i <= level ? color : "#334155"}`, transition: "all 0.2s" }} />
+        <div key={i} style={{ width: 8, height: 8, borderRadius: "50%", background: i <= level ? color : "#e2e8f0", border: `1px solid ${i <= level ? color : "#cbd5e1"}`, transition: "all 0.2s" }} />
       ))}
     </div>
   );
@@ -498,10 +498,10 @@ function StrengthMeter({ level, color }) {
 function DesignCard({ design, selected, onClick }) {
   const active = selected?.id === design.id;
   return (
-    <button onClick={() => onClick(design)} style={{ flex: "1 1 140px", maxWidth: 170, padding: "14px 10px 10px", background: active ? `${design.color}15` : "#0f172a", border: `1.5px solid ${active ? design.color : "#1e293b"}`, borderRadius: 12, cursor: "pointer", textAlign: "center", transition: "all 0.2s", outline: "none" }}>
+    <button onClick={() => onClick(design)} style={{ flex: "1 1 140px", maxWidth: 170, padding: "14px 10px 10px", background: active ? `${design.color}15` : "#f1f5f9", border: `1.5px solid ${active ? design.color : "#e2e8f0"}`, borderRadius: 12, cursor: "pointer", textAlign: "center", transition: "all 0.2s", outline: "none" }}>
       <div style={{ fontSize: "1.4rem", marginBottom: 4 }}>{design.icon}</div>
-      <div style={{ fontSize: "0.95rem", fontWeight: 700, color: active ? design.color : "#ffffff", fontFamily: "'Helvetica Neue', sans-serif" }}>{design.label}</div>
-      <div style={{ fontSize: "0.72rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", marginTop: 2 }}>{design.full}</div>
+      <div style={{ fontSize: "0.95rem", fontWeight: 700, color: active ? design.color : "#000000", fontFamily: "'Inter', sans-serif" }}>{design.label}</div>
+      <div style={{ fontSize: "0.72rem", color: "#000000", fontFamily: "'Inter', sans-serif", marginTop: 2 }}>{design.full}</div>
       <StrengthMeter level={design.strength} color={design.color} />
     </button>
   );
@@ -513,9 +513,9 @@ function LevelSelector({ level, setLevel, accentColor }) {
       {LEVELS.map((l) => {
         const active = level?.id === l.id;
         return (
-          <button key={l.id} onClick={() => setLevel(l)} style={{ padding: "10px 16px", background: active ? `${accentColor}18` : "#0f172a", border: `1.5px solid ${active ? accentColor : "#1e293b"}`, borderRadius: 10, cursor: "pointer", textAlign: "left", transition: "all 0.2s", outline: "none", minWidth: 140 }}>
-            <div style={{ fontSize: "0.9rem", fontWeight: 700, color: active ? accentColor : "#ffffff", fontFamily: "'Helvetica Neue', sans-serif" }}>{l.label}</div>
-            <div style={{ fontSize: "0.78rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", marginTop: 2 }}>{l.desc}</div>
+          <button key={l.id} onClick={() => setLevel(l)} style={{ padding: "10px 16px", background: active ? `${accentColor}18` : "#f1f5f9", border: `1.5px solid ${active ? accentColor : "#e2e8f0"}`, borderRadius: 10, cursor: "pointer", textAlign: "left", transition: "all 0.2s", outline: "none", minWidth: 140 }}>
+            <div style={{ fontSize: "0.9rem", fontWeight: 700, color: active ? accentColor : "#000000", fontFamily: "'Inter', sans-serif" }}>{l.label}</div>
+            <div style={{ fontSize: "0.78rem", color: "#000000", fontFamily: "'Inter', sans-serif", marginTop: 2 }}>{l.desc}</div>
           </button>
         );
       })}
@@ -526,13 +526,13 @@ function LevelSelector({ level, setLevel, accentColor }) {
 function StepNav({ step, setStep, maxSteps, color }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 10, justifyContent: "center", margin: "12px 0" }}>
-      <button onClick={() => setStep(Math.max(1, step - 1))} disabled={step <= 1} style={{ padding: "6px 14px", background: step <= 1 ? "#0f172a" : `${color}18`, border: `1px solid ${step <= 1 ? "#1e293b" : color}`, borderRadius: 8, color: step <= 1 ? "#475569" : color, cursor: step <= 1 ? "default" : "pointer", fontFamily: "'Helvetica Neue', sans-serif", fontSize: "0.85rem", fontWeight: 600 }}>← Prev</button>
+      <button onClick={() => setStep(Math.max(1, step - 1))} disabled={step <= 1} style={{ padding: "6px 14px", background: step <= 1 ? "#f1f5f9" : `${color}18`, border: `1px solid ${step <= 1 ? "#e2e8f0" : color}`, borderRadius: 8, color: step <= 1 ? "#94a3b8" : color, cursor: step <= 1 ? "default" : "pointer", fontFamily: "'Inter', sans-serif", fontSize: "0.85rem", fontWeight: 600 }}>← Prev</button>
       <div style={{ display: "flex", gap: 6 }}>
         {Array.from({ length: maxSteps }, (_, i) => (
-          <div key={i} onClick={() => setStep(i + 1)} style={{ width: 10, height: 10, borderRadius: "50%", background: i + 1 <= step ? color : "#1e293b", border: `1.5px solid ${color}`, cursor: "pointer", transition: "all 0.2s" }} />
+          <div key={i} onClick={() => setStep(i + 1)} style={{ width: 10, height: 10, borderRadius: "50%", background: i + 1 <= step ? color : "#e2e8f0", border: `1.5px solid ${color}`, cursor: "pointer", transition: "all 0.2s" }} />
         ))}
       </div>
-      <button onClick={() => setStep(Math.min(maxSteps, step + 1))} disabled={step >= maxSteps} style={{ padding: "6px 14px", background: step >= maxSteps ? "#0f172a" : `${color}18`, border: `1px solid ${step >= maxSteps ? "#1e293b" : color}`, borderRadius: 8, color: step >= maxSteps ? "#475569" : color, cursor: step >= maxSteps ? "default" : "pointer", fontFamily: "'Helvetica Neue', sans-serif", fontSize: "0.85rem", fontWeight: 600 }}>Next →</button>
+      <button onClick={() => setStep(Math.min(maxSteps, step + 1))} disabled={step >= maxSteps} style={{ padding: "6px 14px", background: step >= maxSteps ? "#f1f5f9" : `${color}18`, border: `1px solid ${step >= maxSteps ? "#e2e8f0" : color}`, borderRadius: 8, color: step >= maxSteps ? "#94a3b8" : color, cursor: step >= maxSteps ? "default" : "pointer", fontFamily: "'Inter', sans-serif", fontSize: "0.85rem", fontWeight: 600 }}>Next →</button>
     </div>
   );
 }
@@ -540,8 +540,8 @@ function StepNav({ step, setStep, maxSteps, color }) {
 function SectionLabel({ number, text }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
-      <span style={{ fontSize: "0.88rem", color: "#ffffff", fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, background: "#0f172a", border: "1px solid #1e293b", borderRadius: 6, padding: "3px 8px" }}>{number}</span>
-      <span style={{ fontSize: "1.05rem", fontWeight: 700, color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif" }}>{text}</span>
+      <span style={{ fontSize: "0.88rem", color: "#000000", fontFamily: "'Inter', sans-serif", fontWeight: 700, background: "#f1f5f9", border: "1px solid #e2e8f0", borderRadius: 6, padding: "3px 8px" }}>{number}</span>
+      <span style={{ fontSize: "1.05rem", fontWeight: 700, color: "#000000", fontFamily: "'Inter', sans-serif" }}>{text}</span>
     </div>
   );
 }
@@ -579,9 +579,9 @@ function NotationTerm({ pattern, tip }) {
   const [show, setShow] = useState(false);
   return (
     <span style={{ position: "relative", display: "inline" }}>
-      <span onClick={() => setShow(!show)} onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)} style={{ borderBottom: "1.5px dotted #a78bfa", cursor: "help", color: "#e0d4ff", padding: "0 1px" }}>{pattern}</span>
+      <span onClick={() => setShow(!show)} onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)} style={{ borderBottom: "1.5px dotted #a78bfa", cursor: "help", color: "#6d28d9", padding: "0 1px" }}>{pattern}</span>
       {show && (
-        <span style={{ position: "absolute", bottom: "calc(100% + 6px)", left: "50%", transform: "translateX(-50%)", background: "#1e293b", border: "1px solid #334155", borderRadius: 8, padding: "8px 12px", fontSize: "0.82rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.45, maxWidth: 320, minWidth: 180, zIndex: 100, whiteSpace: "normal", boxShadow: "0 4px 20px #00000060", pointerEvents: "none" }}>{tip}</span>
+        <span style={{ position: "absolute", bottom: "calc(100% + 6px)", left: "50%", transform: "translateX(-50%)", background: "#f1f5f9", border: "1px solid #cbd5e1", borderRadius: 8, padding: "8px 12px", fontSize: "0.82rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.45, maxWidth: 320, minWidth: 180, zIndex: 100, whiteSpace: "normal", boxShadow: "0 4px 20px #00000015", pointerEvents: "none" }}>{tip}</span>
       )}
     </span>
   );
@@ -664,21 +664,21 @@ export default function ComparisonGroupLab() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#060a13", color: "#ffffff", fontFamily: "'Georgia', 'Times New Roman', serif" }}>
-      <div style={{ position: "fixed", inset: 0, backgroundImage: `radial-gradient(circle at 1px 1px, #ffffff06 1px, transparent 0)`, backgroundSize: "40px 40px", pointerEvents: "none", zIndex: 0 }} />
+    <div style={{ minHeight: "100vh", background: "#f8f7f4", color: "#000000", fontFamily: "'Inter', sans-serif" }}>
+      <div style={{ position: "fixed", inset: 0, backgroundImage: `radial-gradient(circle at 1px 1px, #00000006 1px, transparent 0)`, backgroundSize: "40px 40px", pointerEvents: "none", zIndex: 0 }} />
       <div style={{ position: "relative", zIndex: 1, maxWidth: 820, margin: "0 auto", padding: "2.5rem 1.5rem 4rem" }}>
 
         {/* Navigation */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem", flexWrap: "wrap", gap: 10 }}>
-          <a href="/class7" style={{ fontSize: "1.1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", textDecoration: "none", display: "flex", alignItems: "center", gap: 8, padding: "10px 20px", background: "#1e293b", border: "1px solid #334155", borderRadius: 10, fontWeight: 600 }}>← Class 7: Bias in Impact Evaluation</a>
-          <span style={{ fontSize: "0.85rem", color: "#ffffff", fontFamily: "'JetBrains Mono', monospace", background: "#1e293b", border: "1px solid #334155", borderRadius: 6, padding: "4px 10px", fontWeight: 600 }}>Class 7</span>
+          <a href="/class7" style={{ fontSize: "1.1rem", color: "#000000", fontFamily: "'Inter', sans-serif", textDecoration: "none", display: "flex", alignItems: "center", gap: 8, padding: "10px 20px", background: "#f1f5f9", border: "1px solid #cbd5e1", borderRadius: 10, fontWeight: 600 }}>← Class 7: Bias in Impact Evaluation</a>
+          <span style={{ fontSize: "0.85rem", color: "#000000", fontFamily: "'Inter', sans-serif", background: "#f1f5f9", border: "1px solid #cbd5e1", borderRadius: 6, padding: "4px 10px", fontWeight: 600 }}>Class 7</span>
         </div>
 
         {/* Header */}
         <header style={{ textAlign: "center", marginBottom: "3rem" }}>
-          <div style={{ fontSize: "0.82rem", color: "#ffffff", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 10 }}>Interactive Learning Platform (Work in Progress)</div>
-          <h1 style={{ fontSize: "clamp(1.9rem, 4.5vw, 2.8rem)", fontWeight: 700, color: "#ffffff", lineHeight: 1.2, marginBottom: 10, letterSpacing: "-0.01em" }}>Comparison Group Designs</h1>
-          <p style={{ fontSize: "1.1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", maxWidth: 580, margin: "0 auto", lineHeight: 1.6 }}>Each design below builds on the previous one's limitations. They range from the simplest (naïve) to the most robust (DiD). The strength meter shows how well each design controls for bias.</p>
+          <div style={{ fontSize: "0.82rem", color: "#000000", fontFamily: "'Inter', sans-serif", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 10 }}>Interactive Learning Platform (Work in Progress)</div>
+          <h1 style={{ fontSize: "clamp(1.9rem, 4.5vw, 2.8rem)", fontWeight: 700, color: "#000000", lineHeight: 1.2, marginBottom: 10, letterSpacing: "-0.01em" }}>Comparison Group Designs</h1>
+          <p style={{ fontSize: "1.1rem", color: "#000000", fontFamily: "'Inter', sans-serif", maxWidth: 580, margin: "0 auto", lineHeight: 1.6 }}>Each design below builds on the previous one's limitations. They range from the simplest (naïve) to the most robust (DiD). The strength meter shows how well each design controls for bias.</p>
         </header>
 
         {/* Step 1: Choose Design */}
@@ -689,22 +689,22 @@ export default function ComparisonGroupLab() {
           </div>
           {design && (
             <div style={{ textAlign: "center", marginTop: 16, padding: "14px 20px", background: `${design.color}08`, borderRadius: 10, border: `1px solid ${design.color}20` }}>
-              <span style={{ fontSize: "1rem", color: design.color, fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 500, fontStyle: "italic" }}>{design.tagline}</span>
+              <span style={{ fontSize: "1rem", color: design.color, fontFamily: "'Inter', sans-serif", fontWeight: 500, fontStyle: "italic" }}>{design.tagline}</span>
               {design.addressesBias.length > 0 && (
-                <div style={{ marginTop: 8, fontSize: "0.85rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif" }}>
+                <div style={{ marginTop: 8, fontSize: "0.85rem", color: "#000000", fontFamily: "'Inter', sans-serif" }}>
                   <span style={{ fontWeight: 700 }}>Addresses:</span>{" "}
                   {design.addressesBias.map((b, i) => (
-                    <span key={i} style={{ display: "inline-block", padding: "2px 10px", margin: "2px 3px", background: `${design.color}12`, border: `1px solid ${design.color}30`, borderRadius: 20, fontSize: "0.82rem", color: design.color, fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>{b}</span>
+                    <span key={i} style={{ display: "inline-block", padding: "2px 10px", margin: "2px 3px", background: `${design.color}12`, border: `1px solid ${design.color}30`, borderRadius: 20, fontSize: "0.82rem", color: design.color, fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>{b}</span>
                   ))}
                 </div>
               )}
               {design.addressesBias.length === 0 && (
-                <div style={{ marginTop: 8, fontSize: "0.85rem", color: "#ef4444", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 600 }}>⚠ Vulnerable to all biases. Use only as a starting benchmark.</div>
+                <div style={{ marginTop: 8, fontSize: "0.85rem", color: "#ef4444", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>⚠ Vulnerable to all biases. Use only as a starting benchmark.</div>
               )}
               <div style={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: "center", marginTop: 12 }}>
-                <span style={{ fontSize: "0.85rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 700, marginRight: 4, lineHeight: "28px" }}>Key concepts:</span>
+                <span style={{ fontSize: "0.85rem", color: "#000000", fontFamily: "'Inter', sans-serif", fontWeight: 700, marginRight: 4, lineHeight: "28px" }}>Key concepts:</span>
                 {design.keyConcepts.map((c, i) => (
-                  <span key={i} style={{ display: "inline-block", padding: "4px 12px", background: `${design.color}12`, border: `1px solid ${design.color}30`, borderRadius: 20, fontSize: "0.85rem", color: design.color, fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, whiteSpace: "nowrap" }}>{c}</span>
+                  <span key={i} style={{ display: "inline-block", padding: "4px 12px", background: `${design.color}12`, border: `1px solid ${design.color}30`, borderRadius: 20, fontSize: "0.85rem", color: design.color, fontFamily: "'Inter', sans-serif", fontWeight: 600, whiteSpace: "nowrap" }}>{c}</span>
                 ))}
               </div>
             </div>
@@ -717,9 +717,9 @@ export default function ComparisonGroupLab() {
             <SectionLabel number="2" text="Set the difficulty level" />
             <LevelSelector level={level} setLevel={setLevel} accentColor={accentColor} />
             {design.definitions && level && (
-              <div style={{ marginTop: 16, padding: "16px 20px", background: "#0d1117", border: "1px solid #1e293b", borderRadius: 12, fontSize: "1rem", lineHeight: 1.7, color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif" }}>
+              <div style={{ marginTop: 16, padding: "16px 20px", background: "#000000", border: "1px solid #e2e8f0", borderRadius: 12, fontSize: "1rem", lineHeight: 1.7, color: "#000000", fontFamily: "'Inter', sans-serif" }}>
                 {renderDefinition(design.definitions[level.id])}
-                {level.id === "advanced" && <div style={{ marginTop: 10, fontSize: "0.78rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", fontStyle: "italic" }}>Hover or tap dotted terms for plain-language explanations.</div>}
+                {level.id === "advanced" && <div style={{ marginTop: 10, fontSize: "0.78rem", color: "#000000", fontFamily: "'Inter', sans-serif", fontStyle: "italic" }}>Hover or tap dotted terms for plain-language explanations.</div>}
               </div>
             )}
           </section>
@@ -729,17 +729,17 @@ export default function ComparisonGroupLab() {
         {design && level && (
           <section style={{ marginBottom: "2.5rem", animation: "fadeIn 0.4s ease" }}>
             <SectionLabel number="3" text="Explore how it works" />
-            <div style={{ background: "#0d1117", border: "1px solid #1e293b", borderRadius: 14, padding: "20px 16px 16px", marginBottom: 16 }}>
+            <div style={{ background: "#000000", border: "1px solid #e2e8f0", borderRadius: 14, padding: "20px 16px 16px", marginBottom: 16 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, flexWrap: "wrap", gap: 8 }}>
-                <span style={{ fontSize: "0.82rem", color: "#ffffff", fontFamily: "'JetBrains Mono', monospace" }}>{design.full} · {level.label}</span>
+                <span style={{ fontSize: "0.82rem", color: "#000000", fontFamily: "'Inter', sans-serif" }}>{design.full} · {level.label}</span>
                 <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                  <span style={{ fontSize: "0.75rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif" }}>Strength:</span>
+                  <span style={{ fontSize: "0.75rem", color: "#000000", fontFamily: "'Inter', sans-serif" }}>Strength:</span>
                   <StrengthMeter level={design.strength} color={design.color} />
                 </div>
               </div>
               <DesignChart designId={design.id} step={step} seed={chartSeed + DESIGNS.indexOf(design) * 1000} />
               <StepNav step={step} setStep={setStep} maxSteps={3} color={design.color} />
-              <div style={{ textAlign: "center", fontSize: "0.88rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.5, padding: "0 10px" }}>{CHART_STEPS[design.id]?.[step - 1]}</div>
+              <div style={{ textAlign: "center", fontSize: "0.88rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.5, padding: "0 10px" }}>{CHART_STEPS[design.id]?.[step - 1]}</div>
             </div>
           </section>
         )}
@@ -748,10 +748,10 @@ export default function ComparisonGroupLab() {
         {design && level && (
           <section style={{ marginBottom: "2.5rem", animation: "fadeIn 0.4s ease" }}>
             <SectionLabel number="4" text="Describe your program" />
-            <p style={{ fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", marginBottom: 12, lineHeight: 1.5 }}>Enter a program, policy, or intervention. The AI will explain how to apply the {design.full.toLowerCase()} design to your evaluation.</p>
-            <textarea value={program} onChange={(e) => setProgram(e.target.value)} placeholder="Describe a program you want to evaluate..." rows={3} style={{ width: "100%", padding: "14px 16px", background: "#0d1117", border: "1px solid #1e293b", borderRadius: 12, color: "#ffffff", fontSize: "1rem", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.6, resize: "vertical", outline: "none", boxSizing: "border-box" }} />
+            <p style={{ fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", marginBottom: 12, lineHeight: 1.5 }}>Enter a program, policy, or intervention. The AI will explain how to apply the {design.full.toLowerCase()} design to your evaluation.</p>
+            <textarea value={program} onChange={(e) => setProgram(e.target.value)} placeholder="Describe a program you want to evaluate..." rows={3} style={{ width: "100%", padding: "14px 16px", background: "#000000", border: "1px solid #e2e8f0", borderRadius: 12, color: "#000000", fontSize: "1rem", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, resize: "vertical", outline: "none", boxSizing: "border-box" }} />
             <div style={{ textAlign: "center", marginTop: 12 }}>
-              <button onClick={handleGenerate} disabled={loading || !program.trim()} style={{ padding: "12px 32px", background: loading ? "#1e293b" : accentColor, color: loading ? "#64748b" : "#000000", border: "none", borderRadius: 10, fontSize: "1rem", fontWeight: 700, fontFamily: "'Helvetica Neue', sans-serif", cursor: loading ? "default" : "pointer", transition: "all 0.2s" }}>
+              <button onClick={handleGenerate} disabled={loading || !program.trim()} style={{ padding: "12px 32px", background: loading ? "#e2e8f0" : accentColor, color: loading ? "#64748b" : "#000000", border: "none", borderRadius: 10, fontSize: "1rem", fontWeight: 700, fontFamily: "'Inter', sans-serif", cursor: loading ? "default" : "pointer", transition: "all 0.2s" }}>
                 {loading ? "Generating..." : "Generate Explanation"}
               </button>
             </div>
@@ -762,27 +762,27 @@ export default function ComparisonGroupLab() {
         {loading && (
           <div style={{ textAlign: "center", padding: "2rem" }}>
             <div style={{ width: 36, height: 36, border: `3px solid ${accentColor}30`, borderTopColor: accentColor, borderRadius: "50%", margin: "0 auto 12px", animation: "spin 0.8s linear infinite" }} />
-            <p style={{ color: "#ffffff", fontSize: "1rem", fontFamily: "'Helvetica Neue', sans-serif" }}>Building your personalized explanation...</p>
+            <p style={{ color: "#000000", fontSize: "1rem", fontFamily: "'Inter', sans-serif" }}>Building your personalized explanation...</p>
           </div>
         )}
 
         {/* Error */}
         {error && (
-          <div style={{ padding: "16px 20px", background: "#1c0a0a", border: "1px solid #7f1d1d", borderRadius: 12, color: "#fca5a5", fontSize: "0.95rem", fontFamily: "'Helvetica Neue', sans-serif", marginBottom: 20 }}>Error: {error}</div>
+          <div style={{ padding: "16px 20px", background: "#fef2f2", border: "1px solid #7f1d1d", borderRadius: 12, color: "#991b1b", fontSize: "0.95rem", fontFamily: "'Inter', sans-serif", marginBottom: 20 }}>Error: {error}</div>
         )}
 
         {/* Result */}
         {result && (
           <section ref={resultRef} style={{ animation: "fadeIn 0.5s ease", marginBottom: "2rem" }}>
             <SectionLabel number="5" text="Your personalized explanation" />
-            <div style={{ background: "#0d1117", border: `1px solid ${accentColor}30`, borderRadius: 14, padding: "24px 20px" }}>
-              {result.scenario && <p style={{ fontSize: "1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", marginTop: 0, marginBottom: 16, lineHeight: 1.6, fontStyle: "italic", borderLeft: `3px solid ${accentColor}40`, paddingLeft: 14 }}>{renderDefinition(result.scenario)}</p>}
+            <div style={{ background: "#000000", border: `1px solid ${accentColor}30`, borderRadius: 14, padding: "24px 20px" }}>
+              {result.scenario && <p style={{ fontSize: "1rem", color: "#000000", fontFamily: "'Inter', sans-serif", marginTop: 0, marginBottom: 16, lineHeight: 1.6, fontStyle: "italic", borderLeft: `3px solid ${accentColor}40`, paddingLeft: 14 }}>{renderDefinition(result.scenario)}</p>}
 
               {result.steps?.map((s, i) => (
                 <div key={i} style={{ marginBottom: 16, padding: "14px 16px", background: `${accentColor}06`, border: `1px solid ${accentColor}15`, borderRadius: 10 }}>
-                  <div style={{ fontSize: "0.88rem", fontWeight: 700, color: accentColor, fontFamily: "'Helvetica Neue', sans-serif", marginBottom: 6 }}>Step {i + 1}: {s.title}</div>
-                  <div style={{ fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.65 }}>{renderDefinition(s.explanation)}</div>
-                  {s.analogy && <div style={{ marginTop: 8, padding: "10px 14px", background: "#1c191740", borderLeft: `3px solid ${accentColor}50`, borderRadius: "0 8px 8px 0", fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.6, fontStyle: "italic" }}>💡 {s.analogy}</div>}
+                  <div style={{ fontSize: "0.88rem", fontWeight: 700, color: accentColor, fontFamily: "'Inter', sans-serif", marginBottom: 6 }}>Step {i + 1}: {s.title}</div>
+                  <div style={{ fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.65 }}>{renderDefinition(s.explanation)}</div>
+                  {s.analogy && <div style={{ marginTop: 8, padding: "10px 14px", background: "#f1f5f920", borderLeft: `3px solid ${accentColor}50`, borderRadius: "0 8px 8px 0", fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, fontStyle: "italic" }}>💡 {s.analogy}</div>}
                 </div>
               ))}
 
@@ -792,9 +792,9 @@ export default function ComparisonGroupLab() {
                 { key: "strengths", label: "Strengths for your evaluation", icon: "✓" },
                 { key: "limitations", label: "Limitations to consider", icon: "⚠" },
               ].map(({ key, label, icon }) => result[key] && (
-                <div key={key} style={{ marginTop: 14, padding: "14px 16px", background: "#0f172a", border: "1px solid #1e293b", borderRadius: 10 }}>
-                  <div style={{ fontSize: "0.88rem", fontWeight: 700, color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", marginBottom: 6 }}>{icon} {label}</div>
-                  <div style={{ fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.6 }}>{renderDefinition(result[key])}</div>
+                <div key={key} style={{ marginTop: 14, padding: "14px 16px", background: "#f1f5f9", border: "1px solid #e2e8f0", borderRadius: 10 }}>
+                  <div style={{ fontSize: "0.88rem", fontWeight: 700, color: "#000000", fontFamily: "'Inter', sans-serif", marginBottom: 6 }}>{icon} {label}</div>
+                  <div style={{ fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.6 }}>{renderDefinition(result[key])}</div>
                 </div>
               ))}
             </div>

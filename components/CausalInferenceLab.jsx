@@ -162,7 +162,7 @@ function NotationSpan({ notation, tip, color }) {
       onClick={() => setShow(s => !s)}
       style={{
         position: "relative",
-        borderBottom: `2px dotted ${color || "#94a3b8"}`,
+        borderBottom: `2px dotted ${color || "#64748b"}`,
         cursor: "help",
         paddingBottom: 1,
       }}
@@ -175,15 +175,15 @@ function NotationSpan({ notation, tip, color }) {
           ...(pos === "above" ? { bottom: "calc(100% + 10px)" } : { top: "calc(100% + 10px)" }),
           width: 320, maxWidth: "90vw",
           padding: "12px 14px",
-          background: "#1e293b", border: `1px solid ${color || "#94a3b8"}50`,
+          background: "#f1f5f9", border: `1px solid ${color || "#64748b"}50`,
           borderRadius: 10, boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
-          fontSize: "0.9rem", color: "#ffffff",
-          fontFamily: "'Helvetica Neue', sans-serif", fontStyle: "normal",
+          fontSize: "0.9rem", color: "#000000",
+          fontFamily: "'Inter', sans-serif", fontStyle: "normal",
           lineHeight: 1.55, fontWeight: 400,
           zIndex: 100, pointerEvents: "none",
           textAlign: "left",
         }}>
-          <span style={{ display: "block", fontSize: "0.72rem", color: color || "#94a3b8", fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, marginBottom: 4, letterSpacing: "0.05em", textTransform: "uppercase" }}>In plain terms</span>
+          <span style={{ display: "block", fontSize: "0.72rem", color: color || "#64748b", fontFamily: "'Inter', sans-serif", fontWeight: 700, marginBottom: 4, letterSpacing: "0.05em", textTransform: "uppercase" }}>In plain terms</span>
           {tip}
         </span>
       )}
@@ -343,11 +343,11 @@ const psmD = genPSMData();
 
 const chartBox = {
   width: "100%", background: "linear-gradient(135deg, #111827 0%, #0f172a 100%)",
-  borderRadius: 14, border: "1px solid #1e293b", padding: "1rem 0.5rem 0.5rem",
+  borderRadius: 14, border: "1px solid #e2e8f0", padding: "1rem 0.5rem 0.5rem",
   marginBottom: "1.25rem", position: "relative",
 };
-const ax = { fill: "#e8ecf2", fontSize: 13, fontFamily: "Georgia" };
-const gs = "#1e293b";
+const ax = { fill: "#64748b", fontSize: 13, fontFamily: "Inter" };
+const gs = "#e2e8f0";
 
 function RCTChart({ step }) {
   if (step <= 1) {
@@ -360,16 +360,16 @@ function RCTChart({ step }) {
           {isRand ? (
             <>
               <DotGroup dots={ctrl} color="#60a5fa" label="Control (n=30)" />
-              <div style={{ width: 1, background: "#334155", alignSelf: "stretch" }} />
+              <div style={{ width: 1, background: "#cbd5e1", alignSelf: "stretch" }} />
               <DotGroup dots={trt} color="#22d3ee" label="Treatment (n=30)" />
             </>
           ) : (
             <div style={{ display: "grid", gridTemplateColumns: "repeat(10, 1fr)", gap: 7 }}>
-              {rctD.parts.map((_, i) => <div key={i} style={{ width: 22, height: 22, borderRadius: "50%", background: "#94a3b8", opacity: 0.5 }} />)}
+              {rctD.parts.map((_, i) => <div key={i} style={{ width: 22, height: 22, borderRadius: "50%", background: "#64748b", opacity: 0.5 }} />)}
             </div>
           )}
         </div>
-        <ChartLegend items={isRand ? [{ color: "#60a5fa", label: "Control" }, { color: "#22d3ee", label: "Treatment" }] : [{ color: "#94a3b8", label: "Participants" }]} />
+        <ChartLegend items={isRand ? [{ color: "#60a5fa", label: "Control" }, { color: "#22d3ee", label: "Treatment" }] : [{ color: "#64748b", label: "Participants" }]} />
       </div>
     );
   }
@@ -380,8 +380,8 @@ function RCTChart({ step }) {
         <ResponsiveContainer width="100%" height={230}>
           <BarChart data={data} margin={{ top: 15, right: 30, left: 15, bottom: 5 }} barSize={70}>
             <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-            <XAxis dataKey="group" tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} />
-            <YAxis domain={[0, 80]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Baseline Score", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+            <XAxis dataKey="group" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
+            <YAxis domain={[0, 80]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Baseline Score", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
             <Bar dataKey="mean" radius={[6, 6, 0, 0]}><Cell fill="#60a5fa" /><Cell fill="#22d3ee" /></Bar>
           </BarChart>
         </ResponsiveContainer>
@@ -396,8 +396,8 @@ function RCTChart({ step }) {
         <ResponsiveContainer width="100%" height={240}>
           <LineChart data={tl} margin={{ top: 15, right: 30, left: 15, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-            <XAxis dataKey="time" tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} />
-            <YAxis domain={[35, 80]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Score", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+            <XAxis dataKey="time" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
+            <YAxis domain={[35, 80]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Score", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
             <Line type="linear" dataKey="Control" stroke="#60a5fa" strokeWidth={2.5} dot={{ r: 5, fill: "#60a5fa" }} />
             <Line type="linear" dataKey="Treatment" stroke="#22d3ee" strokeWidth={2.5} dot={{ r: 5, fill: "#22d3ee" }} />
           </LineChart>
@@ -413,9 +413,9 @@ function RCTChart({ step }) {
       <ResponsiveContainer width="100%" height={230}>
         <BarChart data={data} margin={{ top: 15, right: 30, left: 15, bottom: 5 }} barSize={70}>
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-          <XAxis dataKey="group" tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} />
-          <YAxis domain={[-20, 5]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Change", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-          <ReferenceLine y={0} stroke="#334155" /><Bar dataKey="mean" radius={[6, 6, 0, 0]}><Cell fill="#60a5fa" /><Cell fill="#22d3ee" /></Bar>
+          <XAxis dataKey="group" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
+          <YAxis domain={[-20, 5]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Change", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+          <ReferenceLine y={0} stroke="#cbd5e1" /><Bar dataKey="mean" radius={[6, 6, 0, 0]}><Cell fill="#60a5fa" /><Cell fill="#22d3ee" /></Bar>
         </BarChart>
       </ResponsiveContainer>
       <div style={{ display: "flex", justifyContent: "center", marginTop: 4 }}><Pill color="#34d399" text={`ATE = ${rctD.ate}`} /></div>
@@ -431,8 +431,8 @@ function DiDChart({ step }) {
       <ResponsiveContainer width="100%" height={250}>
         <ComposedChart data={didD.timeline} margin={{ top: 15, right: 30, left: 15, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-          <XAxis dataKey="time" tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} />
-          <YAxis domain={[25, 90]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Outcome", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+          <XAxis dataKey="time" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
+          <YAxis domain={[25, 90]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Outcome", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
           <Line type="linear" dataKey="Control" stroke="#60a5fa" strokeWidth={2.5} dot={{ r: 5, fill: "#60a5fa" }} />
           <Line type="linear" dataKey="Treatment" stroke="#f97316" strokeWidth={2.5} dot={{ r: 5, fill: "#f97316" }} />
           {showCf && <ReferenceLine segment={[{ x: "Before", y: 50 }, { x: "After", y: 60 }]} stroke="#f97316" strokeDasharray="8 4" strokeWidth={2} />}
@@ -449,7 +449,7 @@ function RDChart({ step }) {
   const showCut = step >= 1, showLines = step >= 3, showJump = step >= 4, showCf = step >= 5, hl = step === 2;
   const DotRD = ({ cx, cy, payload }) => {
     if (!cx || !cy) return null;
-    const color = step >= 1 ? (payload.side === "below" ? "#60a5fa" : "#e879f9") : "#94a3b8";
+    const color = step >= 1 ? (payload.side === "below" ? "#60a5fa" : "#e879f9") : "#64748b";
     const inB = payload.x >= 43 && payload.x <= 57;
     return <circle cx={cx} cy={cy} r={hl && inB ? 4.5 : 3.5} fill={color} fillOpacity={hl ? (inB ? 0.9 : 0.15) : 0.6} />;
   };
@@ -458,8 +458,8 @@ function RDChart({ step }) {
       <ResponsiveContainer width="100%" height={270}>
         <ComposedChart margin={{ top: 15, right: 30, left: 15, bottom: 20 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-          <XAxis type="number" dataKey="x" domain={[15, 85]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Running Variable", position: "insideBottom", offset: -10, ...ax }} />
-          <YAxis type="number" dataKey="y" domain={[20, 70]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Outcome", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+          <XAxis type="number" dataKey="x" domain={[15, 85]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Running Variable", position: "insideBottom", offset: -10, ...ax }} />
+          <YAxis type="number" dataKey="y" domain={[20, 70]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Outcome", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
           {showCut && <ReferenceLine x={50} stroke="#fbbf24" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Cutoff", position: "top", fill: "#fbbf24", fontSize: 13, fontWeight: 700 }} />}
           <Scatter data={rdD.pts} shape={<DotRD />} />
           {showLines && <Scatter data={rdD.lineB} line={{ stroke: "#60a5fa", strokeWidth: 2.5 }} shape={() => null} />}
@@ -469,7 +469,7 @@ function RDChart({ step }) {
         </ComposedChart>
       </ResponsiveContainer>
       {showJump && <div style={{ display: "flex", justifyContent: "center", marginTop: 2 }}><Pill color="#34d399" text={`LATE ≈ ${rdD.jump}`} /></div>}
-      <ChartLegend items={[...(step >= 1 ? [{ color: "#60a5fa", label: "Below cutoff" }, { color: "#e879f9", label: "Above cutoff" }] : [{ color: "#94a3b8", label: "Individuals" }]), ...(showCut ? [{ color: "#fbbf24", label: "Cutoff", dashed: true }] : []), ...(showJump ? [{ color: "#34d399", label: "Effect" }] : []), ...(showCf ? [{ color: "#60a5fa", label: "Counterfactual", dashed: true }] : [])]} />
+      <ChartLegend items={[...(step >= 1 ? [{ color: "#60a5fa", label: "Below cutoff" }, { color: "#e879f9", label: "Above cutoff" }] : [{ color: "#64748b", label: "Individuals" }]), ...(showCut ? [{ color: "#fbbf24", label: "Cutoff", dashed: true }] : []), ...(showJump ? [{ color: "#34d399", label: "Effect" }] : []), ...(showCf ? [{ color: "#60a5fa", label: "Counterfactual", dashed: true }] : [])]} />
     </div>
   );
 }
@@ -485,8 +485,8 @@ function PSMChart({ step }) {
         <ResponsiveContainer width="100%" height={250}>
           <ComposedChart margin={{ top: 15, right: 30, left: 15, bottom: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-            <XAxis type="number" dataKey="x" domain={[0, 1]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Propensity Score", position: "insideBottom", offset: -10, ...ax }} />
-            <YAxis type="number" dataKey="y" domain={[20, 75]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Outcome ($k)", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+            <XAxis type="number" dataKey="x" domain={[0, 1]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Propensity Score", position: "insideBottom", offset: -10, ...ax }} />
+            <YAxis type="number" dataKey="y" domain={[20, 75]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Outcome ($k)", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
             <Scatter data={psmD.scatterC} shape={<DotPSM />} /><Scatter data={psmD.scatterT} shape={<DotPSM />} />
           </ComposedChart>
         </ResponsiveContainer>
@@ -501,8 +501,8 @@ function PSMChart({ step }) {
         <ResponsiveContainer width="100%" height={230}>
           <BarChart data={data} margin={{ top: 15, right: 30, left: 15, bottom: 5 }} barSize={70}>
             <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-            <XAxis dataKey="group" tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} />
-            <YAxis domain={[0, 65]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Earnings ($k)", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+            <XAxis dataKey="group" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
+            <YAxis domain={[0, 65]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Earnings ($k)", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
             <Bar dataKey="val" radius={[6, 6, 0, 0]}><Cell fill="#60a5fa" /><Cell fill="#a78bfa" /></Bar>
           </BarChart>
         </ResponsiveContainer>
@@ -515,7 +515,7 @@ function PSMChart({ step }) {
     return (
       <div style={chartBox}>
         <div style={{ padding: "1rem" }}>
-          <table style={{ width: "100%", maxWidth: 440, margin: "0 auto", borderCollapse: "collapse", fontFamily: "'Helvetica Neue', sans-serif" }}>
+          <table style={{ width: "100%", maxWidth: 440, margin: "0 auto", borderCollapse: "collapse", fontFamily: "'Inter', sans-serif" }}>
             <thead><tr>
               <th style={thS}>Covariate</th><th style={{ ...thS, color: "#a78bfa" }}>Treated</th><th style={{ ...thS, color: "#60a5fa" }}>Untreated</th><th style={{ ...thS, color: aft ? "#34d399" : "#f87171" }}>Gap</th>
             </tr></thead>
@@ -535,13 +535,13 @@ function PSMChart({ step }) {
         <ResponsiveContainer width="100%" height={250}>
           <ComposedChart margin={{ top: 15, right: 30, left: 15, bottom: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-            <XAxis type="number" dataKey="x" domain={[0, 1]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Propensity Score", position: "insideBottom", offset: -10, ...ax }} />
-            <YAxis type="number" dataKey="y" domain={[20, 75]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Outcome ($k)", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-            {psmD.matchLines.map(m => <ReferenceLine key={m.id} segment={[{ x: m.x1, y: m.y1 }, { x: m.x2, y: m.y2 }]} stroke="#94a3b8" strokeWidth={0.8} strokeOpacity={0.5} />)}
+            <XAxis type="number" dataKey="x" domain={[0, 1]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Propensity Score", position: "insideBottom", offset: -10, ...ax }} />
+            <YAxis type="number" dataKey="y" domain={[20, 75]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Outcome ($k)", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+            {psmD.matchLines.map(m => <ReferenceLine key={m.id} segment={[{ x: m.x1, y: m.y1 }, { x: m.x2, y: m.y2 }]} stroke="#64748b" strokeWidth={0.8} strokeOpacity={0.5} />)}
             <Scatter data={psmD.scatterC} shape={<DotPSM />} /><Scatter data={psmD.scatterT} shape={<DotPSM />} />
           </ComposedChart>
         </ResponsiveContainer>
-        <ChartLegend items={[{ color: "#a78bfa", label: "Treated" }, { color: "#60a5fa", label: "Matched control" }, { color: "#94a3b8", label: "Match link", dashed: true }]} />
+        <ChartLegend items={[{ color: "#a78bfa", label: "Treated" }, { color: "#60a5fa", label: "Matched control" }, { color: "#64748b", label: "Match link", dashed: true }]} />
       </div>
     );
   }
@@ -551,8 +551,8 @@ function PSMChart({ step }) {
       <ResponsiveContainer width="100%" height={230}>
         <BarChart data={data} margin={{ top: 15, right: 30, left: 15, bottom: 5 }} barSize={70}>
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
-          <XAxis dataKey="label" tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} />
-          <YAxis domain={[0, 18]} tick={ax} axisLine={{ stroke: "#334155" }} tickLine={false} label={{ value: "Effect ($k)", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
+          <XAxis dataKey="label" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
+          <YAxis domain={[0, 18]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Effect ($k)", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
           <Bar dataKey="value" radius={[6, 6, 0, 0]}>{data.map((d, i) => <Cell key={i} fill={d.color} />)}</Bar>
         </BarChart>
       </ResponsiveContainer>
@@ -561,8 +561,8 @@ function PSMChart({ step }) {
   );
 }
 
-const thS = { textAlign: "left", padding: "8px 10px", borderBottom: "2px solid #334155", color: "#ffffff", fontSize: "0.92rem", fontWeight: 600 };
-const tdS = { padding: "8px 10px", borderBottom: "1px solid #1e293b", color: "#ffffff", fontSize: "1rem" };
+const thS = { textAlign: "left", padding: "8px 10px", borderBottom: "2px solid #cbd5e1", color: "#000000", fontSize: "0.92rem", fontWeight: 600 };
+const tdS = { padding: "8px 10px", borderBottom: "1px solid #e2e8f0", color: "#000000", fontSize: "1rem" };
 
 function MethodChart({ methodId, step }) {
   switch (methodId) {
@@ -601,13 +601,13 @@ function DotGroup({ dots, color, label }) {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 5, marginBottom: 8 }}>
         {dots.map(d => <div key={d.id} style={{ width: 20, height: 20, borderRadius: "50%", background: color, opacity: 0.7 }} />)}
       </div>
-      <span style={{ fontSize: "0.9rem", color, fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 600 }}>{label}</span>
+      <span style={{ fontSize: "0.9rem", color, fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>{label}</span>
     </div>
   );
 }
 
 function Pill({ color, text }) {
-  return <div style={{ background: color + "18", border: `1px solid ${color}55`, color, padding: "5px 13px", borderRadius: 8, fontSize: "0.88rem", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>{text}</div>;
+  return <div style={{ background: color + "18", border: `1px solid ${color}55`, color, padding: "5px 13px", borderRadius: 8, fontSize: "0.88rem", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>{text}</div>;
 }
 
 function ChartLegend({ items }) {
@@ -616,7 +616,7 @@ function ChartLegend({ items }) {
       {items.map((it, i) => (
         <div key={i} style={{ display: "flex", alignItems: "center", gap: 5 }}>
           <div style={{ width: 16, height: 0, borderTop: `2.5px ${it.dashed ? "dashed" : "solid"} ${it.color}` }} />
-          <span style={{ fontSize: "0.82rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif" }}>{it.label}</span>
+          <span style={{ fontSize: "0.82rem", color: "#000000", fontFamily: "'Inter', sans-serif" }}>{it.label}</span>
         </div>
       ))}
     </div>
@@ -629,13 +629,13 @@ function MethodCard({ method, selected, onClick }) {
     <button onClick={() => onClick(method)} style={{
       flex: "1 1 140px", maxWidth: 200, padding: "1.25rem 1rem",
       background: isA ? `linear-gradient(135deg, ${method.color}18, ${method.color}08)` : "rgba(255,255,255,0.02)",
-      border: isA ? `2px solid ${method.color}` : "1px solid #1e293b",
+      border: isA ? `2px solid ${method.color}` : "1px solid #e2e8f0",
       borderRadius: 14, cursor: "pointer", transition: "all 0.25s ease", textAlign: "center",
       transform: isA ? "translateY(-2px)" : "none", boxShadow: isA ? `0 8px 24px ${method.color}15` : "none",
     }}>
       <div style={{ fontSize: "2rem", marginBottom: 6 }}>{method.icon}</div>
-      <div style={{ fontSize: "1.25rem", fontWeight: 700, color: isA ? method.color : "#f0f0f0", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", letterSpacing: "0.05em", marginBottom: 4 }}>{method.label}</div>
-      <div style={{ fontSize: "0.82rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.4 }}>{method.full}</div>
+      <div style={{ fontSize: "1.25rem", fontWeight: 700, color: isA ? method.color : "#000000", fontFamily: "'Inter', sans-serif", letterSpacing: "0.05em", marginBottom: 4 }}>{method.label}</div>
+      <div style={{ fontSize: "0.82rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.4 }}>{method.full}</div>
     </button>
   );
 }
@@ -647,12 +647,12 @@ function LevelSelector({ level, setLevel, accentColor }) {
         <button key={l.id} onClick={() => setLevel(l)} style={{
           flex: "1 1 120px", padding: "0.7rem 0.8rem",
           background: level.id === l.id ? `${accentColor}15` : "rgba(255,255,255,0.02)",
-          border: level.id === l.id ? `1.5px solid ${accentColor}` : "1px solid #1e293b",
+          border: level.id === l.id ? `1.5px solid ${accentColor}` : "1px solid #e2e8f0",
           borderRadius: 10, cursor: "pointer", transition: "all 0.2s", textAlign: "center",
         }}>
           <div style={{ fontSize: "1.25rem", marginBottom: 2 }}>{l.emoji}</div>
-          <div style={{ fontSize: "0.95rem", fontWeight: 600, color: level.id === l.id ? accentColor : "#f0f0f0", fontFamily: "'Helvetica Neue', sans-serif" }}>{l.label}</div>
-          <div style={{ fontSize: "0.8rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", marginTop: 2, lineHeight: 1.3 }}>{l.desc}</div>
+          <div style={{ fontSize: "0.95rem", fontWeight: 600, color: level.id === l.id ? accentColor : "#000000", fontFamily: "'Inter', sans-serif" }}>{l.label}</div>
+          <div style={{ fontSize: "0.8rem", color: "#000000", fontFamily: "'Inter', sans-serif", marginTop: 2, lineHeight: 1.3 }}>{l.desc}</div>
         </button>
       ))}
     </div>
@@ -664,24 +664,24 @@ function StepCard({ step, color, isActive, onClick }) {
     <button onClick={onClick} style={{
       width: "100%", textAlign: "left", padding: "1rem 1.25rem",
       background: isActive ? `${color}10` : "transparent",
-      border: isActive ? `1px solid ${color}40` : "1px solid #1e293b",
+      border: isActive ? `1px solid ${color}40` : "1px solid #e2e8f0",
       borderRadius: 12, cursor: "pointer", transition: "all 0.25s", marginBottom: 8,
     }}>
       <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
         <div style={{
           width: 32, height: 32, borderRadius: "50%",
-          background: isActive ? color : "#1e293b",
+          background: isActive ? color : "#e2e8f0",
           color: isActive ? "#0a0f1a" : "#c0c8d4",
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: "0.95rem", fontWeight: 700, fontFamily: "'JetBrains Mono', monospace", flexShrink: 0,
+          fontSize: "0.95rem", fontWeight: 700, fontFamily: "'Inter', sans-serif", flexShrink: 0,
         }}>{step.step_number}</div>
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: "1.1rem", fontWeight: 600, color: isActive ? "#ffffff" : "#f0f0f0", fontFamily: "'Georgia', serif", marginBottom: isActive ? 8 : 0 }}>{step.title}</div>
+          <div style={{ fontSize: "1.1rem", fontWeight: 600, color: isActive ? "#000000" : "#000000", fontFamily: "'Inter', sans-serif", marginBottom: isActive ? 8 : 0 }}>{step.title}</div>
           {isActive && (
             <div>
-              <p style={{ fontSize: "1.05rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.75, margin: "0 0 10px" }}>{step.explanation}</p>
-              {step.key_concept && <div style={{ display: "inline-block", padding: "5px 12px", background: `${color}15`, border: `1px solid ${color}30`, borderRadius: 6, fontSize: "0.88rem", color, fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, marginBottom: step.analogy ? 8 : 0 }}>Key concept: {step.key_concept}</div>}
-              {step.analogy && <div style={{ marginTop: 8, padding: "10px 14px", background: "#1c191740", borderLeft: `3px solid ${color}50`, borderRadius: "0 8px 8px 0", fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.6, fontStyle: "italic" }}>💡 {step.analogy}</div>}
+              <p style={{ fontSize: "1.05rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.75, margin: "0 0 10px" }}>{step.explanation}</p>
+              {step.key_concept && <div style={{ display: "inline-block", padding: "5px 12px", background: `${color}15`, border: `1px solid ${color}30`, borderRadius: 6, fontSize: "0.88rem", color, fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: step.analogy ? 8 : 0 }}>Key concept: {step.key_concept}</div>}
+              {step.analogy && <div style={{ marginTop: 8, padding: "10px 14px", background: "#f1f5f920", borderLeft: `3px solid ${color}50`, borderRadius: "0 8px 8px 0", fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, fontStyle: "italic" }}>💡 {step.analogy}</div>}
             </div>
           )}
         </div>
@@ -693,15 +693,15 @@ function StepCard({ step, color, isActive, onClick }) {
 function AssumptionCard({ assumption, color }) {
   const [open, setOpen] = useState(false);
   return (
-    <div style={{ padding: "0.9rem 1.1rem", background: "rgba(255,255,255,0.02)", border: "1px solid #1e293b", borderRadius: 10, marginBottom: 8, cursor: "pointer" }} onClick={() => setOpen(!open)}>
+    <div style={{ padding: "0.9rem 1.1rem", background: "rgba(255,255,255,0.02)", border: "1px solid #e2e8f0", borderRadius: 10, marginBottom: 8, cursor: "pointer" }} onClick={() => setOpen(!open)}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <div style={{ fontSize: "1.02rem", fontWeight: 600, color, fontFamily: "'Georgia', serif" }}>{assumption.name}</div>
-        <span style={{ color: "#ffffff", fontSize: "0.9rem", transition: "transform 0.2s", transform: open ? "rotate(90deg)" : "none" }}>▶</span>
+        <div style={{ fontSize: "1.02rem", fontWeight: 600, color, fontFamily: "'Inter', sans-serif" }}>{assumption.name}</div>
+        <span style={{ color: "#000000", fontSize: "0.9rem", transition: "transform 0.2s", transform: open ? "rotate(90deg)" : "none" }}>▶</span>
       </div>
       {open && (
         <div style={{ marginTop: 10 }}>
-          <p style={{ fontSize: "1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.65, margin: "0 0 8px" }}>{assumption.plain_english}</p>
-          <div style={{ padding: "10px 14px", background: "#f8717115", border: "1px solid #f8717130", borderRadius: 8, fontSize: "0.92rem", color: "#fecaca", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.55 }}>⚠️ Violation: {assumption.what_breaks_it}</div>
+          <p style={{ fontSize: "1rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.65, margin: "0 0 8px" }}>{assumption.plain_english}</p>
+          <div style={{ padding: "10px 14px", background: "#f8717115", border: "1px solid #f8717130", borderRadius: 8, fontSize: "0.92rem", color: "#fecaca", fontFamily: "'Inter', sans-serif", lineHeight: 1.55 }}>⚠️ Violation: {assumption.what_breaks_it}</div>
         </div>
       )}
     </div>
@@ -712,7 +712,7 @@ function LoadingAnimation({ color }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "4rem 2rem", gap: 20 }}>
       <div style={{ display: "flex", gap: 8 }}>{[0, 1, 2, 3].map(i => <div key={i} style={{ width: 12, height: 12, borderRadius: "50%", background: color, animation: `pulse 1.2s ease-in-out ${i * 0.15}s infinite` }} />)}</div>
-      <p style={{ color: "#ffffff", fontSize: "1rem", fontFamily: "'Helvetica Neue', sans-serif" }}>Building your personalized explanation...</p>
+      <p style={{ color: "#000000", fontSize: "1rem", fontFamily: "'Inter', sans-serif" }}>Building your personalized explanation...</p>
       <style>{`@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.5); opacity: 1; } }`}</style>
     </div>
   );
@@ -721,15 +721,15 @@ function LoadingAnimation({ color }) {
 function SectionLabel({ number, text }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-      <span style={{ fontSize: "0.88rem", color: "#ffffff", fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, background: "#0f172a", border: "1px solid #1e293b", borderRadius: 6, padding: "3px 8px" }}>{number}</span>
-      <span style={{ fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em" }}>{text}</span>
-      <div style={{ flex: 1, height: 1, background: "#1e293b" }} />
+      <span style={{ fontSize: "0.88rem", color: "#000000", fontFamily: "'Inter', sans-serif", fontWeight: 700, background: "#f1f5f9", border: "1px solid #e2e8f0", borderRadius: 6, padding: "3px 8px" }}>{number}</span>
+      <span style={{ fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em" }}>{text}</span>
+      <div style={{ flex: 1, height: 1, background: "#f1f5f9" }} />
     </div>
   );
 }
 
 function navBtnStyle(disabled, color, primary = false) {
-  return { padding: "0.55rem 1.4rem", borderRadius: 8, border: `1px solid ${disabled ? "#1e293b" : primary ? color : "#334155"}`, background: disabled ? "#0f172a" : primary ? color : "#1e293b", color: disabled ? "#475569" : primary ? "#0a0f1a" : "#ffffff", cursor: disabled ? "default" : "pointer", fontFamily: "'Helvetica Neue', sans-serif", fontSize: "0.95rem", fontWeight: primary ? 700 : 500, transition: "all 0.2s" };
+  return { padding: "0.55rem 1.4rem", borderRadius: 8, border: `1px solid ${disabled ? "#e2e8f0" : primary ? color : "#cbd5e1"}`, background: disabled ? "#f1f5f9" : primary ? color : "#e2e8f0", color: disabled ? "#94a3b8" : primary ? "#0a0f1a" : "#000000", cursor: disabled ? "default" : "pointer", fontFamily: "'Inter', sans-serif", fontSize: "0.95rem", fontWeight: primary ? 700 : 500, transition: "all 0.2s" };
 }
 
 // ============================================================
@@ -745,7 +745,7 @@ export default function CausalInferenceLab() {
   const [activeStep, setActiveStep] = useState(0);
   const [error, setError] = useState(null);
   const resultRef = useRef(null);
-  const accentColor = method?.color || "#94a3b8";
+  const accentColor = method?.color || "#64748b";
 
   useEffect(() => { if (method && !program) setProgram(EXAMPLE_PROGRAMS[method.id]); }, [method]);
   useEffect(() => { setResult(null); setActiveStep(0); setError(null); }, [method, level]);
@@ -760,21 +760,21 @@ export default function CausalInferenceLab() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#060a13", color: "#ffffff", fontFamily: "'Georgia', 'Times New Roman', serif" }}>
-      <div style={{ position: "fixed", inset: 0, backgroundImage: `radial-gradient(circle at 1px 1px, #ffffff06 1px, transparent 0)`, backgroundSize: "40px 40px", pointerEvents: "none", zIndex: 0 }} />
+    <div style={{ minHeight: "100vh", background: "#f8f7f4", color: "#000000", fontFamily: "'Inter', sans-serif" }}>
+      <div style={{ position: "fixed", inset: 0, backgroundImage: `radial-gradient(circle at 1px 1px, #00000006 1px, transparent 0)`, backgroundSize: "40px 40px", pointerEvents: "none", zIndex: 0 }} />
       <div style={{ position: "relative", zIndex: 1, maxWidth: 820, margin: "0 auto", padding: "2.5rem 1.5rem 4rem" }}>
 
         {/* Navigation */}
         <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "1.5rem" }}>
-          <a href="/class7" style={{ fontSize: "1.1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", textDecoration: "none", display: "flex", alignItems: "center", gap: 8, padding: "10px 20px", background: "#1e293b", border: "1px solid #334155", borderRadius: 10, transition: "all 0.2s", fontWeight: 600 }}>Class 7: Bias in Impact Evaluation →</a>
+          <a href="/class7" style={{ fontSize: "1.1rem", color: "#000000", fontFamily: "'Inter', sans-serif", textDecoration: "none", display: "flex", alignItems: "center", gap: 8, padding: "10px 20px", background: "#f1f5f9", border: "1px solid #cbd5e1", borderRadius: 10, transition: "all 0.2s", fontWeight: 600 }}>Class 7: Bias in Impact Evaluation →</a>
         </div>
 
         {/* Header */}
         <header style={{ textAlign: "center", marginBottom: "3rem" }}>
-          <div style={{ fontSize: "0.82rem", color: "#ffffff", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 10 }}>Interactive Learning Platform (Work in Progress)</div>
-          <div style={{ display: "inline-block", padding: "4px 14px", background: "#1e293b", borderRadius: 6, fontSize: "0.85rem", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", color: "#ffffff", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12, fontWeight: 600 }}>Class 6</div>
-          <h1 style={{ fontSize: "clamp(1.9rem, 4.5vw, 2.8rem)", fontWeight: 700, color: "#ffffff", lineHeight: 1.2, marginBottom: 10, letterSpacing: "-0.01em" }}>Causal Inference Methods</h1>
-          <p style={{ fontSize: "1.1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", maxWidth: 560, margin: "0 auto", lineHeight: 1.6 }}>Choose a method, set your difficulty level, and describe a program you want to evaluate. The AI builds a personalized, step-by-step explanation using your example.</p>
+          <div style={{ fontSize: "0.82rem", color: "#000000", fontFamily: "'Inter', sans-serif", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 10 }}>Interactive Learning Platform (Work in Progress)</div>
+          <div style={{ display: "inline-block", padding: "4px 14px", background: "#f1f5f9", borderRadius: 6, fontSize: "0.85rem", fontFamily: "'Inter', sans-serif", color: "#000000", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12, fontWeight: 600 }}>Class 6</div>
+          <h1 style={{ fontSize: "clamp(1.9rem, 4.5vw, 2.8rem)", fontWeight: 700, color: "#000000", lineHeight: 1.2, marginBottom: 10, letterSpacing: "-0.01em" }}>Causal Inference Methods</h1>
+          <p style={{ fontSize: "1.1rem", color: "#000000", fontFamily: "'Inter', sans-serif", maxWidth: 560, margin: "0 auto", lineHeight: 1.6 }}>Choose a method, set your difficulty level, and describe a program you want to evaluate. The AI builds a personalized, step-by-step explanation using your example.</p>
         </header>
 
         {/* Step 1 */}
@@ -783,10 +783,10 @@ export default function CausalInferenceLab() {
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>{METHODS.map(m => <MethodCard key={m.id} method={m} selected={method} onClick={setMethod} />)}</div>
           {method && (
             <div style={{ textAlign: "center", marginTop: 16, padding: "14px 20px", background: `${method.color}08`, borderRadius: 10, border: `1px solid ${method.color}20` }}>
-              <span style={{ fontSize: "1rem", color: method.color, fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 500, fontStyle: "italic" }}>{method.tagline}</span>
+              <span style={{ fontSize: "1rem", color: method.color, fontFamily: "'Inter', sans-serif", fontWeight: 500, fontStyle: "italic" }}>{method.tagline}</span>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: "center", marginTop: 12 }}>
-                <span style={{ fontSize: "0.85rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 700, marginRight: 4, lineHeight: "28px" }}>Key concepts:</span>
-                {method.keyConcepts.map((c, i) => <span key={i} style={{ display: "inline-block", padding: "4px 12px", background: `${method.color}12`, border: `1px solid ${method.color}30`, borderRadius: 20, fontSize: "0.85rem", color: method.color, fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, whiteSpace: "nowrap" }}>{c}</span>)}
+                <span style={{ fontSize: "0.85rem", color: "#000000", fontFamily: "'Inter', sans-serif", fontWeight: 700, marginRight: 4, lineHeight: "28px" }}>Key concepts:</span>
+                {method.keyConcepts.map((c, i) => <span key={i} style={{ display: "inline-block", padding: "4px 12px", background: `${method.color}12`, border: `1px solid ${method.color}30`, borderRadius: 20, fontSize: "0.85rem", color: method.color, fontFamily: "'Inter', sans-serif", fontWeight: 600, whiteSpace: "nowrap" }}>{c}</span>)}
               </div>
             </div>
           )}
@@ -798,15 +798,15 @@ export default function CausalInferenceLab() {
             <SectionLabel number="2" text="Set the difficulty level" />
             <LevelSelector level={level} setLevel={setLevel} accentColor={accentColor} />
             {method.definitions && level && (
-              <div style={{ marginTop: 16, padding: "1.1rem 1.4rem", background: "#0f172a", borderRadius: 12, border: `1px solid ${accentColor}25`, borderLeft: `3px solid ${accentColor}` }}>
+              <div style={{ marginTop: 16, padding: "1.1rem 1.4rem", background: "#f1f5f9", borderRadius: 12, border: `1px solid ${accentColor}25`, borderLeft: `3px solid ${accentColor}` }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                  <span style={{ fontSize: "0.85rem", color: accentColor, fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>What is {method.full}?</span>
-                  <span style={{ fontSize: "0.78rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", background: "#1e293b", padding: "3px 10px", borderRadius: 4 }}>{level.label} level</span>
+                  <span style={{ fontSize: "0.85rem", color: accentColor, fontFamily: "'Inter', sans-serif", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>What is {method.full}?</span>
+                  <span style={{ fontSize: "0.78rem", color: "#000000", fontFamily: "'Inter', sans-serif", background: "#f1f5f9", padding: "3px 10px", borderRadius: 4 }}>{level.label} level</span>
                 </div>
-                <p style={{ fontSize: "1.05rem", color: "#ffffff", fontFamily: "'Georgia', serif", lineHeight: 1.75, margin: 0 }}>
+                <p style={{ fontSize: "1.05rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.75, margin: 0 }}>
                   {level.id === "advanced" ? <NotationText text={method.definitions[level.id]} color={accentColor} /> : method.definitions[level.id]}
                 </p>
-                {level.id === "advanced" && <div style={{ marginTop: 10, fontSize: "0.78rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", fontStyle: "italic" }}>Hover or tap dotted terms for plain-language explanations.</div>}
+                {level.id === "advanced" && <div style={{ marginTop: 10, fontSize: "0.78rem", color: "#000000", fontFamily: "'Inter', sans-serif", fontStyle: "italic" }}>Hover or tap dotted terms for plain-language explanations.</div>}
               </div>
             )}
           </section>
@@ -816,27 +816,27 @@ export default function CausalInferenceLab() {
         {method && (
           <section style={{ marginBottom: "2.5rem", animation: "fadeIn 0.4s ease" }}>
             <SectionLabel number="3" text="Describe your program" />
-            <p style={{ fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", marginBottom: 12, lineHeight: 1.5 }}>Enter a program, policy, or intervention you want to evaluate. A default example is provided, but feel free to replace it with your own.</p>
-            <div style={{ position: "relative", background: "#0f172a", borderRadius: 12, border: "1px solid #1e293b", overflow: "hidden" }}>
-              <textarea value={program} onChange={e => setProgram(e.target.value)} placeholder="e.g., a community health worker home visiting program on childhood vaccination rates" rows={3} style={{ width: "100%", padding: "1rem 1.25rem", background: "transparent", border: "none", color: "#ffffff", fontSize: "1.05rem", fontFamily: "'Georgia', serif", lineHeight: 1.6, resize: "vertical", outline: "none", boxSizing: "border-box" }} />
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.5rem 1.25rem 0.75rem", borderTop: "1px solid #1e293b10" }}>
-                <span style={{ fontSize: "0.82rem", color: "#ffffff", fontFamily: "'JetBrains Mono', monospace" }}>{method.full} · {level.label}</span>
-                <button onClick={handleGenerate} disabled={loading || !program.trim()} style={{ padding: "0.6rem 1.6rem", background: loading || !program.trim() ? "#1e293b" : accentColor, color: loading || !program.trim() ? "#475569" : "#0a0f1a", border: "none", borderRadius: 8, cursor: loading || !program.trim() ? "default" : "pointer", fontSize: "0.95rem", fontWeight: 700, fontFamily: "'Helvetica Neue', sans-serif", transition: "all 0.2s", letterSpacing: "0.02em" }}>{loading ? "Generating..." : "Generate Explanation →"}</button>
+            <p style={{ fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", marginBottom: 12, lineHeight: 1.5 }}>Enter a program, policy, or intervention you want to evaluate. A default example is provided, but feel free to replace it with your own.</p>
+            <div style={{ position: "relative", background: "#f1f5f9", borderRadius: 12, border: "1px solid #e2e8f0", overflow: "hidden" }}>
+              <textarea value={program} onChange={e => setProgram(e.target.value)} placeholder="e.g., a community health worker home visiting program on childhood vaccination rates" rows={3} style={{ width: "100%", padding: "1rem 1.25rem", background: "transparent", border: "none", color: "#000000", fontSize: "1.05rem", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, resize: "vertical", outline: "none", boxSizing: "border-box" }} />
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.5rem 1.25rem 0.75rem", borderTop: "1px solid #e2e8f010" }}>
+                <span style={{ fontSize: "0.82rem", color: "#000000", fontFamily: "'Inter', sans-serif" }}>{method.full} · {level.label}</span>
+                <button onClick={handleGenerate} disabled={loading || !program.trim()} style={{ padding: "0.6rem 1.6rem", background: loading || !program.trim() ? "#e2e8f0" : accentColor, color: loading || !program.trim() ? "#94a3b8" : "#0a0f1a", border: "none", borderRadius: 8, cursor: loading || !program.trim() ? "default" : "pointer", fontSize: "0.95rem", fontWeight: 700, fontFamily: "'Inter', sans-serif", transition: "all 0.2s", letterSpacing: "0.02em" }}>{loading ? "Generating..." : "Generate Explanation →"}</button>
               </div>
             </div>
           </section>
         )}
 
         {loading && <LoadingAnimation color={accentColor} />}
-        {error && <div style={{ padding: "1rem 1.25rem", background: "#f8717115", border: "1px solid #f8717130", borderRadius: 12, color: "#ffffff", fontSize: "1rem", fontFamily: "'Helvetica Neue', sans-serif", textAlign: "center", marginBottom: "2rem" }}>{error}</div>}
+        {error && <div style={{ padding: "1rem 1.25rem", background: "#f8717115", border: "1px solid #f8717130", borderRadius: 12, color: "#000000", fontSize: "1rem", fontFamily: "'Inter', sans-serif", textAlign: "center", marginBottom: "2rem" }}>{error}</div>}
 
         {/* RESULTS */}
         {result && !loading && (
           <div ref={resultRef} style={{ animation: "fadeIn 0.5s ease" }}>
             <section style={{ padding: "1.25rem 1.5rem", background: `${accentColor}08`, border: `1px solid ${accentColor}25`, borderRadius: 14, marginBottom: "2rem" }}>
-              <div style={{ fontSize: "0.82rem", color: accentColor, fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 6 }}>Your evaluation scenario</div>
-              <p style={{ fontSize: "1.1rem", color: "#ffffff", fontFamily: "'Georgia', serif", lineHeight: 1.65, margin: 0 }}>{result.example_framing}</p>
-              {result.running_variable && <p style={{ fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", marginTop: 8, marginBottom: 0, lineHeight: 1.5 }}>📏 {result.running_variable}</p>}
+              <div style={{ fontSize: "0.82rem", color: accentColor, fontFamily: "'Inter', sans-serif", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 6 }}>Your evaluation scenario</div>
+              <p style={{ fontSize: "1.1rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.65, margin: 0 }}>{result.example_framing}</p>
+              {result.running_variable && <p style={{ fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", marginTop: 8, marginBottom: 0, lineHeight: 1.5 }}>📏 {result.running_variable}</p>}
             </section>
 
             <section style={{ marginBottom: "2.5rem" }}>
@@ -853,7 +853,7 @@ export default function CausalInferenceLab() {
             {result.assumptions?.length > 0 && (
               <section style={{ marginBottom: "2.5rem" }}>
                 <SectionLabel number="⚡" text="Key assumptions" />
-                <p style={{ fontSize: "0.95rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", marginBottom: 12 }}>Click each assumption to expand.</p>
+                <p style={{ fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", marginBottom: 12 }}>Click each assumption to expand.</p>
                 {result.assumptions.map((a, i) => <AssumptionCard key={i} assumption={a} color={accentColor} />)}
               </section>
             )}
@@ -861,20 +861,20 @@ export default function CausalInferenceLab() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 12, marginBottom: "2.5rem" }}>
               {result.limitations && (
                 <div style={{ padding: "1rem 1.25rem", background: "#f8717108", border: "1px solid #f8717120", borderRadius: 12 }}>
-                  <div style={{ fontSize: "0.85rem", color: "#f87171", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>Limitations</div>
-                  <p style={{ fontSize: "1rem", color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.6, margin: 0 }}>{result.limitations}</p>
+                  <div style={{ fontSize: "0.85rem", color: "#f87171", fontFamily: "'Inter', sans-serif", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>Limitations</div>
+                  <p style={{ fontSize: "1rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, margin: 0 }}>{result.limitations}</p>
                 </div>
               )}
               {result.connection_to_other_methods && (
                 <div style={{ padding: "1rem 1.25rem", background: "#34d39908", border: "1px solid #34d39920", borderRadius: 12 }}>
-                  <div style={{ fontSize: "0.85rem", color: "#34d399", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>Connection to other methods</div>
-                  <p style={{ fontSize: "1rem", color: "#d1fae5", fontFamily: "'Helvetica Neue', sans-serif", lineHeight: 1.6, margin: 0 }}>{result.connection_to_other_methods}</p>
+                  <div style={{ fontSize: "0.85rem", color: "#34d399", fontFamily: "'Inter', sans-serif", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>Connection to other methods</div>
+                  <p style={{ fontSize: "1rem", color: "#d1fae5", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, margin: 0 }}>{result.connection_to_other_methods}</p>
                 </div>
               )}
             </div>
 
             <div style={{ textAlign: "center" }}>
-              <button onClick={() => { setResult(null); setProgram(""); setActiveStep(0); window.scrollTo({ top: 0, behavior: "smooth" }); }} style={{ padding: "0.65rem 2.2rem", background: "transparent", border: "1px solid #334155", borderRadius: 8, color: "#ffffff", fontSize: "1rem", fontFamily: "'Helvetica Neue', sans-serif", cursor: "pointer" }}>↻ Try a different example</button>
+              <button onClick={() => { setResult(null); setProgram(""); setActiveStep(0); window.scrollTo({ top: 0, behavior: "smooth" }); }} style={{ padding: "0.65rem 2.2rem", background: "transparent", border: "1px solid #cbd5e1", borderRadius: 8, color: "#000000", fontSize: "1rem", fontFamily: "'Inter', sans-serif", cursor: "pointer" }}>↻ Try a different example</button>
             </div>
           </div>
         )}
@@ -883,7 +883,7 @@ export default function CausalInferenceLab() {
       <style>{`
         @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
         textarea::placeholder { color: #94a3b8; }
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
+
       `}</style>
     </div>
   );
