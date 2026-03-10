@@ -764,6 +764,11 @@ export default function CausalInferenceLab() {
       <div style={{ position: "fixed", inset: 0, backgroundImage: `radial-gradient(circle at 1px 1px, #ffffff06 1px, transparent 0)`, backgroundSize: "40px 40px", pointerEvents: "none", zIndex: 0 }} />
       <div style={{ position: "relative", zIndex: 1, maxWidth: 820, margin: "0 auto", padding: "2.5rem 1.5rem 4rem" }}>
 
+        {/* Navigation */}
+        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "1.5rem" }}>
+          <a href="/class7" style={{ fontSize: "0.85rem", color: "#94a3b8", fontFamily: "'Helvetica Neue', sans-serif", textDecoration: "none", display: "flex", alignItems: "center", gap: 6, padding: "6px 14px", background: "#0f172a", border: "1px solid #1e293b", borderRadius: 8, transition: "all 0.2s" }}>Class 7: Bias in Impact Evaluation →</a>
+        </div>
+
         {/* Header */}
         <header style={{ textAlign: "center", marginBottom: "3rem" }}>
           <div style={{ fontSize: "0.82rem", color: "#dce1e8", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 10 }}>Interactive Learning Platform (Work in Progress)</div>
