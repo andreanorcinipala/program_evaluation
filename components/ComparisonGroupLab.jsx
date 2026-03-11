@@ -717,7 +717,7 @@ export default function ComparisonGroupLab() {
             <SectionLabel number="2" text="Set the difficulty level" />
             <LevelSelector level={level} setLevel={setLevel} accentColor={accentColor} />
             {design.definitions && level && (
-              <div style={{ marginTop: 16, padding: "16px 20px", background: "#000000", border: "1px solid #e2e8f0", borderRadius: 12, fontSize: "1rem", lineHeight: 1.7, color: "#000000", fontFamily: "'Inter', sans-serif" }}>
+              <div style={{ marginTop: 16, padding: "16px 20px", background: "#ffffff", border: "1px solid #000000", borderRadius: 12, fontSize: "1rem", lineHeight: 1.7, color: "#000000", fontFamily: "'Inter', sans-serif" }}>
                 {renderDefinition(design.definitions[level.id])}
                 {level.id === "advanced" && <div style={{ marginTop: 10, fontSize: "0.78rem", color: "#000000", fontFamily: "'Inter', sans-serif", fontStyle: "italic" }}>Hover or tap dotted terms for plain-language explanations.</div>}
               </div>
@@ -729,7 +729,7 @@ export default function ComparisonGroupLab() {
         {design && level && (
           <section style={{ marginBottom: "2.5rem", animation: "fadeIn 0.4s ease" }}>
             <SectionLabel number="3" text="Explore how it works" />
-            <div style={{ background: "#000000", border: "1px solid #e2e8f0", borderRadius: 14, padding: "20px 16px 16px", marginBottom: 16 }}>
+            <div style={{ background: "#ffffff", border: "1px solid #000000", borderRadius: 14, padding: "20px 16px 16px", marginBottom: 16 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, flexWrap: "wrap", gap: 8 }}>
                 <span style={{ fontSize: "0.82rem", color: "#000000", fontFamily: "'Inter', sans-serif" }}>{design.full} · {level.label}</span>
                 <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
@@ -749,7 +749,7 @@ export default function ComparisonGroupLab() {
           <section style={{ marginBottom: "2.5rem", animation: "fadeIn 0.4s ease" }}>
             <SectionLabel number="4" text="Describe your program" />
             <p style={{ fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", marginBottom: 12, lineHeight: 1.5 }}>Enter a program, policy, or intervention. The AI will explain how to apply the {design.full.toLowerCase()} design to your evaluation.</p>
-            <textarea value={program} onChange={(e) => setProgram(e.target.value)} placeholder="Describe a program you want to evaluate..." rows={3} style={{ width: "100%", padding: "14px 16px", background: "#000000", border: "1px solid #e2e8f0", borderRadius: 12, color: "#000000", fontSize: "1rem", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, resize: "vertical", outline: "none", boxSizing: "border-box" }} />
+            <textarea value={program} onChange={(e) => setProgram(e.target.value)} placeholder="Describe a program you want to evaluate..." rows={3} style={{ width: "100%", padding: "14px 16px", background: "#ffffff", border: "1px solid #000000", borderRadius: 12, color: "#000000", fontSize: "1rem", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, resize: "vertical", outline: "none", boxSizing: "border-box" }} />
             <div style={{ textAlign: "center", marginTop: 12 }}>
               <button onClick={handleGenerate} disabled={loading || !program.trim()} style={{ padding: "12px 32px", background: loading ? "#e2e8f0" : accentColor, color: loading ? "#64748b" : "#ffffff", border: "none", borderRadius: 10, fontSize: "1rem", fontWeight: 700, fontFamily: "'Inter', sans-serif", cursor: loading ? "default" : "pointer", transition: "all 0.2s" }}>
                 {loading ? "Generating..." : "Generate Explanation"}
@@ -775,7 +775,7 @@ export default function ComparisonGroupLab() {
         {result && (
           <section ref={resultRef} style={{ animation: "fadeIn 0.5s ease", marginBottom: "2rem" }}>
             <SectionLabel number="5" text="Your personalized explanation" />
-            <div style={{ background: "#000000", border: `1px solid ${accentColor}30`, borderRadius: 14, padding: "24px 20px" }}>
+            <div style={{ background: "#ffffff", border: `1px solid #000000`, borderRadius: 14, padding: "24px 20px" }}>
               {result.scenario && <p style={{ fontSize: "1rem", color: "#000000", fontFamily: "'Inter', sans-serif", marginTop: 0, marginBottom: 16, lineHeight: 1.6, fontStyle: "italic", borderLeft: `3px solid ${accentColor}40`, paddingLeft: 14 }}>{renderDefinition(result.scenario)}</p>}
 
               {result.steps?.map((s, i) => (
