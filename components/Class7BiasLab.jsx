@@ -25,7 +25,7 @@ const BIAS_TYPES = [
     id: "attrition",
     label: "Attrition",
     full: "Attrition Bias",
-    color: "#d97706",
+    color: "#92400e",
     icon: "🚪",
     tagline: "When people drop out, and it's not random who leaves.",
     keyConcepts: ["Differential dropout", "Loss to follow-up", "Missing data", "Intention-to-treat", "Survivor bias"],
@@ -39,7 +39,7 @@ const BIAS_TYPES = [
     id: "secular",
     label: "Secular Trends",
     full: "Secular Trends",
-    color: "#059669",
+    color: "#065f46",
     icon: "📈",
     tagline: "The world changes too, not just your program.",
     keyConcepts: ["Time trends", "Historical changes", "Confounding with time", "Pre-post fallacy", "Comparison groups"],
@@ -396,7 +396,7 @@ function SelectionChart({ step }) {
             )}
           </BarChart>
         </ResponsiveContainer>
-        {step === 1 && <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#dc2626" text={`Treatment avg: ${selD.avgT}`} /><Pill color="#2563eb" text={`Control avg: ${selD.avgC}`} /><Pill color="#d97706" text={`Gap: ${selD.gap}`} /></div>}
+        {step === 1 && <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#dc2626" text={`Treatment avg: ${selD.avgT}`} /><Pill color="#2563eb" text={`Control avg: ${selD.avgC}`} /><Pill color="#92400e" text={`Gap: ${selD.gap}`} /></div>}
         <ChartLegend items={step === 0 ? [{ color: "#dc2626", label: "Treatment group" }] : [{ color: "#dc2626", label: "Treatment" }, { color: "#2563eb", label: "Control" }]} />
       </div>
     );
@@ -404,8 +404,8 @@ function SelectionChart({ step }) {
   // Steps 2-3: show the bias in the comparison
   const data = [
     { label: "Naive Estimate", value: 15.2, color: "#dc2626" },
-    { label: "True Effect", value: 5.0, color: "#059669" },
-    { label: "Selection Bias", value: 10.2, color: "#d97706" },
+    { label: "True Effect", value: 5.0, color: "#065f46" },
+    { label: "Selection Bias", value: 10.2, color: "#92400e" },
   ];
   return (
     <div style={chartBox}>
@@ -417,7 +417,7 @@ function SelectionChart({ step }) {
           <Bar dataKey="value" radius={[6, 6, 0, 0]}>{data.map((d, i) => <Cell key={i} fill={d.color} />)}</Bar>
         </BarChart>
       </ResponsiveContainer>
-      <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#d97706" text="Naive = True Effect + Selection Bias" /></div>
+      <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#92400e" text="Naive = True Effect + Selection Bias" /></div>
     </div>
   );
 }
@@ -432,12 +432,12 @@ function AttritionChart({ step }) {
             <CartesianGrid strokeDasharray="3 3" stroke={gs} />
             <XAxis dataKey="wave" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
             <YAxis domain={[0, 55]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Participants", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-            <Line type="linear" dataKey="Treatment" stroke="#d97706" strokeWidth={2.5} dot={{ r: 5, fill: "#d97706" }} />
+            <Line type="linear" dataKey="Treatment" stroke="#92400e" strokeWidth={2.5} dot={{ r: 5, fill: "#92400e" }} />
             <Line type="linear" dataKey="Control" stroke="#2563eb" strokeWidth={2.5} dot={{ r: 5, fill: "#2563eb" }} />
           </LineChart>
         </ResponsiveContainer>
-        {step === 1 && <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#d97706" text="Treatment: 50 → 28 (44% lost)" /><Pill color="#2563eb" text="Control: 50 → 42 (16% lost)" /></div>}
-        <ChartLegend items={[{ color: "#d97706", label: "Treatment" }, { color: "#2563eb", label: "Control" }]} />
+        {step === 1 && <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}><Pill color="#92400e" text="Treatment: 50 → 28 (44% lost)" /><Pill color="#2563eb" text="Control: 50 → 42 (16% lost)" /></div>}
+        <ChartLegend items={[{ color: "#92400e", label: "Treatment" }, { color: "#2563eb", label: "Control" }]} />
       </div>
     );
   }
@@ -449,16 +449,16 @@ function AttritionChart({ step }) {
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
           <XAxis dataKey="wave" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} />
           <YAxis domain={[60, 82]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Outcome", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-          <Line type="linear" dataKey="Treatment" stroke="#d97706" strokeWidth={2.5} dot={{ r: 5, fill: "#d97706" }} />
+          <Line type="linear" dataKey="Treatment" stroke="#92400e" strokeWidth={2.5} dot={{ r: 5, fill: "#92400e" }} />
           <Line type="linear" dataKey="Control" stroke="#2563eb" strokeWidth={2.5} dot={{ r: 5, fill: "#2563eb" }} />
-          {step >= 3 && <Line type="linear" dataKey="Treatment (ITT)" stroke="#d97706" strokeWidth={2} strokeDasharray="8 4" dot={{ r: 4, fill: "#d97706", strokeDasharray: "0" }} />}
+          {step >= 3 && <Line type="linear" dataKey="Treatment (ITT)" stroke="#92400e" strokeWidth={2} strokeDasharray="8 4" dot={{ r: 4, fill: "#92400e", strokeDasharray: "0" }} />}
         </LineChart>
       </ResponsiveContainer>
       <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}>
-        <Pill color="#d97706" text="Survivors look great" />
-        {step >= 3 && <Pill color="#059669" text="ITT tells the real story" />}
+        <Pill color="#92400e" text="Survivors look great" />
+        {step >= 3 && <Pill color="#065f46" text="ITT tells the real story" />}
       </div>
-      <ChartLegend items={[{ color: "#d97706", label: "Treatment (survivors)" }, { color: "#2563eb", label: "Control" }, ...(step >= 3 ? [{ color: "#d97706", label: "Treatment (ITT)", dashed: true }] : [])]} />
+      <ChartLegend items={[{ color: "#92400e", label: "Treatment (survivors)" }, { color: "#2563eb", label: "Control" }, ...(step >= 3 ? [{ color: "#92400e", label: "Treatment (ITT)", dashed: true }] : [])]} />
     </div>
   );
 }
@@ -471,18 +471,18 @@ function SecularChart({ step }) {
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
           <XAxis dataKey="month" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Month", position: "insideBottom", offset: -10, ...ax }} />
           <YAxis domain={[15, 55]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Outcome", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-          <ReferenceLine x={12} stroke="#d97706" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Intervention", position: "top", fill: "#d97706", fontSize: 12, fontWeight: 700 }} />
-          <Line type="monotone" dataKey="Observed" stroke="#059669" strokeWidth={2.5} dot={false} />
+          <ReferenceLine x={12} stroke="#92400e" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Intervention", position: "top", fill: "#92400e", fontSize: 12, fontWeight: 700 }} />
+          <Line type="monotone" dataKey="Observed" stroke="#065f46" strokeWidth={2.5} dot={false} />
           {step >= 2 && <Line type="monotone" dataKey="Secular Trend" stroke="#64748b" strokeWidth={2} strokeDasharray="6 4" dot={false} />}
         </ComposedChart>
       </ResponsiveContainer>
       <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}>
-        {step === 0 && <Pill color="#059669" text="Outcome drops after intervention" />}
-        {step === 1 && <Pill color="#d97706" text="But was it already dropping?" />}
+        {step === 0 && <Pill color="#065f46" text="Outcome drops after intervention" />}
+        {step === 1 && <Pill color="#92400e" text="But was it already dropping?" />}
         {step >= 2 && <Pill color="#64748b" text="Secular trend was declining anyway" />}
-        {step >= 3 && <Pill color="#059669" text="True effect = observed - trend" />}
+        {step >= 3 && <Pill color="#065f46" text="True effect = observed - trend" />}
       </div>
-      <ChartLegend items={[{ color: "#059669", label: "Observed" }, ...(step >= 2 ? [{ color: "#64748b", label: "Secular trend", dashed: true }] : []), { color: "#d97706", label: "Intervention start", dashed: true }]} />
+      <ChartLegend items={[{ color: "#065f46", label: "Observed" }, ...(step >= 2 ? [{ color: "#64748b", label: "Secular trend", dashed: true }] : []), { color: "#92400e", label: "Intervention start", dashed: true }]} />
     </div>
   );
 }
@@ -495,7 +495,7 @@ function MaturationChart({ step }) {
           <CartesianGrid strokeDasharray="3 3" stroke={gs} />
           <XAxis dataKey="age" tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Age (years)", position: "insideBottom", offset: -10, ...ax }} />
           <YAxis domain={[15, 55]} tick={ax} axisLine={{ stroke: "#cbd5e1" }} tickLine={false} label={{ value: "Reading Score", angle: -90, position: "insideLeft", ...ax, dx: -5 }} />
-          <ReferenceLine x={7} stroke="#d97706" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Program starts", position: "top", fill: "#d97706", fontSize: 12, fontWeight: 700 }} />
+          <ReferenceLine x={7} stroke="#92400e" strokeWidth={2} strokeDasharray="6 4" label={{ value: "Program starts", position: "top", fill: "#92400e", fontSize: 12, fontWeight: 700 }} />
           <Line type="monotone" dataKey="With Program" stroke="#2563eb" strokeWidth={2.5} dot={false} />
           {step >= 2 && <Line type="monotone" dataKey="Natural Growth" stroke="#64748b" strokeWidth={2} strokeDasharray="6 4" dot={false} />}
         </ComposedChart>
@@ -503,9 +503,9 @@ function MaturationChart({ step }) {
       <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}>
         {step <= 1 && <Pill color="#2563eb" text="Scores improve after program starts" />}
         {step >= 2 && <Pill color="#64748b" text="But kids naturally improve too" />}
-        {step >= 3 && <Pill color="#059669" text="True effect = gap between curves" />}
+        {step >= 3 && <Pill color="#065f46" text="True effect = gap between curves" />}
       </div>
-      <ChartLegend items={[{ color: "#2563eb", label: "With program" }, ...(step >= 2 ? [{ color: "#64748b", label: "Natural growth", dashed: true }] : []), { color: "#d97706", label: "Program start", dashed: true }]} />
+      <ChartLegend items={[{ color: "#2563eb", label: "With program" }, ...(step >= 2 ? [{ color: "#64748b", label: "Natural growth", dashed: true }] : []), { color: "#92400e", label: "Program start", dashed: true }]} />
     </div>
   );
 }
@@ -539,7 +539,7 @@ function RTMChart({ step }) {
   const data = [
     { label: "Test 1 (selected)", value: rtmD.avgSel1, color: "#9333ea" },
     { label: "Test 2 (retest)", value: rtmD.avgSel2, color: "#2563eb" },
-    { label: "True Score", value: rtmD.avgTrue, color: "#059669" },
+    { label: "True Score", value: rtmD.avgTrue, color: "#065f46" },
   ];
   return (
     <div style={chartBox}>
@@ -553,7 +553,7 @@ function RTMChart({ step }) {
       </ResponsiveContainer>
       <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 4, flexWrap: "wrap" }}>
         <Pill color="#9333ea" text={`RTM effect: +${rtmD.rtmEffect} points`} />
-        {step >= 3 && <Pill color="#d97706" text="This is NOT a program effect!" />}
+        {step >= 3 && <Pill color="#92400e" text="This is NOT a program effect!" />}
       </div>
     </div>
   );
@@ -678,7 +678,7 @@ function DetectFixCard({ item, color, type }) {
   return (
     <div style={{ padding: "0.85rem 1.1rem", background: "rgba(255,255,255,0.02)", border: "1px solid #e2e8f0", borderRadius: 10, marginBottom: 8 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-        <span style={{ fontSize: "0.9rem", color: type === "detect" ? "#d97706" : "#059669" }}>{type === "detect" ? "🔍" : "🛠️"}</span>
+        <span style={{ fontSize: "0.9rem", color: type === "detect" ? "#92400e" : "#065f46" }}>{type === "detect" ? "🔍" : "🛠️"}</span>
         <span style={{ fontSize: "1rem", fontWeight: 600, color, fontFamily: "'Inter', sans-serif" }}>{item.method}</span>
       </div>
       <p style={{ fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, margin: 0 }}>{item.description}</p>
