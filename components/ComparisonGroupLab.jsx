@@ -751,7 +751,7 @@ export default function ComparisonGroupLab() {
             <p style={{ fontSize: "0.95rem", color: "#000000", fontFamily: "'Inter', sans-serif", marginBottom: 12, lineHeight: 1.5 }}>Enter a program, policy, or intervention. The AI will explain how to apply the {design.full.toLowerCase()} design to your evaluation.</p>
             <textarea value={program} onChange={(e) => setProgram(e.target.value)} placeholder="Describe a program you want to evaluate..." rows={3} style={{ width: "100%", padding: "14px 16px", background: "#000000", border: "1px solid #e2e8f0", borderRadius: 12, color: "#000000", fontSize: "1rem", fontFamily: "'Inter', sans-serif", lineHeight: 1.6, resize: "vertical", outline: "none", boxSizing: "border-box" }} />
             <div style={{ textAlign: "center", marginTop: 12 }}>
-              <button onClick={handleGenerate} disabled={loading || !program.trim()} style={{ padding: "12px 32px", background: loading ? "#e2e8f0" : accentColor, color: loading ? "#64748b" : "#000000", border: "none", borderRadius: 10, fontSize: "1rem", fontWeight: 700, fontFamily: "'Inter', sans-serif", cursor: loading ? "default" : "pointer", transition: "all 0.2s" }}>
+              <button onClick={handleGenerate} disabled={loading || !program.trim()} style={{ padding: "12px 32px", background: loading ? "#e2e8f0" : accentColor, color: loading ? "#64748b" : "#ffffff", border: "none", borderRadius: 10, fontSize: "1rem", fontWeight: 700, fontFamily: "'Inter', sans-serif", cursor: loading ? "default" : "pointer", transition: "all 0.2s" }}>
                 {loading ? "Generating..." : "Generate Explanation"}
               </button>
             </div>
